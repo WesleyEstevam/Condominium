@@ -19,17 +19,17 @@ const items = [
     title: 'Painel'
   },
   {
-    href: '/customers',
+    href: '/visitantes',
     icon: (<UsersIcon fontSize="small" />),
     title: 'Visitantes'
   },
   {
-    href: '/account',
+    href: '/moradores',
     icon: (<HomeIcon fontSize="small" />),
     title: 'Moradores'
   },
   {
-    href: '/settings',
+    href: '/prestadores',
     icon: (<HandymanIcon fontSize="small" />),
     title: 'Prestadores'
   },
@@ -39,7 +39,7 @@ const items = [
     title: 'Ocorrências'
   },
   {
-    href: '/products',
+    href: '/cameras',
     icon: (<CameraAltIcon fontSize="small" />),
     title: 'Câmeras'
   },

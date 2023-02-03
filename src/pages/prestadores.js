@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import { Box, Container } from '@mui/material';
-import { CustomerListResults } from '../components/visitantes/customer-list-results';
-import { CustomerListToolbar } from '../components/visitantes/customer-list-toolbar';
+import { CustomerListResults } from '../components/visitantes/visitantes-list-results';
+import { CustomerListToolbar } from '../components/visitantes/visitantes-list-toolbar';
 import { DashboardLayout } from '../components/painel-layout';
 import { customers } from '../__mocks__/customers';
 
 const Page = () => (
-  <>
+  <> 
     <Box
       component="main"
       sx={{
