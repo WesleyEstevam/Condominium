@@ -1,9 +1,8 @@
-import Head from 'next/head';
 import { Box, Container } from '@mui/material';
-import { CustomerListResults } from '../components/visitantes/visitantes-list-results';
-import { CustomerListToolbar } from '../components/visitantes/visitantes-list-toolbar';
 import { DashboardLayout } from '../components/painel-layout';
 import { customers } from '../__mocks__/customers';
+import { HeaderMoradores } from '../components/moradores/header';
+import { ListaMoradores } from '../components/moradores/listagem-moradores';
 
 const Page = () => (
   <>
@@ -15,9 +14,9 @@ const Page = () => (
       }}
     >
       <Container maxWidth={false}>
-        <CustomerListToolbar />
+        <HeaderMoradores />
         <Box sx={{ mt: 3 }}>
-          <CustomerListResults customers={customers} />
+          <ListaMoradores customers={customers} />
         </Box>
       </Container>
     </Box>

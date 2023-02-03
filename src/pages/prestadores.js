@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { Box, Container } from '@mui/material';
-import { CustomerListResults } from '../components/visitantes/visitantes-list-results';
-import { CustomerListToolbar } from '../components/visitantes/visitantes-list-toolbar';
 import { DashboardLayout } from '../components/painel-layout';
 import { customers } from '../__mocks__/customers';
+import { ListaPrestadores } from '../components/prestadores/listagem-prestadores'
+import { HeaderPrestadores } from '../components/prestadores/header';
 
 const Page = () => (
   <> 
@@ -15,9 +15,9 @@ const Page = () => (
       }}
     >
       <Container maxWidth={false}>
-        <CustomerListToolbar />
+        <HeaderPrestadores />
         <Box sx={{ mt: 3 }}>
-          <CustomerListResults customers={customers} />
+          <ListaPrestadores customers={customers} />
         </Box>
       </Container>
     </Box>

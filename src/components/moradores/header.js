@@ -11,7 +11,7 @@ import {
   import { Upload as UploadIcon } from '../../icons/upload';
   import { Download as DownloadIcon } from '../../icons/download';
   
-  export const HeaderPrestadores = (props) => (
+  export const HeaderMoradores = (props) => (
     <Box {...props}>
       <Box
         sx={{
@@ -26,7 +26,7 @@ import {
           sx={{ m: 1 }}
           variant="h4"
         >
-          Prestadores de Serviço
+            Moradores
         </Typography>
         <Box sx={{ m: 1 }}>
           <Button
@@ -45,7 +45,7 @@ import {
             color="primary"
             variant="contained"
           >
-            Novo Prestador
+            Novo Morador
           </Button>
         </Box>
       </Box>
