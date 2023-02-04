@@ -2,6 +2,8 @@ import { useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import InfoIcon from '@mui/icons-material/Info';
+
 import {
   Avatar,
   Box,
@@ -142,22 +144,25 @@ export const ListaPrestadores = ({ customers, ...rest }) => {
                   <TableCell>
                     {customer.phone}
                   </TableCell>
+                  <Button
+                    color="success"
+                    variant="contained"
+                    >
+                      <InfoIcon />
+                  </Button>
                     <Button 
                       color="primary"
                       variant="contained"
+                      sx={{ ml: 1, mr: 1 }}
                     >
-                      <EditIcon>
-                        Editar
-                      </EditIcon> 
+                      <EditIcon />
                       </Button>
                       <Button 
                       color="error"
                       variant="contained"
-                      sx={{ ml: 1 }}
                     >
-                      <DeleteForeverIcon>
-                        Excluir
-                      </DeleteForeverIcon>
+                      <DeleteForeverIcon />
+
                       </Button>
                 </TableRow>
               ))}
