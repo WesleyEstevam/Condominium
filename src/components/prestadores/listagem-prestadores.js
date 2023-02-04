@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-import { format } from 'date-fns';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 import {
   Avatar,
   Box,
+  Button,
   Card,
   Checkbox,
   Table,
@@ -84,7 +85,7 @@ export const ListaPrestadores = ({ customers, ...rest }) => {
                   Nome
                 </TableCell>
                 <TableCell>
-                  E-mail
+                  Cargo
                 </TableCell>
                 <TableCell>
                   Documento
@@ -93,10 +94,7 @@ export const ListaPrestadores = ({ customers, ...rest }) => {
                   Telefone
                 </TableCell>
                 <TableCell>
-                  Destido
-                </TableCell>
-                <TableCell>
-                  Registration date
+                  Ação
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -139,14 +137,28 @@ export const ListaPrestadores = ({ customers, ...rest }) => {
                     {customer.email}
                   </TableCell>
                   <TableCell>
-                    {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}
+                    {` ${customer.address.state}`}
                   </TableCell>
                   <TableCell>
                     {customer.phone}
                   </TableCell>
-                  <TableCell>
-                    {format(customer.createdAt, 'dd/MM/yyyy')}
-                  </TableCell>
+                    <Button 
+                      color="primary"
+                      variant="contained"
+                    >
+                      <EditIcon>
+                        Editar
+                      </EditIcon> 
+                      </Button>
+                      <Button 
+                      color="error"
+                      variant="contained"
+                      sx={{ ml: 1 }}
+                    >
+                      <DeleteForeverIcon>
+                        Excluir
+                      </DeleteForeverIcon>
+                      </Button>
                 </TableRow>
               ))}
             </TableBody>
