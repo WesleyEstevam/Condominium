@@ -1,7 +1,5 @@
 import { Box, Container, Grid } from '@mui/material';
 import { Imoveis } from '../components/painel/imoveis';
-import { LatestOrders } from '../components/painel/latest-orders';
-import { LatestProducts } from '../components/painel/latest-products';
 import { Grafico } from '../components/painel/grafico';
 import { Condominio } from '../components/painel/condominio';
 import { TotalMoradores } from '../components/painel/total-moradores';
@@ -76,24 +74,6 @@ const Page = () => (
             xs={12}
           >
             <CameraPortariaPrincipal sx={{ height: '100%' }} />
-          </Grid>
-          <Grid
-            item
-            lg={4}
-            md={6}
-            xl={3}
-            xs={12}
-          >
-            <LatestProducts sx={{ height: '100%' }} />
-          </Grid>
-          <Grid
-            item
-            lg={8}
-            md={12}
-            xl={9}
-            xs={12}
-          >
-            <LatestOrders />
           </Grid>
         </Grid>
       </Container>
