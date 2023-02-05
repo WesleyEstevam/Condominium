@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
 import {
   Avatar,
   Box,
-  Card,
   Button,
+  Card,
   Checkbox,
   Table,
   TableBody,
@@ -139,31 +138,31 @@ export const ListaOcorrencia = ({ customers, ...rest }) => {
                     {customer.email}
                   </TableCell>
                   <TableCell>
-                    {`${customer.address.state}`}
+                    {` ${customer.address.state}`}
                   </TableCell>
                   <TableCell>
                     {customer.phone}
                   </TableCell>
-                  <Button
-                    color="success"
-                    variant="contained"
+                  <Button 
+                      color="success"
+                      variant="contained"
                     >
                       <InfoIcon />
-                  </Button>
-                  <Button 
-                    color="primary"
-                    variant="contained"
-                    sx={{ ml: 1, mr: 1 }}
+                      </Button>
+                    <Button 
+                      color="primary"
+                      variant="contained"
+                      sx={{ ml: 1, mr: 1 }}
                     >
                       <EditIcon />
-                  </Button>
-                  <Button 
-                    color="error"
-                    variant="contained"
+                      </Button>
+                      <Button 
+                      color="error"
+                      variant="contained"
                       
                     >
-                    <DeleteForeverIcon />
-                  </Button>
+                      <DeleteForeverIcon />
+                      </Button>
                 </TableRow>
               ))}
             </TableBody>
