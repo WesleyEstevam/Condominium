@@ -34,7 +34,7 @@ const items = [
     title: 'Prestadores'
   },
   {
-    href: '/account',
+    href: '/ocorrencias',
     icon: (<CampaignIcon fontSize="small" />),
     title: 'Ocorrências'
   },
