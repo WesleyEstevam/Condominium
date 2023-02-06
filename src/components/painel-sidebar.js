@@ -43,8 +43,6 @@ const items = [
     icon: (<CameraAltIcon fontSize="small" />),
     title: 'Câmeras'
   },
-
-
 ];
 
 export const DashboardSidebar = (props) => {
