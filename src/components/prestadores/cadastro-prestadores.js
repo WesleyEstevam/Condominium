@@ -134,7 +134,7 @@ export const NovoPrestador = (props) => {
             </Grid>
           </Grid>
           <CardHeader
-            title="Dados do Vaículo"
+            title="Dados do Veículo"
             sx={{ 
                 textAlign: 'center'
               }}
