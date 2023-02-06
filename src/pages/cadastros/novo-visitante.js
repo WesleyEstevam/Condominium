@@ -14,7 +14,7 @@ const Page = () => (
     >
       <Container maxWidth="lg">
         <Typography
-          sx={{ mb: 3 }}
+          sx={{ mb: 3, textAlign: 'center' }}
           variant="h4"
         >
           Novo visitante
@@ -22,11 +22,17 @@ const Page = () => (
         <Grid
           container
           spacing={3}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+            
+          }}
         >
 
           <Grid
             item
-            lg={8}
+            lg={20}
             md={6}
             xs={12}
           >
@@ -36,11 +42,17 @@ const Page = () => (
         <Grid
           container
           spacing={3}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+            
+          }}
         >
 
           <Grid
             item
-            lg={8}
+            lg={20}
             md={6}
             xs={12}
           >

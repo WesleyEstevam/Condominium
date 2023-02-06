@@ -72,7 +72,17 @@ export const ListaMoradores = ({ customers, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-
+              <TableCell padding="checkbox">
+                  <Checkbox
+                    checked={selectedCustomerIds.length === customers.length}
+                    color="primary"
+                    indeterminate={
+                      selectedCustomerIds.length > 0
+                      && selectedCustomerIds.length < customers.length
+                    }
+                    onChange={handleSelectAll}
+                  />
+                </TableCell>
                 <TableCell>
                   Nome
                 </TableCell>
@@ -129,31 +139,30 @@ export const ListaMoradores = ({ customers, ...rest }) => {
                     {customer.email}
                   </TableCell>
                   <TableCell>
-                    {`${customer.address.state}`}
+                    {` ${customer.address.state}`}
                   </TableCell>
                   <TableCell>
                     {customer.phone}
                   </TableCell>
-                  <Button
-                    color="success"
-                    variant="contained"
+                  <Button 
+                      color="success"
+                      variant="contained"
                     >
                       <InfoIcon />
-                  </Button>
-                  <Button 
-                    color="primary"
-                    variant="contained"
-                    sx={{ ml: 1, mr: 1 }}
+                      </Button>
+                    <Button 
+                      color="primary"
+                      variant="contained"
+                      sx={{ ml: 1, mr: 1 }}
                     >
                       <EditIcon />
-                  </Button>
-                  <Button 
-                    color="error"
-                    variant="contained"
-                      
+                      </Button>
+                      <Button 
+                      color="error"
+                      variant="contained"
                     >
-                    <DeleteForeverIcon />
-                  </Button>
+                      <DeleteForeverIcon />
+                      </Button>
                 </TableRow>
               ))}
             </TableBody>

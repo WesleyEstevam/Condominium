@@ -26,6 +26,7 @@ import {
         <Typography
           sx={{ m: 1 }}
           variant="h4"
+          
         >
           Ocorrências
         </Typography>
