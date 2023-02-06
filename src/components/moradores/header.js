@@ -10,6 +10,7 @@ import {
   import { Search as SearchIcon } from '../../icons/search';
   import { Upload as UploadIcon } from '../../icons/upload';
   import { Download as DownloadIcon } from '../../icons/download';
+  import Link from 'next/link'
   
   export const HeaderMoradores = (props) => (
     <Box {...props}>
@@ -41,12 +42,11 @@ import {
           >
             Exportar
           </Button>
-          <Button
-            color="primary"
-            variant="contained"
-          >
-            Novo Morador
-          </Button>
+          <Link href="cadastros/novo-morador" color='primary'>
+            <Button color='primary' variant='contained'>
+              Novo Morador
+            </Button>
+          </Link>
         </Box>
       </Box>
       <Box sx={{ mt: 3 }}>

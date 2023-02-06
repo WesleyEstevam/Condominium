@@ -44,10 +44,10 @@ export const CustomerListToolbar = (props) => (
           Exportar
         </Button>
           <Link href="cadastros/novo-visitante" color='primary'>
-          <Button color='primary' variant='contained'>
-                    
-            Novo Visitante
-        </Button>
+            <Button color='primary' variant='contained'>
+                      
+              Novo Visitante
+            </Button>
           </Link>
       </Box>
     </Box>

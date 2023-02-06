@@ -10,7 +10,7 @@ import {
   TextField
 } from '@mui/material';
 
-export const NovoPrestador = (props) => {
+export const NovoMorador = (props) => {
   const [values, setValues] = useState({
     firstName: 'Katarina',
     lastName: 'Smith',
@@ -67,6 +67,21 @@ export const NovoPrestador = (props) => {
                 onChange={handleChange}
                 required
                 value={values.lastName}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="E-mail"
+                name="email"
+                onChange={handleChange}
+                required
+                value={values.email}
                 variant="outlined"
               />
             </Grid>
