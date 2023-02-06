@@ -54,7 +54,7 @@ export const ProductListToolbar = (props) => (
                   </InputAdornment>
                 )
               }}
-              placeholder="Search product"
+              placeholder="Pesquisar câmera"
               variant="outlined"
             />
           </Box>

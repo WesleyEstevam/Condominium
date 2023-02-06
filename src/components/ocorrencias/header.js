@@ -68,7 +68,7 @@ import {
                     </InputAdornment>
                   )
                 }}
-                placeholder="Search customer"
+                placeholder="Pesquisar ocorrênciaproduct"
                 variant="outlined"
               />
             </Box>
