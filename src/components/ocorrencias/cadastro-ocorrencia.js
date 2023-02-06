@@ -25,7 +25,7 @@ const states = [
   }
 ];
 
-export const AccountProfileDetails = (props) => {
+export const NovaOcorrencia = (props) => {
   const [values, setValues] = useState({
     firstName: 'Katarina',
     lastName: 'Smith',
@@ -50,8 +50,8 @@ export const AccountProfileDetails = (props) => {
     >
       <Card>
         <CardHeader
-          subheader="The information can be edited"
-          title="Perfil"
+          subheader="Aqui você pode cadastrar as situações que ocorrem no dia a dia do condomínio"
+          title="Cadastrar ocorrência"
         />
         <Divider />
         <CardContent>
@@ -67,7 +67,7 @@ export const AccountProfileDetails = (props) => {
               <TextField
                 fullWidth
                 helperText="Please specify the first name"
-                label="Primeiro nome"
+                label="Nome"
                 name="firstName"
                 onChange={handleChange}
                 required
@@ -82,7 +82,7 @@ export const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Sobrenome"
+                label="Status"
                 name="lastName"
                 onChange={handleChange}
                 required
@@ -97,12 +97,11 @@ export const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="E-mail"
-                name="email"
-                onChange={handleChange}
-                required
-                value={values.email}
-                variant="outlined"
+                id="outlined-multiline-static"
+                label="Descrição"
+                multiline
+                rows={10}
+                defaultValue="Descrição do ocorrido"
               />
             </Grid>
             <Grid
@@ -112,37 +111,7 @@ export const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Telefone"
-                name="phone"
-                onChange={handleChange}
-                type="number"
-                value={values.phone}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Country"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Select State"
+                label="Tipo"
                 name="state"
                 onChange={handleChange}
                 required
@@ -167,7 +136,7 @@ export const AccountProfileDetails = (props) => {
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'flex-end',
+            justifyContent: 'center',
             p: 2
           }}
         >
