@@ -38,7 +38,8 @@ const Login = () => {
         sx={{
           display: 'flex',
           flexGrow: 1,
-          maxHeight: '100%'
+          maxHeight: '100%',
+          backgroundColor: '#FFFAFA',
         }}
       >
         <img 
@@ -46,7 +47,13 @@ const Login = () => {
           style={{maxWidth: '50%'}}
         />
         <Container maxWidth="sm" >
-          <Box sx={{ my: '50%' }}>
+          <Box 
+            sx={{ 
+              my: '45%', 
+              backgroundColor: '#ffffff',
+              borderRadius: '15px', 
+              p: '20px' 
+            }}>
             <form onSubmit={formik.handleSubmit}>
               
               <TextField
