@@ -2,7 +2,7 @@ import NextLink from 'next/link';
 import Router from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, Container, Link, TextField, Typography} from '@mui/material';
+import { Box, Button, Container, Divider, Link, TextField, Typography} from '@mui/material';
 
 const Login = () => {
   const formik = useFormik({
@@ -25,9 +25,8 @@ const Login = () => {
       Router
         .push('/')
         .catch(console.error);
-    }
+    },
   });
-
   return (
     <>
       <Box
@@ -35,18 +34,58 @@ const Login = () => {
         sx={{
           display: 'flex',
           flexGrow: 1,
-          maxHeight: '100%',
           backgroundColor: '#FFFAFA',
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
       >
-        <img 
-          src='static/logoCondominium.jpeg'
-          style={{maxWidth: '50%'}}
-        />
-        <Container maxWidth="sm" >
+        <Container maxWidth="sm">
+          <img 
+            src='static/logoCondominium.jpeg'
+            style={{
+              margin: 'auto',
+              width: '282px',
+              borderRadius: '200px'
+            }}
+          />
+          <Typography variant="h5" 
+            style={{
+              fontFamily: "Poppins", 
+              fontSize: '5vh',
+              fontWeight: "300",
+              textAlign: 'center',
+              fontStyle: 'medium',
+
+          }}>
+            Bem vindo ao 
+          </Typography>
+          <Typography 
+            style={{
+              display:'flex',
+              flexDirection:'row',
+              justifyContent: 'flex-end',
+              fontSize: '5vh',
+              fontFamily: 'Poppins',
+              fontStyle: 'thin',
+              fontWeight: "50",
+            }}
+
+          >
+            CONDOMINIUM
+          </Typography>
+          <Divider 
+            sx={{
+              display: 'flex',
+              marginLeft: "auto",
+              backgroundColor: 'orange',
+              width: '100px',
+              height: '7px',
+
+            }}
+          />
           <Box 
             sx={{ 
-              my: '45%', 
+              my: '10%', 
               backgroundColor: '#ffffff',
               borderRadius: '15px', 
               p: '20px' 
@@ -81,7 +120,7 @@ const Login = () => {
               />
               <Box sx={{ py: 2 }}>
                 <Button
-                  color="primary"
+                  color="success"
                   disabled={formik.isSubmitting}
                   fullWidth
                   size="large"
@@ -98,7 +137,7 @@ const Login = () => {
                 Não tem uma conta??
                 {' '}
                 <NextLink
-                  href="/register"
+                  href="/cadastro"
                 >
                   <Link
                     to="/register"

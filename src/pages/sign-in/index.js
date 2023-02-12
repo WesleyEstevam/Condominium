@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Head from 'next/head';
 import NextLink from 'next/link';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';

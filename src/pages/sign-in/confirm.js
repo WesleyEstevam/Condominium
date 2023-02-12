@@ -62,7 +62,7 @@ const Page = () => {
         .catch(console.error);
     } catch (err) {
       console.error(err);
-      setError(err.message || 'Something went wrong');
+      setError(err.message || 'Algo deu errado');
       setIsLoading(false);
     }
   };

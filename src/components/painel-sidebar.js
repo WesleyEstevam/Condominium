@@ -68,9 +68,15 @@ export const DashboardSidebar = (props) => {
   );
 
   const content = (
-    <div style={{ //Estilização da Scrollbar está apenas para o Firefox
+    <div sx={{ //Estilização da Scrollbar está apenas para o Firefox
       scrollbarWidth: 'thin',
       scrollbarColor: 'blue orange',
+      '::-webkit-scrollbar-thumb:vertical': {
+        width: '8px',
+        backgroundColor:'#bfbfbf',
+        borderTop:'1px solid #a4a4a4',
+        borderBottom:'1px solid #a4a4a4'
+      }
     }}>
 
       <Box
