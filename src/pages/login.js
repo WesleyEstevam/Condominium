@@ -44,7 +44,7 @@ const Login = () => {
             src='static/logoCondominium.jpeg'
             style={{
               margin: 'auto',
-              width: '282px',
+              width: '200px',
               borderRadius: '200px'
             }}
           />
