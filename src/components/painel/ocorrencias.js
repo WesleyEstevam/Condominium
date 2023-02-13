@@ -1,5 +1,5 @@
-import { Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { Alert, Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
+import ErrorOutline from '@mui/icons-material/ErrorOutline';
 
 export const Ocorrencias = (props) => (
   <Card {...props}>
@@ -32,7 +32,7 @@ export const Ocorrencias = (props) => (
               width: 56
             }}
           >
-            <AttachMoneyIcon />
+            <ErrorOutline />
           </Avatar>
         </Grid>
       </Grid>

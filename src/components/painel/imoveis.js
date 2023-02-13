@@ -1,6 +1,6 @@
 import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import MoneyIcon from '@mui/icons-material/Money';
+import HomeIcon from '@mui/icons-material/Home';
 
 export const Imoveis = (props) => (
   <Card
@@ -29,14 +29,14 @@ export const Imoveis = (props) => (
           </Typography>
         </Grid>
         <Grid item>
-          <Avatar
+        <Avatar
             sx={{
               backgroundColor: 'error.main',
               height: 56,
               width: 56
             }}
           >
-            <MoneyIcon />
+            <HomeIcon />
           </Avatar>
         </Grid>
       </Grid>
