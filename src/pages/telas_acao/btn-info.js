@@ -1,8 +1,7 @@
 import { Box, Container } from '@mui/material';
-import { CustomerListResults } from '../components/visitantes/listagem-visitantes';
-import { CustomerListToolbar } from '../components/visitantes/visitantes-header';
-import { DashboardLayout } from '../components/painel-layout';
-import { customers } from '../__mocks__/customers';
+import { InfoVisitante } from '../../components/btn_acao/btn-info';
+import { DashboardLayout } from '../../components/painel-layout';
+import { customers } from '../../__mocks__/customers';
 
 const Page = () => (
   <>
@@ -14,9 +13,8 @@ const Page = () => (
       }}
     >
       <Container maxWidth={false}>
-        <CustomerListToolbar />
         <Box sx={{ mt: 3 }}>
-          <CustomerListResults customers={customers} />
+          <InfoVisitante customers={customers} />
         </Box>
       </Container>
     </Box>

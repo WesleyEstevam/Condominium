@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Pagination } from '@mui/material';
 import { products } from '../__mocks__/products';
-import { ProductListToolbar } from '../components/cameras/camera-list-toolbar';
+import { ProductListToolbar } from '../components/cameras/camera-header';
 import { ProductCard } from '../components/cameras/camera-card';
 import { DashboardLayout } from '../components/painel-layout';
 

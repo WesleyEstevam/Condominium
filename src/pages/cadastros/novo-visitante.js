@@ -1,7 +1,7 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { DashboardLayout } from '../../components/painel-layout';
 import { PerfilVisitante } from '../../components/visitantes/perfil-visitante';
-import { NovoVisitante } from '../../components/visitantes/cadastro-visitante'
+import { NovoVisitante } from '../../components/visitantes/cadastro-visitante';
 
 const Page = () => (
   <>

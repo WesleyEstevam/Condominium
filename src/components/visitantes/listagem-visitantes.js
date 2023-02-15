@@ -18,6 +18,7 @@ import {
   Typography
 } from '@mui/material';
 import { getInitials } from '../../utils/get-initials';
+import Link  from 'next/link';
 
 export const CustomerListResults = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -143,26 +144,31 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                   <TableCell>
                     {customer.phone}
                   </TableCell>
-                  <Button 
-                      color="success"
-                      variant="contained"
-                    >
-                      <InfoIcon />
-                      </Button>
+                  <Link href="../telas_acao/btn-info">
                     <Button 
-                      color="primary"
-                      variant="contained"
-                      sx={{ ml: 1, mr: 1 }}
+                        color="success"
+                        variant="contained"          
+                      >
+                        <InfoIcon />
+                    </Button>
+                  </Link>
+                  <Link href="../telas_acao/btn-edit">
+                      <Button 
+                        color="primary"
+                        variant="contained"
+                        sx={{ ml: 1, mr: 1 }}
                     >
                       <EditIcon />
                       </Button>
+                  </Link>
+                  <Link href="../telas_acao/btn-delet">
                       <Button 
-                      color="error"
-                      variant="contained"
-                      
+                        color="error"
+                        variant="contained"
                     >
                       <DeleteForeverIcon />
                       </Button>
+                  </Link>
                 </TableRow>
               ))}
             </TableBody>
