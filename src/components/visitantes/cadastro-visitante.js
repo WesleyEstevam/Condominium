@@ -29,25 +29,12 @@ export const NovoVisitante = (props) => {
     });
   };
 
-  function Alertas(e) {
-    e.preventDefault();
-    
-    <Alert severity="success">
-      <AlertTitle>Success</AlertTitle>
-      This is a success alert — <strong>check it out!</strong>
-    </Alert>
-
-    console.log("Deu certooo!")
-  }
-
   return (
     <form
-      onSubmit={Alertas}
       autoComplete="off"
       noValidate
       {...props}
     >
-      {Alertas}
       <Card>
         <Divider />
         <CardContent>

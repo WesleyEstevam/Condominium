@@ -19,6 +19,8 @@ import {
 } from '@mui/material';
 import { getInitials } from '../../utils/get-initials';
 import Link  from 'next/link';
+//import DeletarItem from '../btn_acao/btn-delet'
+import Swal from 'sweetalert2';
 
 export const CustomerListResults = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -64,6 +66,28 @@ export const CustomerListResults = ({ customers, ...rest }) => {
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
+
+
+function DeletarItem() {
+  Swal.fire({
+    title: 'Tem certeza?',
+    text: "Você não será capaz de reverter isso!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sim, apague!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Excluído!',
+        'O visitante foi excluído.',
+        'success'
+      )
+    }
+  })
+
+}
 
   return (
     <Card {...rest}>
@@ -161,14 +185,13 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                       <EditIcon />
                       </Button>
                   </Link>
-                  <Link href="../telas_acao/btn-delet">
                       <Button 
                         color="error"
                         variant="contained"
+                        onClick={DeletarItem}
                     >
                       <DeleteForeverIcon />
                       </Button>
-                  </Link>
                 </TableRow>
               ))}
             </TableBody>
