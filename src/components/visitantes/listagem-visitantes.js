@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
+import ImageList from "@mui/material/ImageList";
+
 import {
   Avatar,
   Box,
@@ -68,7 +69,13 @@ export const CustomerListResults = ({ customers, ...rest }) => {
 
   return (
     <Card {...rest}>
-      <PerfectScrollbar>
+      <ImageList 
+        sx={{
+          gridAutoFlow: "column",
+          gridTemplateColumns: "repeat(auto-fit, minmax(160px,1fr)) !important",
+          gridAutoColumns: "minmax(160px, 1fr)"
+        }}
+      >
         <Box sx={{ minWidth: 1050 }}>
           <Table>
             <TableHead>
@@ -174,7 +181,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
             </TableBody>
           </Table>
         </Box>
-      </PerfectScrollbar>
+      </ImageList>
       <TablePagination
         component="div"
         count={customers.length}

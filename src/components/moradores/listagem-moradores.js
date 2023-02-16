@@ -3,6 +3,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ImageList from "@mui/material/ImageList";
 
 import {
   Avatar,
@@ -68,7 +69,13 @@ export const ListaMoradores = ({ customers, ...rest }) => {
 
   return (
     <Card {...rest}>
-      <PerfectScrollbar>
+      <ImageList 
+        sx={{
+          gridAutoFlow: "column",
+          gridTemplateColumns: "repeat(auto-fit, minmax(160px,1fr)) !important",
+          gridAutoColumns: "minmax(160px, 1fr)"
+        }}
+      >
         <Box sx={{ minWidth: 1050 }}>
           <Table>
             <TableHead>
@@ -170,7 +177,7 @@ export const ListaMoradores = ({ customers, ...rest }) => {
             </TableBody>
           </Table>
         </Box>
-      </PerfectScrollbar>
+      </ImageList >
       <TablePagination
         component="div"
         count={customers.length}
