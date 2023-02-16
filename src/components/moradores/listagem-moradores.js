@@ -19,6 +19,7 @@ import {
   Typography
 } from '@mui/material';
 import { getInitials } from '../../utils/get-initials';
+import { DeletarItem } from '../btn_acao/btn-delet'; 
 
 export const ListaMoradores = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -158,8 +159,9 @@ export const ListaMoradores = ({ customers, ...rest }) => {
                       <EditIcon />
                       </Button>
                       <Button 
-                      color="error"
-                      variant="contained"
+                        color="error"
+                        variant="contained"
+                        onClick={DeletarItem}
                     >
                       <DeleteForeverIcon />
                       </Button>
