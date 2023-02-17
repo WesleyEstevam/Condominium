@@ -34,7 +34,7 @@ import {
           <Button
             startIcon={(<UploadIcon fontSize="small" />)}
             sx={{ mr: 1 }}
-            onClick={Importarpdf}
+            onClick={Importar}
           >
             Importar
           </Button>
