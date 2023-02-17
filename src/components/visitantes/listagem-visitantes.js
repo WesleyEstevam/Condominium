@@ -3,6 +3,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
+import { getInitials } from '../../utils/get-initials';
+import { DeletarItem } from '../btn_acao/btn-delet'; 
+import Link  from 'next/link';
 
 import {
   Avatar,
@@ -18,9 +21,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-import { getInitials } from '../../utils/get-initials';
-import Link  from 'next/link';
-import { DeletarItem } from '../btn_acao/btn-delet'; 
+
 
 export const CustomerListResults = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -152,7 +153,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                   <TableCell>
                     {customer.phone}
                   </TableCell>
-                  <Link href="../telas_acao/btn-info">
+                  <Link href="../telas_acao/visitante/btn-info">
                     <Button 
                         color="success"
                         variant="contained"          
@@ -160,7 +161,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                         <InfoIcon />
                     </Button>
                   </Link>
-                  <Link href="../telas_acao/btn-edit">
+                  <Link href="../telas_acao/visitante/btn-edit">
                       <Button 
                         color="primary"
                         variant="contained"

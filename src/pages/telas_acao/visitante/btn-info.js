@@ -1,7 +1,7 @@
 import { Box, Container } from '@mui/material';
-import { InfoVisitante } from '../../components/btn_acao/btn-info';
-import { DashboardLayout } from '../../components/painel-layout';
-import { customers } from '../../__mocks__/customers';
+import { InfoVisitante } from '../../../components/btn_acao/visitante/btn-info';
+import { DashboardLayout } from '../../../components/painel-layout';
+import { customers } from '../../../__mocks__/customers';
 
 const Page = () => (
   <>

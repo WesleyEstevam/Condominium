@@ -4,6 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ImageList from "@mui/material/ImageList";
+import Link  from 'next/link';
 
 import {
   Avatar,
@@ -152,19 +153,23 @@ export const ListaMoradores = ({ customers, ...rest }) => {
                   <TableCell>
                     {customer.phone}
                   </TableCell>
-                  <Button 
-                      color="success"
-                      variant="contained"
-                    >
-                      <InfoIcon />
-                      </Button>
+                  <Link href="../telas_acao/morador/btn-info">
                     <Button 
-                      color="primary"
-                      variant="contained"
-                      sx={{ ml: 1, mr: 1 }}
+                        color="success"
+                        variant="contained"          
+                      >
+                        <InfoIcon />
+                    </Button>
+                  </Link>
+                  <Link href="../telas_acao/morador/btn-edit">
+                      <Button 
+                        color="primary"
+                        variant="contained"
+                        sx={{ ml: 1, mr: 1 }}
                     >
                       <EditIcon />
                       </Button>
+                  </Link>
                       <Button 
                         color="error"
                         variant="contained"

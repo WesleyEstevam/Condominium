@@ -1,7 +1,7 @@
 import { Box, Container } from '@mui/material';
-import { EditVisitante } from '../../components/btn_acao/btn-edit';
-import { DashboardLayout } from '../../components/painel-layout';
-import { customers } from '../../__mocks__/customers';
+import { InfoOcorrencia } from '../../../components/btn_acao/ocorrencia/btn-info';
+import { DashboardLayout } from '../../../components/painel-layout';
+import { customers } from '../../../__mocks__/customers';
 
 const Page = () => (
   <>
@@ -14,7 +14,7 @@ const Page = () => (
     >
       <Container maxWidth={false}>
         <Box sx={{ mt: 3 }}>
-          <EditVisitante customers={customers} />
+          <InfoOcorrencia customers={customers} />
         </Box>
       </Container>
     </Box>

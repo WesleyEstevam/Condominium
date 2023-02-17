@@ -3,6 +3,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
+import { getInitials } from '../../utils/get-initials';
+import { DeletarItem } from '../btn_acao/btn-delet'; 
+import Link from 'next/link';
 
 import {
   Avatar,
@@ -18,8 +21,6 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-import { getInitials } from '../../utils/get-initials';
-import { DeletarItem } from '../btn_acao/btn-delet'; 
 
 export const ListaOcorrencia = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -151,19 +152,23 @@ export const ListaOcorrencia = ({ customers, ...rest }) => {
                   <TableCell>
                     {customer.phone}
                   </TableCell>
-                  <Button 
-                      color="success"
-                      variant="contained"
-                    >
-                      <InfoIcon />
-                      </Button>
+                  <Link href="../telas_acao/ocorrencia/btn-info">
                     <Button 
-                      color="primary"
-                      variant="contained"
-                      sx={{ ml: 1, mr: 1 }}
+                        color="success"
+                        variant="contained"          
+                      >
+                        <InfoIcon />
+                    </Button>
+                  </Link>
+                  <Link href="../telas_acao/ocorrencia/btn-edit">
+                      <Button 
+                        color="primary"
+                        variant="contained"
+                        sx={{ ml: 1, mr: 1 }}
                     >
                       <EditIcon />
                       </Button>
+                  </Link>
                       <Button 
                         color="error"
                         variant="contained"
