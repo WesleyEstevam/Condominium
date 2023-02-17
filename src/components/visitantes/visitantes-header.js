@@ -11,6 +11,7 @@ import Link  from 'next/link';
 import { Search as SearchIcon } from '../../icons/search';
 import { Upload as UploadIcon } from '../../icons/upload';
 import { Download as DownloadIcon } from '../../icons/download';
+import { Importar } from '../btn_acao/btn-importar';
 
 export const CustomerListToolbar = (props) => (
 
@@ -34,6 +35,7 @@ export const CustomerListToolbar = (props) => (
         <Button
           startIcon={(<UploadIcon fontSize="small" />)}
           sx={{ mr: 1 }}
+          onClick={Importar}
         >
           Importar
         </Button>

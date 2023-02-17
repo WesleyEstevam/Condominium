@@ -11,7 +11,8 @@ import {
   import { Upload as UploadIcon } from '../../icons/upload';
   import { Download as DownloadIcon } from '../../icons/download';
   import Link from 'next/link'
-  
+  import { Importar } from '../btn_acao/btn-importar';
+
   export const HeaderMoradores = (props) => (
     <Box {...props}>
       <Box
@@ -33,6 +34,7 @@ import {
           <Button
             startIcon={(<UploadIcon fontSize="small" />)}
             sx={{ mr: 1 }}
+            onClick={Importarpdf}
           >
             Importar
           </Button>

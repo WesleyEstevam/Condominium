@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
