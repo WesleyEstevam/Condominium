@@ -11,6 +11,7 @@ import {
   Alert,
   AlertTitle
 } from '@mui/material';
+import Link from 'next/link';
 
 export const NovoVisitante = (props) => {
   const [values, setValues] = useState({
@@ -234,12 +235,14 @@ export const NovoVisitante = (props) => {
             p: 2
           }}
         >
+        <Link href='/visitantes'>
           <Button
             color="success"
             variant="contained"
           >
             Cadastrar
           </Button>
+        </Link>
         </Box>
       </Card>
     </form>

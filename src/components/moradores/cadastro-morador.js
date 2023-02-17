@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link'
 import {
   Box,
   Button,
@@ -232,12 +233,14 @@ export const NovoMorador = (props) => {
             p: 2
           }}
         >
+        <Link href='/moradores'>
           <Button
             color="success"
             variant="contained"
           >
             Cadastrar
           </Button>
+        </Link>
         </Box>
       </Card>
     </form>
