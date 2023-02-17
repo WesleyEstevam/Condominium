@@ -76,7 +76,7 @@ export const ListaMoradores = ({ customers, ...rest }) => {
           gridAutoColumns: "minmax(160px, 1fr)"
         }}
       >
-        <Box sx={{ minWidth: 1050 }}>
+        <Box sx={{ minWidth: '100%' }}>
           <Table>
             <TableHead>
               <TableRow>
