@@ -56,7 +56,7 @@ export const CustomerListToolbar = (props) => (
     <Box sx={{ mt: 3 }}>
       <Card>
         <CardContent>
-          <Box sx={{ maxWidth: 500 }}>
+          <Box sx={{ maxWidth: 1000, display: 'flex', alignContent: 'center' }}>
             <TextField
               fullWidth
               InputProps={{
@@ -71,7 +71,68 @@ export const CustomerListToolbar = (props) => (
                   </InputAdornment>
                 )
               }}
-              placeholder="Pesquisar visitante"
+              placeholder="Nome"
+              variant="outlined"
+            />
+            <TextField
+              fullWidth
+              sx={{
+                display: 'flex',
+                justifyContent:'space-around',
+                margin: '0px 10px'
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SvgIcon
+                      color="action"
+                      fontSize="small"
+                    >
+                      <SearchIcon />
+                    </SvgIcon>
+                  </InputAdornment>
+                )
+              }}
+              placeholder="Documento"
+              variant="outlined"
+            />
+            <TextField
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SvgIcon
+                      color="action"
+                      fontSize="small"
+                    >
+                      <SearchIcon />
+                    </SvgIcon>
+                  </InputAdornment>
+                )
+              }}
+              placeholder="Placa do veículo"
+              variant="outlined"
+            />
+            <TextField
+              fullWidth
+              sx={{
+                display: 'flex',
+                justifyContent:'space-around',
+                margin: '0px 10px'
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SvgIcon
+                      color="action"
+                      fontSize="small"
+                    >
+                      <SearchIcon />
+                    </SvgIcon>
+                  </InputAdornment>
+                )
+              }}
+              placeholder="Telefone"
               variant="outlined"
             />
           </Box>

@@ -53,27 +53,88 @@ import {
       </Box>
       <Box sx={{ mt: 3 }}>
         <Card>
-          <CardContent>
-            <Box sx={{ maxWidth: 500 }}>
-              <TextField
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SvgIcon
-                        color="action"
-                        fontSize="small"
-                      >
-                        <SearchIcon />
-                      </SvgIcon>
-                    </InputAdornment>
-                  )
-                }}
-                placeholder="Pesquisar prestador de serviço"
-                variant="outlined"
-              />
-            </Box>
-          </CardContent>
+        <CardContent>
+          <Box sx={{ maxWidth: 1000, display: 'flex', alignContent: 'center' }}>
+            <TextField
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SvgIcon
+                      color="action"
+                      fontSize="small"
+                    >
+                      <SearchIcon />
+                    </SvgIcon>
+                  </InputAdornment>
+                )
+              }}
+              placeholder="Nome"
+              variant="outlined"
+            />
+            <TextField
+              fullWidth
+              sx={{
+                display: 'flex',
+                justifyContent:'space-around',
+                margin: '0px 10px'
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SvgIcon
+                      color="action"
+                      fontSize="small"
+                    >
+                      <SearchIcon />
+                    </SvgIcon>
+                  </InputAdornment>
+                )
+              }}
+              placeholder="Empresa"
+              variant="outlined"
+            />
+            <TextField
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SvgIcon
+                      color="action"
+                      fontSize="small"
+                    >
+                      <SearchIcon />
+                    </SvgIcon>
+                  </InputAdornment>
+                )
+              }}
+              placeholder="Documento"
+              variant="outlined"
+            />
+            <TextField
+              fullWidth
+              sx={{
+                display: 'flex',
+                justifyContent:'space-around',
+                margin: '0px 10px'
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SvgIcon
+                      color="action"
+                      fontSize="small"
+                    >
+                      <SearchIcon />
+                    </SvgIcon>
+                  </InputAdornment>
+                )
+              }}
+              placeholder="Telefone"
+              variant="outlined"
+            />
+          </Box>
+        </CardContent>
         </Card>
       </Box>
     </Box>
