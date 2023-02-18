@@ -150,12 +150,11 @@ export const NovoVisitante = (props) => {
               >
               </TextField>
             </Grid>
-              <TextField
+              <input
                 name="tipo"
                 type="hidden"        
                 value="visitante"
-              >
-              </TextField>
+              />
             </Grid>
           <CardHeader
             title="Dados do Veículo"
