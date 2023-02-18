@@ -133,6 +133,12 @@ export const NovoPrestador = (props) => {
               >
               </TextField>
             </Grid>
+            <TextField
+                name="tipo"
+                type="hidden"        
+                value="prestador"
+              >
+              </TextField>
           </Grid>
           <CardHeader
             title="Dados do Veículo"

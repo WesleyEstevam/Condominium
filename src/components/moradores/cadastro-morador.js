@@ -148,6 +148,12 @@ export const NovoMorador = (props) => {
               >
               </TextField>
             </Grid>
+            <TextField
+                name="tipo"
+                type="hidden"
+                value="morador"
+              >
+              </TextField>
           </Grid>
           <CardHeader
             title="Dados do Veículo"
