@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
+import Link  from 'next/link';
 import { getInitials } from '../../utils/get-initials';
 import { DeletarItem } from '../btn_acao/btn-delet'; 
-import Link  from 'next/link';
+import { AlocarDestino }  from '../logs/AlocarDestino';
 
 import {
   Avatar,
@@ -79,7 +81,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
         <Box sx={{ minWidth: '100%' }}>
           <Table>
             <TableHead>
-              <TableRow>
+              <TableRow >
                 <TableCell padding="checkbox">
                   <Checkbox
                     checked={selectedCustomerIds.length === customers.length}
@@ -95,7 +97,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                   Nome
                 </TableCell>
                 <TableCell>
-                  E-mail
+                  Veículo
                 </TableCell>
                 <TableCell>
                   Documento
@@ -152,30 +154,50 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                   <TableCell>
                     {customer.phone}
                   </TableCell>
-                  <Link href="../telas_acao/visitante/btn-info">
-                    <Button 
-                        color="success"
-                        variant="contained"          
+                  <div
+                    style={{
+                      display: 'flex',                      
+                    }}
+                    >
+                    <div
+                      style={{
+                        display: 'flex',
+                        gap: '10px'
+                      }}
+                    >
+                    <Link href="../telas_acao/visitante/btn-info">
+                      <Button 
+                          color="success"
+                          variant="contained"          
+                        >
+                          <InfoIcon />
+                      </Button>
+                    </Link>
+                    <Link href="../telas_acao/visitante/btn-edit">
+                        <Button 
+                          color="primary"
+                          variant="contained"                         
                       >
-                        <InfoIcon />
-                    </Button>
-                  </Link>
-                  <Link href="../telas_acao/visitante/btn-edit">
-                      <Button 
-                        color="primary"
-                        variant="contained"
-                        sx={{ ml: 1, mr: 1 }}
-                    >
-                      <EditIcon />
-                      </Button>
-                  </Link>
-                      <Button 
-                        color="error"
-                        variant="contained"
-                        onClick={DeletarItem}
-                    >
-                      <DeleteForeverIcon />
-                      </Button>
+                        <EditIcon />
+                        </Button>
+                    </Link>
+                        <Button 
+                          color="error"
+                          variant="contained"
+                          onClick={DeletarItem}
+                      >
+                        <DeleteForeverIcon />
+                        </Button>
+                        <Button 
+                          color="warning"
+                          variant="contained"
+                          //href="/logs"
+                          onClick={AlocarDestino}
+                      >
+                        <HomeIcon />
+                        </Button>
+                    </div>
+                </div>        
                 </TableRow>
               ))}
             </TableBody>

@@ -95,13 +95,13 @@ export const ListaOcorrencia = ({ customers, ...rest }) => {
                   Nome
                 </TableCell>
                 <TableCell>
-                  E-mail
+                  Status
                 </TableCell>
                 <TableCell>
-                  Documento
+                  Tipo
                 </TableCell>
                 <TableCell>
-                  Telefone
+                  Descrição
                 </TableCell>
                 <TableCell>
                   Ação

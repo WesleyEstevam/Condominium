@@ -100,7 +100,7 @@ export const ListaPrestadores = ({ customers, ...rest }) => {
                   Documento
                 </TableCell>
                 <TableCell>
-                  Telefone
+                  Empresa
                 </TableCell>
                 <TableCell>
                   Ação

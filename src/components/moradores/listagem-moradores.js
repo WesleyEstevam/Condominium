@@ -95,10 +95,10 @@ export const ListaMoradores = ({ customers, ...rest }) => {
                   Nome
                 </TableCell>
                 <TableCell>
-                  E-mail
+                  Quadra
                 </TableCell>
                 <TableCell>
-                  Documento
+                  Lote
                 </TableCell>
                 <TableCell>
                   Telefone
