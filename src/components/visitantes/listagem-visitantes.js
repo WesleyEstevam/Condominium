@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
-import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
 import Link  from 'next/link';
@@ -71,6 +70,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
 
   return (
     <Card {...rest}>
+      
       <ImageList 
         sx={{
           gridAutoFlow: "column",
@@ -188,14 +188,8 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                       >
                         <DeleteForeverIcon />
                         </Button>
-                        <Button 
-                          color="warning"
-                          variant="contained"
-                          //href="/logs"
-                          onClick={AlocarDestino}
-                      >
-                        <HomeIcon />
-                        </Button>
+
+                        <AlocarDestino />
                     </div>
                 </div>        
                 </TableRow>

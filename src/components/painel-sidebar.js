@@ -11,6 +11,7 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import HomeIcon from '@mui/icons-material/Home';
+import SecurityIcon from '@mui/icons-material/Security';
 
 const items = [
   {
@@ -42,6 +43,11 @@ const items = [
     href: '/cameras',
     icon: (<CameraAltIcon fontSize="small" />),
     title: 'Câmeras'
+  },
+  {
+    href: '/logs',
+    icon: (<SecurityIcon fontSize="small" />),
+    title: 'Logs'
   },
 ];
 
