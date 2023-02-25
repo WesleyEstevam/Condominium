@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { AppBar, Avatar, Badge, Box, IconButton, Toolbar, Tooltip } from '@mui/material';
+import { AppBar, Avatar, Badge, Box, Button, IconButton, Toolbar, Tooltip } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Bell as BellIcon } from '../icons/bell';
 import { UserCircle as UserCircleIcon } from '../icons/user-circle';
 import { Users as UsersIcon } from '../icons/users';
 import { AccountPopover } from './account-popover';
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -38,6 +39,13 @@ export const DashboardNavbar = (props) => {
             px: 2
           }}
         >
+          <Button
+            sx={{ ml: 1 }}
+            color="success"
+            variant="contained"
+          >
+            <MeetingRoomIcon fontSize="small" /> Abrir Portão
+          </Button>
           <IconButton
             onClick={onSidebarOpen}
             sx={{
@@ -51,6 +59,7 @@ export const DashboardNavbar = (props) => {
           </IconButton>
 
           <Box sx={{ flexGrow: 1 }} />
+
           <Tooltip title="Contacts">
             <IconButton sx={{ ml: 1 }}>
               <UsersIcon fontSize="small" />
@@ -76,7 +85,7 @@ export const DashboardNavbar = (props) => {
               width: 40,
               ml: 1
             }}
-            //src="/static/images/avatars/avatar_1.png"
+          //src="/static/images/avatars/avatar_1.png"
           >
             <UserCircleIcon fontSize="small" />
           </Avatar>
