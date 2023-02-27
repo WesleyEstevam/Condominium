@@ -8,7 +8,9 @@ export function DeletarItem() {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, apague!'
+      confirmButtonText: 'Sim, apague!',
+      cancelButtonText: 'Cancelar',
+
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(

@@ -12,6 +12,7 @@ import CampaignIcon from '@mui/icons-material/Campaign';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import HomeIcon from '@mui/icons-material/Home';
 import SecurityIcon from '@mui/icons-material/Security';
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 
 const items = [
   {
@@ -128,10 +129,19 @@ export const DashboardSidebar = (props) => {
         <Divider sx={{ borderColor: '#2D3748' }} />
         <Box
           sx={{
-            px: 2,
-            py: 3
+            px: 2
           }}
         >
+          <Button
+            color="success"
+            variant="contained"
+            component="a"
+            endIcon={(<MeetingRoomIcon />)}
+            fullWidth
+            sx={{ mb: 2, mt: 1 }}
+          >
+            Abrir Portão
+          </Button>
           <Typography
             color="neutral.100"
             variant="subtitle2"
@@ -144,18 +154,6 @@ export const DashboardSidebar = (props) => {
           >
             Clique no botão sair.
           </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              mt: 2,
-              mx: 'auto',
-              width: '160px',
-              '& img': {
-                width: '100%'
-              }
-            }}
-          >
-          </Box>
           <NextLink
             href="/login"
             passHref

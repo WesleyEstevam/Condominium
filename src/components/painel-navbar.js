@@ -7,7 +7,7 @@ import { Bell as BellIcon } from '../icons/bell';
 import { UserCircle as UserCircleIcon } from '../icons/user-circle';
 import { Users as UsersIcon } from '../icons/users';
 import { AccountPopover } from './account-popover';
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -39,13 +39,7 @@ export const DashboardNavbar = (props) => {
             px: 2
           }}
         >
-          <Button
-            sx={{ ml: 1 }}
-            color="success"
-            variant="contained"
-          >
-            <MeetingRoomIcon fontSize="small" /> Abrir Portão
-          </Button>
+
           <IconButton
             onClick={onSidebarOpen}
             sx={{
