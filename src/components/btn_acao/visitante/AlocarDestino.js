@@ -40,79 +40,100 @@ export function AlocarDestino() {
         variant="contained"
         onClick={() =>
           Swal.fire({
-            html: 
-              `<div>
-                <h2></h2>
-                <form>
+            html:
+              ` <div>
+              <h2>Destino do Visitante</h2>
+              <form>
+                <div className="bloco1">
                   <label htmlFor="nome-morador">Nome do Morador:</label>
                   <input
                     type="text"
                     id="nome-morador"
+                    class="swal2-input"
                     name="nomeMorador"
-                    value={formValues.nomeMorador}
-                    onChange={handleInputChange}
+                    value="${formValues.nomeMorador}"
+                    onChange="${handleInputChange}"
                   />
 
                   <label htmlFor="data-hora">Data/hora:</label>
                   <input
                     type="datetime-local"
                     id="data-hora"
+                    class="swal2-input"
                     name="dataHora"
-                    value={formValues.dataHora}
-                    onChange={handleInputChange}
+                    value="${formValues.dataHora}"
+                    onChange="${handleInputChange}"
                   />
+                </div>
 
+                <div className="bloco2">
                   <label htmlFor="quadra">Quadra:</label>
                   <input
                     type="text"
                     id="quadra"
+                    class="swal2-input"
                     name="quadra"
-                    value={formValues.quadra}
-                    onChange={handleInputChange}
+                    value="${formValues.quadra}"
+                    onChange="${handleInputChange}"
                   />
 
                   <label htmlFor="lote">Lote:</label>
                   <input
                     type="text"
                     id="lote"
+                    class="swal2-input"
                     name="lote"
-                    value={formValues.lote}
-                    onChange={handleInputChange}
+                    value="${formValues.lote}"
+                    onChange="${handleInputChange}"
                   />
 
                   <label htmlFor="bloco">Bloco:</label>
                   <input
                     type="text"
                     id="bloco"
+                    class="swal2-input"
                     name="bloco"
-                    value={formValues.bloco}
-                    onChange={handleInputChange}
+                    value="${formValues.bloco}"
+                    onChange="${handleInputChange}"
                   />
 
                   <label htmlFor="apartamento">Apartamento:</label>
                   <input
                     type="text"
                     id="apartamento"
+                    class="swal2-input"
                     name="apartamento"
-                    value={formValues.apartamento}
-                    onChange={handleInputChange}
+                    value="${formValues.apartamento}"
+                    onChange="${handleInputChange}"
                   />
+                </div>
 
-                  <label htmlFor="descricao">Descrição:</label>
-                  <textarea
-                    id="descricao"
-                    name="descricao"
-                    value={formValues.descricao}
-                    onChange={handleInputChange}
-                  ></textarea>
-                </form>
-              </div>
+                <label htmlFor="descricao">Descrição:</label>
+                <textarea
+                  cols="50"
+                  rows="20"
+                  id="descricao"
+                  class="swal2-input"
+                  name="descricao"
+                  value="${formValues.descricao}"
+                  onChange="${handleInputChange}"
+                ></textarea>
+              </form>
             `,
             showCancelButton: true,
             confirmButtonText: 'Salvar',
+            width: '60%',
+            position: 'right',
             cancelButtonText: 'Cancelar',
-            focusCancel: true,
-            preConfirm: handleFormSubmit,
+            focusConfirm: false,
+            preConfirm: () => {
+              // Aqui você pode adicionar a lógica para salvar os dados do formulário.
+              // Caso ocorra algum erro, retorne uma Promise rejeitada para manter o modal aberto.
+              return Promise.resolve();
+            },
+            customClass: {
+              
+            }
           })
         }
       >

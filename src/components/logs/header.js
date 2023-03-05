@@ -8,10 +8,7 @@ import {
     SvgIcon, Typography
   } from '@mui/material';
   import { Search as SearchIcon } from '../../icons/search';
-  import { Upload as UploadIcon } from '../../icons/upload';
   import { Download as DownloadIcon } from '../../icons/download';
-  import Link from 'next/link'
-  import { Importar } from '../btn_acao/btn-importar';
 
   export const HeaderLogs = (props) => (
     <Box {...props}>
@@ -34,6 +31,7 @@ import {
           <Button
             startIcon={(<DownloadIcon fontSize="small" />)}
             sx={{ mr: 1 }}
+            variant='contained'
           >
             Exportar
           </Button>

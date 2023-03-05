@@ -6,7 +6,7 @@ import ImageList from "@mui/material/ImageList";
 import Link  from 'next/link';
 import { getInitials } from '../../utils/get-initials';
 import { DeletarItem } from '../btn_acao/btn-delet'; 
-import { AlocarDestino }  from '../logs/AlocarDestino';
+import { AlocarDestino }  from '../btn_acao/visitante/AlocarDestino';
 
 import {
   Avatar,
