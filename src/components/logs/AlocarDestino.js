@@ -40,8 +40,8 @@ export function AlocarDestino() {
         variant="contained"
         onClick={() =>
           Swal.fire({
-            html: (
-              <div>
+            html: 
+              `<div>
                 <h2></h2>
                 <form>
                   <label htmlFor="nome-morador">Nome do Morador:</label>
@@ -107,7 +107,7 @@ export function AlocarDestino() {
                   ></textarea>
                 </form>
               </div>
-            ),
+            `,
             showCancelButton: true,
             confirmButtonText: 'Salvar',
             cancelButtonText: 'Cancelar',
