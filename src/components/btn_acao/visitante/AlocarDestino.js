@@ -179,9 +179,11 @@ export function AlocarDestino() {
             justifyContent: 'center',
             marginTop: '10px'
           }}>
-            <Button type="submit" variant="contained" color="success">
-              Enviar
-            </Button>
+            <Link href="/visitantes">
+              <Button type="submit" variant="contained" color="success">
+                Enviar
+              </Button>
+            </Link>
           </Grid>
         </CardContent>
       </Card>
