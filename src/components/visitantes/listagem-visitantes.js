@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
 import Link  from 'next/link';
@@ -189,7 +190,14 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                         <DeleteForeverIcon />
                         </Button>
 
-                        <AlocarDestino />
+                    <Link href="../telas_acao/visitante/alocarDestino">
+                        <Button 
+                          color="warning"
+                          variant="contained"                         
+                      >
+                        <HomeIcon />
+                        </Button>
+                    </Link>
                     </div>
                 </div>        
                 </TableRow>

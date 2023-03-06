@@ -1,144 +1,190 @@
-import { useState } from 'react';
-import Swal from 'sweetalert2';
-import HomeIcon from '@mui/icons-material/Home';
-import { Button } from '@mui/material';
+import React, { useState } from 'react';
+import { TextField, Button, Grid, MenuItem, Card, CardContent } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Link from 'next/link';
 
 export function AlocarDestino() {
-  // Estado para guardar os valores do formulário
-  const [formValues, setFormValues] = useState({
-    nomeMorador: '',
-    dataHora: '',
-    quadra: '',
-    lote: '',
-    bloco: '',
-    apartamento: '',
-    descricao: '',
-  });
+  const [nomeMorador, setNomeMorador] = useState('');
+  const [dataHora, setDataHora] = useState('');
+  const [quadra, setQuadra] = useState('');
+  const [lote, setLote] = useState('');
+  const [bloco, setBloco] = useState('');
+  const [apartamento, setApartamento] = useState('');
+  const [descricao, setDescricao] = useState('');
 
-
-  // Função para atualizar o estado com os valores do formulário
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormValues({
-      ...formValues,
-      [name]: value,
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aqui você pode adicionar o código para enviar o formulário para o backend
+    console.log({
+      nomeMorador,
+      dataHora,
+      quadra,
+      lote,
+      bloco,
+      apartamento,
+      descricao,
     });
   };
 
-  // Função para enviar o formulário
-  const handleFormSubmit = () => {
-    // Fazer algo com os valores do formulário, como enviá-los para um servidor
-    console.log(formValues);
-    // Fechar o modal
-    Swal.close();
-  };
+  const quadraOptions = [
+    "Quadra A",
+    "Quadra B",
+    "Quadra C",
+    "Quadra D",
+  ];
+
+  const loteOptions = [
+    "Lote 1",
+    "Lote 2",
+    "Lote 3",
+    "Lote 4",
+  ];
+
+  const blocoOptions = [
+    "Bloco X",
+    "Bloco Y",
+    "Bloco Z",
+  ];
+
+  const apartamentoOptions = [
+    "Bloco X",
+    "Bloco Y",
+    "Bloco Z",
+  ];
 
   return (
     <>
-      <Button
-        color="warning"
-        variant="contained"
-        onClick={() =>
-          Swal.fire({
-            html:
-              ` <div>
-              <h2>Destino do Visitante</h2>
-              <form>
-                <div className="bloco1">
-                  <label htmlFor="nome-morador">Nome do Morador:</label>
-                  <input
-                    type="text"
-                    id="nome-morador"
-                    class="swal2-input"
-                    name="nomeMorador"
-                    value="${formValues.nomeMorador}"
-                    onChange="${handleInputChange}"
-                  />
+      <Grid item xs={12} sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        margin: '10px 10px'
+      }}>
+        <h1>Destino visitante</h1>
+        <Link href="/visitantes">
+          <Button
+            startIcon={(<ArrowBackIcon fontSize="small" />)}
+            variant="contained"
 
-                  <label htmlFor="data-hora">Data/hora:</label>
-                  <input
-                    type="datetime-local"
-                    id="data-hora"
-                    class="swal2-input"
-                    name="dataHora"
-                    value="${formValues.dataHora}"
-                    onChange="${handleInputChange}"
-                  />
-                </div>
-
-                <div className="bloco2">
-                  <label htmlFor="quadra">Quadra:</label>
-                  <input
-                    type="text"
-                    id="quadra"
-                    class="swal2-input"
-                    name="quadra"
-                    value="${formValues.quadra}"
-                    onChange="${handleInputChange}"
-                  />
-
-                  <label htmlFor="lote">Lote:</label>
-                  <input
-                    type="text"
-                    id="lote"
-                    class="swal2-input"
-                    name="lote"
-                    value="${formValues.lote}"
-                    onChange="${handleInputChange}"
-                  />
-
-                  <label htmlFor="bloco">Bloco:</label>
-                  <input
-                    type="text"
-                    id="bloco"
-                    class="swal2-input"
-                    name="bloco"
-                    value="${formValues.bloco}"
-                    onChange="${handleInputChange}"
-                  />
-
-                  <label htmlFor="apartamento">Apartamento:</label>
-                  <input
-                    type="text"
-                    id="apartamento"
-                    class="swal2-input"
-                    name="apartamento"
-                    value="${formValues.apartamento}"
-                    onChange="${handleInputChange}"
-                  />
-                </div>
-
-                <label htmlFor="descricao">Descrição:</label>
-                <textarea
-                  cols="50"
-                  rows="20"
-                  id="descricao"
-                  class="swal2-input"
-                  name="descricao"
-                  value="${formValues.descricao}"
-                  onChange="${handleInputChange}"
-                ></textarea>
-              </form>
-            `,
-            showCancelButton: true,
-            confirmButtonText: 'Salvar',
-            width: '60%',
-            position: 'right',
-            cancelButtonText: 'Cancelar',
-            focusConfirm: false,
-            preConfirm: () => {
-              // Aqui você pode adicionar a lógica para salvar os dados do formulário.
-              // Caso ocorra algum erro, retorne uma Promise rejeitada para manter o modal aberto.
-              return Promise.resolve();
-            },
-            customClass: {
-              
-            }
-          })
-        }
-      >
-        <HomeIcon />
-      </Button>
+          >
+            Voltar
+          </Button>
+        </Link>
+      </Grid>
+      <Card >
+        <CardContent>
+          <form onSubmit={handleSubmit}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItem: 'center'
+            }}
+          >
+            <Grid
+              container
+              spacing={2}
+              item
+              md={6}
+              xs={12}
+            >
+              <Grid item xs={6}>
+                <TextField
+                  label="Nome do Morador"
+                  fullWidth
+                  value={nomeMorador}
+                  onChange={(e) => setNomeMorador(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Data/Hora"
+                  fullWidth
+                  value={dataHora}
+                  onChange={(e) => setDataHora(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Quadra"
+                  fullWidth
+                  select
+                  value={quadra}
+                  onChange={(e) => setQuadra(e.target.value)}
+                >
+                  {quadraOptions.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Lote"
+                  fullWidth
+                  select
+                  value={lote}
+                  onChange={(e) => setLote(e.target.value)}
+                >
+                  {loteOptions.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Bloco"
+                  fullWidth
+                  select
+                  value={bloco}
+                  onChange={(e) => setBloco(e.target.value)}
+                >
+                  {blocoOptions.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Apartamento"
+                  fullWidth
+                  select
+                  value={bloco}
+                  onChange={(e) => setBloco(e.target.value)}
+                >
+                  {apartamentoOptions.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Descrição"
+                  multiline
+                  rows="10"
+                  fullWidth
+                  value={descricao}
+                  onChange={(e) => setDescricao(e.target.value)}
+                />
+              </Grid>
+            </Grid>
+          </form>
+          <Grid item xs={12} sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '10px'
+          }}>
+            <Button type="submit" variant="contained" color="success">
+              Enviar
+            </Button>
+          </Grid>
+        </CardContent>
+      </Card>
     </>
   );
-};
+}
