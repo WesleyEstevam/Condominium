@@ -103,6 +103,9 @@ export const ListaVeiculos = ({ customers, ...rest }) => {
                 <TableCell>
                   Cor
                 </TableCell>
+                <TableCell>
+                  Ação
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
