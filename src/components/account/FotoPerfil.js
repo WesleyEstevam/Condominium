@@ -18,7 +18,7 @@ const user = {
   timezone: 'GTM-7'
 };
 
-export const AccountProfile = (props) => (
+export const FotoPerfil = (props) => (
   <Card {...props}>
     <CardContent>
       <Box
@@ -64,7 +64,7 @@ export const AccountProfile = (props) => (
         fullWidth
         variant="text"
       >
-        Upload picture
+        Adicionar foto
       </Button>
     </CardActions>
   </Card>

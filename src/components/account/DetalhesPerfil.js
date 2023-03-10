@@ -25,7 +25,7 @@ const states = [
   }
 ];
 
-export const AccountProfileDetails = (props) => {
+export const DetalhesPerfil = (props) => {
   const [values, setValues] = useState({
     firstName: 'Katarina',
     lastName: 'Smith',
@@ -50,8 +50,8 @@ export const AccountProfileDetails = (props) => {
     >
       <Card>
         <CardHeader
-          subheader="The information can be edited"
-          title="Perfil"
+          subheader="Informações do proteiro"
+          title="Usuário"
         />
         <Divider />
         <CardContent>
@@ -66,7 +66,6 @@ export const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
                 label="Primeiro nome"
                 name="firstName"
                 onChange={handleChange}
@@ -146,7 +145,6 @@ export const AccountProfileDetails = (props) => {
                 name="state"
                 onChange={handleChange}
                 required
-                select
                 SelectProps={{ native: true }}
                 value={values.state}
                 variant="outlined"
@@ -171,12 +169,6 @@ export const AccountProfileDetails = (props) => {
             p: 2
           }}
         >
-          <Button
-            color="success"
-            variant="contained"
-          >
-            Cadastrar
-          </Button>
         </Box>
       </Card>
     </form>

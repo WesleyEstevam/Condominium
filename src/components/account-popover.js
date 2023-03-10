@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Box, MenuItem, MenuList, Popover, Typography } from '@mui/material';
 import { AuthContext } from '../contexts/auth-context';
 import { auth, ENABLE_AUTH } from '../lib/auth';
+import Link from 'next/link';
 
 export const AccountPopover = (props) => {
   const { anchorEl, onClose, open, ...other } = props;
@@ -64,24 +65,7 @@ export const AccountPopover = (props) => {
       }}
       {...other}
     >
-      <Box
-        sx={{
-          py: 1.5,
-          px: 2
-        }}
-      >
-        <Typography variant="overline">
-          Conta
-        </Typography>
-        <Typography
-          color="text.secondary"
-          variant="body2"
-        >
-        </Typography>
-        <Typography variant="overline">
-          Configurações
-        </Typography>
-      </Box>
+
       <MenuList
         disablePadding
         sx={{
@@ -95,9 +79,18 @@ export const AccountPopover = (props) => {
           }
         }}
       >
-        <MenuItem onClick={handleSignOut}>
-          Sair
-        </MenuItem>
+        <Link href="/perfil">
+          <MenuItem>
+            <Typography variant="overline">
+              Conta
+            </Typography>
+          </MenuItem>
+        </Link>
+        <Link href="/login">
+          <MenuItem onClick={handleSignOut}>
+            Sair
+          </MenuItem>
+        </Link>
       </MenuList>
     </Popover>
   );

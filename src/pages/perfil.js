@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
-import { AccountProfile } from '../components/account/account-profile';
-import { AccountProfileDetails } from '../components/account/account-profile-details';
+import { FotoPerfil } from '../components/account/FotoPerfil';
+import { DetalhesPerfil } from '../components/account/DetalhesPerfil';
 import { DashboardLayout } from '../components/painel-layout';
 
 const Page = () => (
@@ -29,7 +29,7 @@ const Page = () => (
             md={6}
             xs={12}
           >
-            <AccountProfile />
+            <FotoPerfil />
           </Grid>
           <Grid
             item
@@ -37,7 +37,7 @@ const Page = () => (
             md={6}
             xs={12}
           >
-            <AccountProfileDetails />
+            <DetalhesPerfil />
           </Grid>
         </Grid>
       </Container>
