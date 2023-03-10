@@ -13,6 +13,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import HomeIcon from '@mui/icons-material/Home';
 import SecurityIcon from '@mui/icons-material/Security';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
 
 const items = [
   {
@@ -34,6 +35,11 @@ const items = [
     href: '/prestadores',
     icon: (<HandymanIcon fontSize="small" />),
     title: 'Prestadores'
+  },
+  {
+    href: '/veiculos',
+    icon: (<TimeToLeaveIcon fontSize="small" />),
+    title: 'Veiculos'
   },
   {
     href: '/ocorrencias',
@@ -82,7 +88,7 @@ export const DashboardSidebar = (props) => {
         width: '8px',
         backgroundColor:'#bfbfbf',
         borderTop:'1px solid #a4a4a4',
-        borderBottom:'1px solid #a4a4a4'
+        borderBottom:'1px solid #a4a4a4',                
       }
     }}>
 
@@ -129,7 +135,8 @@ export const DashboardSidebar = (props) => {
         <Divider sx={{ borderColor: '#2D3748' }} />
         <Box
           sx={{
-            px: 2
+            px: 2,
+            marginTop: '-20%'
           }}
         >
           <Button
@@ -138,7 +145,7 @@ export const DashboardSidebar = (props) => {
             component="a"
             endIcon={(<MeetingRoomIcon />)}
             fullWidth
-            sx={{ mb: 2, mt: 1 }}
+            sx={{ mb: 3, mt: -1 }}
           >
             Abrir Portão
           </Button>
@@ -163,7 +170,7 @@ export const DashboardSidebar = (props) => {
               component="a"
               endIcon={(<OpenInNewIcon />)}
               fullWidth
-              sx={{ mt: 2 }}
+              sx={{ mt: 2, mb: 2 }}
               variant="contained"
             >
               Sair
