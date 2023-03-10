@@ -156,10 +156,10 @@ export function DestinoVisitante({ customers, ...rest }) {
                       {` ${customer.address.state}`}
                     </TableCell>
                     <TableCell>
-                    {customer.phone}
+                      {customer.phone}
                     </TableCell>
                     <TableCell>
-                    {customer.phone}
+                      {customer.phone}
                     </TableCell>
                     <div
                       style={{
@@ -172,7 +172,7 @@ export function DestinoVisitante({ customers, ...rest }) {
                           gap: '10px'
                         }}
                       >
-                        <Link href="../telas_acao/visitante/btn-info">
+                        <Link href="../telas_acao/logs/btn-info">
                           <Button
                             color="success"
                             variant="contained"
