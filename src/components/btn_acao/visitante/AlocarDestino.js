@@ -57,14 +57,14 @@ export function AlocarDestino() {
       <Grid item xs={12} sx={{
         display: 'flex',
         justifyContent: 'space-between',
-        margin: '10px 10px'
+        margin: '-30px 5px 30px 5px'
+
       }}>
         <h1>Destino visitante</h1>
         <Link href="/visitantes">
           <Button
             startIcon={(<ArrowBackIcon fontSize="small" />)}
             variant="contained"
-
           >
             Voltar
           </Button>
@@ -96,7 +96,7 @@ export function AlocarDestino() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  label="Data/Hora"
+                  type="datetime-local"
                   fullWidth
                   value={dataHora}
                   onChange={(e) => setDataHora(e.target.value)}
@@ -122,6 +122,9 @@ export function AlocarDestino() {
                   label="Lote"
                   fullWidth
                   select
+                  SelectProps={{
+                    renderValue: (value) => value,
+                  }}
                   value={lote}
                   onChange={(e) => setLote(e.target.value)}
                 >
@@ -166,7 +169,7 @@ export function AlocarDestino() {
                 <TextField
                   label="Descrição"
                   multiline
-                  rows="10"
+                  rows="5"
                   fullWidth
                   value={descricao}
                   onChange={(e) => setDescricao(e.target.value)}

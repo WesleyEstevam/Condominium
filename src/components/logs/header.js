@@ -25,7 +25,7 @@ import {
           sx={{ m: 1 }}
           variant="h4"
         >
-            Histórico de Visitas
+            Entradas e Saídas
         </Typography>
         <Box sx={{ m: 1 }}>
           <Button
@@ -99,6 +99,7 @@ import {
             />
             <TextField
               fullWidth
+              type="datetime-local"
               sx={{
                 display: 'flex',
                 justifyContent:'space-around',
