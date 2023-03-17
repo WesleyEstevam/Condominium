@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '@mui/icons-material/Home';
@@ -23,16 +24,26 @@ import {
   Typography
 } from '@mui/material';
 
-export const CustomerListResults = ({ customers, ...rest }) => {
+export const CustomerListResults = ({  ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+  const [visitante, setVisitante] = useState([])
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/visitante")
+      .then((response) => {
+        setVisitante(response.data)
+    }).catch(() => {
+      console.log('DEu ruimmm')
+    })
+  }, [])
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
 
     if (event.target.checked) {
-      newSelectedCustomerIds = customers.map((customer) => customer.id);
+      newSelectedCustomerIds = visitante.map((customer) => customer.id);
     } else {
       newSelectedCustomerIds = [];
     }
@@ -84,11 +95,11 @@ export const CustomerListResults = ({ customers, ...rest }) => {
               <TableRow >
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
+                    checked={selectedCustomerIds.length === visitante.length}
                     color="primary"
                     indeterminate={
                       selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
+                      && selectedCustomerIds.length < visitante.length
                     }
                     onChange={handleSelectAll}
                   />
@@ -111,16 +122,16 @@ export const CustomerListResults = ({ customers, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {visitante.slice(0, limit).map((visitante) => (
                 <TableRow
                   hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                  key={visitante.id}
+                  selected={selectedCustomerIds.indexOf(visitante.id) !== -1}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
+                      checked={selectedCustomerIds.indexOf(visitante.id) !== -1}
+                      onChange={(event) => handleSelectOne(event, visitante.id)}
                       value="true"
                     />
                   </TableCell>
@@ -131,28 +142,22 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                         display: 'flex'
                       }}
                     >
-                      <Avatar
-                        src={customer.avatarUrl}
-                        sx={{ mr: 2 }}
-                      >
-                        {getInitials(customer.name)}
-                      </Avatar>
                       <Typography
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.name}
+                        {visitante.nomePessoa}
                       </Typography>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {customer.email}
+                    {visitante.email}
                   </TableCell>
                   <TableCell>
-                    {` ${customer.address.state}`}
+                    {` ${visitante.documento}`}
                   </TableCell>
                   <TableCell>
-                    {customer.phone}
+                    {visitante.telefoneID}
                   </TableCell>
                   <div
                     style={{
@@ -207,7 +212,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
       </ImageList>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={visitante.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}
