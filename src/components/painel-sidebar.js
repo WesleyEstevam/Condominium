@@ -81,105 +81,92 @@ export const DashboardSidebar = (props) => {
   );
 
   const content = (
-    <div sx={{ //Estilização da Scrollbar está apenas para o Firefox
-      scrollbarWidth: 'thin',
-      scrollbarColor: 'blue orange',
-      '::-webkit-scrollbar-thumb:vertical': {
-        width: '8px',
-        backgroundColor:'#bfbfbf',
-        borderTop:'1px solid #a4a4a4',
-        borderBottom:'1px solid #a4a4a4',                
-      }
-    }}>
-
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-        }}
-      >
-        <div>
-          <Box sx={{ p: 3, marginBottom: -3, textAlign: 'center' }}>
-            <NextLink
-              href="/"
-              passHref
-            >
-              <img 
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+      }}
+    >
+      <div>
+        <Box sx={{ p: 3, marginBottom: -3, textAlign: 'center' }}>
+          <NextLink
+            href="/"
+            passHref
+          >
+            <img
               src='/static/logoCondominium.jpeg'
               style={{
                 display: 'inline-block',
                 width: 150,
                 borderRadius: 100
               }}
-              />
-            </NextLink>
-          </Box>
-        </div>
-        <Divider
-          sx={{
-            borderColor: '#2D3748',
-            my: 3
-          }}
-        />
-        <Box sx={{ flexGrow: 1, paddingBottom: 30 }}>
-          {items.map((item) => (
-            <NavItem
-              key={item.title}
-              icon={item.icon}
-              href={item.href}
-              title={item.title}
             />
-          ))}
-        </Box>
-        <Divider sx={{ borderColor: '#2D3748' }} />
-        <Box
-          sx={{
-            px: 2,
-            marginTop: '-20%'
-          }}
-        >
-          <Button
-            color="success"
-            variant="contained"
-            component="a"
-            endIcon={(<MeetingRoomIcon />)}
-            fullWidth
-            sx={{ mb: 3, mt: -1 }}
-          >
-            Abrir Portão
-          </Button>
-          <Typography
-            color="neutral.100"
-            variant="subtitle2"
-          >
-            Deseja deslogar do sistema?
-          </Typography>
-          <Typography
-            color="neutral.500"
-            variant="body2"
-          >
-            Clique no botão sair.
-          </Typography>
-          <NextLink
-            href="/login"
-            passHref
-          >
-            <Button
-              color="error"
-              component="a"
-              endIcon={(<OpenInNewIcon />)}
-              fullWidth
-              sx={{ mt: 2, mb: 2 }}
-              variant="contained"
-            >
-              Sair
-            </Button>
           </NextLink>
         </Box>
+      </div>
+      <Divider
+        sx={{
+          borderColor: '#2D3748',
+          my: 3
+        }}
+      />
+      <Box sx={{ flexGrow: 1, paddingBottom: 30 }}>
+        {items.map((item) => (
+          <NavItem
+            key={item.title}
+            icon={item.icon}
+            href={item.href}
+            title={item.title}
+          />
+        ))}
       </Box>
-
-    </div>
+      <Divider sx={{ borderColor: '#2D3748' }} />
+      <Box
+        sx={{
+          px: 2,
+          marginTop: '-20%'
+        }}
+      >
+        <Button
+          color="success"
+          variant="contained"
+          component="a"
+          endIcon={(<MeetingRoomIcon />)}
+          fullWidth
+          sx={{ mb: 3, mt: -1 }}
+        >
+          Abrir Portão
+        </Button>
+        <Typography
+          color="neutral.100"
+          variant="subtitle2"
+        >
+          Deseja deslogar do sistema?
+        </Typography>
+        <Typography
+          color="neutral.500"
+          variant="body2"
+        >
+          Clique no botão sair.
+        </Typography>
+        <NextLink
+          href="/login"
+          passHref
+        >
+          <Button
+            color="error"
+            component="a"
+            endIcon={(<OpenInNewIcon />)}
+            fullWidth
+            sx={{ mt: 2, mb: 2 }}
+            variant="contained"
+          >
+            Sair
+          </Button>
+        </NextLink>
+      </Box>
+    </Box>
   );
 
   if (lgUp) {
@@ -191,7 +178,29 @@ export const DashboardSidebar = (props) => {
           sx: {
             backgroundColor: 'neutral.900',
             color: '#FFFFFF',
-            width: 280
+            width: 280,
+            
+            '::-webkit-scrollbar': { /* Estiliza a barra de rolagem */
+              width: '5px',
+            },
+           
+            '::-webkit-scrollbar-thumb': { /* Estiliza o botão de rolagem */
+              backgroundColor: 'green',
+              borderRadius: '10px'
+            },
+
+           '::-webkit-scrollbar-track': { /* Estiliza o fundo da barra de rolagem */
+              backgroundColor: 'bfbfbf',
+            },
+
+            scrollbarWidth: 'thin',
+            scrollbarColor: 'blue orange',
+            '::-webkit-scrollbar-thumb:vertical': {
+              width: '8px',
+              backgroundColor: '#bfbfbf',
+              borderTop: '1px solid #a4a4a4',
+              borderBottom: '1px solid #a4a4a4',
+            }
           }
         }}
         variant="permanent"
@@ -199,27 +208,27 @@ export const DashboardSidebar = (props) => {
         {content}
       </Drawer>
     );
-    
+
   }
 
   return (
-      <Drawer
-        anchor="left"
-        onClose={onClose}
-        open={open}
-        PaperProps={{
-          sx: {
-            backgroundColor: 'neutral.900',
-            color: '#FFFFFF',
-            width: 280
-          }
-        }}
-        sx={{ zIndex: (theme) => theme.zIndex.appBar + 100 }}
-        variant="temporary"
-      >
-        {content}
-      </Drawer>
-    );
+    <Drawer
+      anchor="left"
+      onClose={onClose}
+      open={open}
+      PaperProps={{
+        sx: {
+          backgroundColor: 'neutral.900',
+          color: '#FFFFFF',
+          width: 280
+        }
+      }}
+      sx={{ zIndex: (theme) => theme.zIndex.appBar + 100 }}
+      variant="temporary"
+    >
+      {content}
+    </Drawer>
+  );
 };
 
 DashboardSidebar.propTypes = {
