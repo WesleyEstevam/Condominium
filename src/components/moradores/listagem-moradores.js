@@ -3,7 +3,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ImageList from "@mui/material/ImageList";
-import Link  from 'next/link';
+import Link from 'next/link';
 
 import {
   Avatar,
@@ -20,7 +20,7 @@ import {
   Typography
 } from '@mui/material';
 import { getInitials } from '../../utils/get-initials';
-import { DeletarItem } from '../btn_acao/btn-delet'; 
+import { DeletarItem } from '../btn_acao/btn-delet';
 
 export const ListaMoradores = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -69,7 +69,7 @@ export const ListaMoradores = ({ customers, ...rest }) => {
 
   return (
     <Card {...rest}>
-      <ImageList 
+      <ImageList
         sx={{
           gridAutoFlow: "column",
           gridTemplateColumns: "repeat(auto-fit, minmax(160px,1fr)) !important",
@@ -80,7 +80,7 @@ export const ListaMoradores = ({ customers, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-              <TableCell padding="checkbox">
+                <TableCell padding="checkbox">
                   <Checkbox
                     checked={selectedCustomerIds.length === customers.length}
                     color="primary"
@@ -152,30 +152,35 @@ export const ListaMoradores = ({ customers, ...rest }) => {
                   <TableCell>
                     {customer.phone}
                   </TableCell>
-                  <Link href="../telas_acao/morador/btn-info">
-                    <Button 
+                  <TableCell
+                    sx={{
+                      display: 'flex',
+                      gap: '5px'
+                    }}>
+                    <Link href="../telas_acao/morador/btn-info">
+                      <Button
                         color="success"
-                        variant="contained"          
+                        variant="contained"
                       >
                         <InfoIcon />
-                    </Button>
-                  </Link>
-                  <Link href="../telas_acao/morador/btn-edit">
-                      <Button 
+                      </Button>
+                    </Link>
+                    <Link href="../telas_acao/morador/btn-edit">
+                      <Button
                         color="primary"
                         variant="contained"
-                        sx={{ ml: 1, mr: 1 }}
-                    >
-                      <EditIcon />
+                      >
+                        <EditIcon />
                       </Button>
-                  </Link>
-                      <Button 
-                        color="error"
-                        variant="contained"
-                        onClick={DeletarItem}
+                    </Link>
+                    <Button
+                      color="error"
+                      variant="contained"
+                      onClick={DeletarItem}
                     >
                       <DeleteForeverIcon />
-                      </Button>
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

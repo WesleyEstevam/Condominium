@@ -1,9 +1,7 @@
 import {
     Avatar,
     Box,
-    Button,
     Card,
-    CardActions,
     CardContent,
     Divider,
     Typography
@@ -58,15 +56,6 @@ import {
         </Box>
       </CardContent>
       <Divider />
-      <CardActions>
-        <Button
-          color="primary"
-          fullWidth
-          variant="text"
-        >
-          Adicionar Foto
-        </Button>
-      </CardActions>
     </Card>
   );
   

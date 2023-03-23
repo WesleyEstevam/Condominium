@@ -5,9 +5,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
-import Link  from 'next/link';
+import Link from 'next/link';
 import { getInitials } from '../../utils/get-initials';
-import { DeletarItem } from '../btn_acao/btn-delet'; 
+import { DeletarItem } from '../btn_acao/btn-delet';
 
 import {
   Avatar,
@@ -24,7 +24,7 @@ import {
   Typography
 } from '@mui/material';
 
-export const CustomerListResults = ({  ...rest }) => {
+export const CustomerListResults = ({ ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -34,9 +34,9 @@ export const CustomerListResults = ({  ...rest }) => {
     axios.get("http://localhost:3000/visitante")
       .then((response) => {
         setVisitante(response.data)
-    }).catch(() => {
-      console.log('DEu ruimmm')
-    })
+      }).catch((error) => {
+        console.error(error)
+      })
   }, [])
 
   const handleSelectAll = (event) => {
@@ -81,8 +81,8 @@ export const CustomerListResults = ({  ...rest }) => {
 
   return (
     <Card {...rest}>
-      
-      <ImageList 
+
+      <ImageList
         sx={{
           gridAutoFlow: "column",
           gridTemplateColumns: "repeat(auto-fit, minmax(160px,1fr)) !important",
@@ -159,51 +159,43 @@ export const CustomerListResults = ({  ...rest }) => {
                   <TableCell>
                     {visitante.telefoneID}
                   </TableCell>
-                  <div
-                    style={{
-                      display: 'flex',                      
-                    }}
-                    >
-                    <div
-                      style={{
-                        display: 'flex',
-                        gap: '10px'
-                      }}
-                    >
+                  <TableCell
+                    sx={{
+                      display: 'flex',
+                      gap: '5px'
+                    }}>
                     <Link href="../telas_acao/visitante/btn-info">
-                      <Button 
-                          color="success"
-                          variant="contained"          
-                        >
-                          <InfoIcon />
+                      <Button
+                        color="success"
+                        variant="contained"
+                      >
+                        <InfoIcon />
                       </Button>
                     </Link>
                     <Link href="../telas_acao/visitante/btn-edit">
-                        <Button 
-                          color="primary"
-                          variant="contained"                         
+                      <Button
+                        color="primary"
+                        variant="contained"
                       >
                         <EditIcon />
-                        </Button>
+                      </Button>
                     </Link>
-                        <Button 
-                          color="error"
-                          variant="contained"
-                          onClick={DeletarItem}
-                      >
-                        <DeleteForeverIcon />
-                        </Button>
-
+                    <Button
+                      color="error"
+                      variant="contained"
+                      onClick={DeletarItem}
+                    >
+                      <DeleteForeverIcon />
+                    </Button>
                     <Link href="../telas_acao/visitante/alocarDestino">
-                        <Button 
-                          color="warning"
-                          variant="contained"                         
+                      <Button
+                        color="warning"
+                        variant="contained"
                       >
                         <HomeIcon />
-                        </Button>
+                      </Button>
                     </Link>
-                    </div>
-                </div>        
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

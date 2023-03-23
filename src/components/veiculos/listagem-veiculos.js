@@ -4,7 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
 import { getInitials } from '../../utils/get-initials';
-import { DeletarItem } from '../btn_acao/btn-delet'; 
+import { DeletarItem } from '../btn_acao/btn-delet';
 import Link from 'next/link';
 
 import {
@@ -69,7 +69,7 @@ export const ListaVeiculos = ({ customers, ...rest }) => {
 
   return (
     <Card {...rest}>
-      <ImageList 
+      <ImageList
         sx={{
           gridAutoFlow: "column",
           gridTemplateColumns: "repeat(auto-fit, minmax(160px,1fr)) !important",
@@ -152,30 +152,35 @@ export const ListaVeiculos = ({ customers, ...rest }) => {
                   <TableCell>
                     {customer.phone}
                   </TableCell>
-                  <Link href="../telas_acao/veiculo/btn-info">
-                    <Button 
+                  <TableCell
+                    sx={{
+                      display: 'flex',
+                      gap: '5px'
+                    }}>
+                    <Link href="../telas_acao/veiculo/btn-info">
+                      <Button
                         color="success"
-                        variant="contained"          
+                        variant="contained"
                       >
                         <InfoIcon />
-                    </Button>
-                  </Link>
-                  <Link href="../telas_acao/veiculo/btn-edit">
-                      <Button 
+                      </Button>
+                    </Link>
+                    <Link href="../telas_acao/veiculo/btn-edit">
+                      <Button
                         color="primary"
                         variant="contained"
-                        sx={{ ml: 1, mr: 1 }}
-                    >
-                      <EditIcon />
+                      >
+                        <EditIcon />
                       </Button>
-                  </Link>
-                      <Button 
-                        color="error"
-                        variant="contained"
-                        onClick={DeletarItem}
+                    </Link>
+                    <Button
+                      color="error"
+                      variant="contained"
+                      onClick={DeletarItem}
                     >
                       <DeleteForeverIcon />
-                      </Button>
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

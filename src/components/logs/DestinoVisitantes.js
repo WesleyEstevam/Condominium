@@ -22,7 +22,6 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-//TELA DE EXEMPLO
 
 export function DestinoVisitante({ customers, ...rest }) {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -161,27 +160,20 @@ export function DestinoVisitante({ customers, ...rest }) {
                     <TableCell>
                       {customer.phone}
                     </TableCell>
-                    <div
-                      style={{
+                    <TableCell
+                      sx={{
                         display: 'flex',
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: 'flex',
-                          gap: '10px'
-                        }}
-                      >
-                        <Link href="../telas_acao/logs/btn-info">
-                          <Button
-                            color="success"
-                            variant="contained"
-                          >
-                            <InfoIcon />
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
+                        gap: '5px'
+                      }}>
+                      <Link href="../telas_acao/logs/btn-info">
+                        <Button
+                          color="success"
+                          variant="contained"
+                        >
+                          <InfoIcon />
+                        </Button>
+                      </Link>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

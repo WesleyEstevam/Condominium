@@ -1,6 +1,5 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { DashboardLayout } from '../../components/painel-layout';
-import { PerfilVisitante } from '../../components/visitantes/perfil-visitante';
 import { NovoVisitante } from '../../components/visitantes/cadastro-visitante';
 
 const Page = () => (
@@ -29,27 +28,6 @@ const Page = () => (
             
           }}
         >
-
-          <Grid
-            item
-            lg={20}
-            md={6}
-            xs={12}
-          >
-            <PerfilVisitante />
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          spacing={3}
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-            
-          }}
-        >
-
           <Grid
             item
             lg={20}
