@@ -1,40 +1,26 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios'
-import Link from 'next/link'
+import { useState } from 'react';
 import {
   Box,
   Button,
   Card,
   CardContent,
+  CardHeader,
+  Divider,
   Grid,
-  TextField
+  TextField,
 } from '@mui/material';
+import Link from 'next/link';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-export const NovoImovel = (props) => {
+export const EditImovel = (props) => {
   const [values, setValues] = useState({
-    nome: '',
-    email: '',
-    telefone: '',
-    documento: '',
-    nomePai: '',
-    nomeMae: ''
+    firstName: 'Katarina',
+    lastName: 'Smith',
+    email: 'demo@devias.io',
+    phone: '',
+    state: 'Alabama',
+    country: 'USA'
   });
-
-  const data = {
-    nome: setValues.nome,
-    email: setValues.email,
-    documento: setValues.documento,
-    nomePai: setValues.nomePai,
-    nomeMae: setValues.nomeMae
-  }
-
-  useEffect(() => {
-    axios.post("http://localhost:3000/visitante", data)
-      .then((response) => console.log(response))
-      .catch((error) => {
-        console.error("ops! ocorreu um erro " + error);
-      });
-  }, []);
 
   const handleChange = (event) => {
     setValues({
@@ -44,6 +30,25 @@ export const NovoImovel = (props) => {
   };
 
   return (
+    <>
+      <div 
+        style={{ 
+          margin: 20,
+          display: 'flex',
+          justifyContent: 'space-between',
+
+        }}
+      >
+        <h1>Imoveis</h1>
+        <Link href="/imoveis">
+          <Button
+            startIcon={(<ArrowBackIcon fontSize="small" />)}
+            variant="contained"
+          >
+            Voltar
+          </Button>
+        </Link>
+      </div>
     <form
       autoComplete="off"
       noValidate
@@ -132,11 +137,13 @@ export const NovoImovel = (props) => {
               variant="contained"
               type="submit"
             >
-              Cadastrar
+              Atualizar
             </Button>
           </Link>
         </Box>
       </Card>
     </form>
+  );
+    </>  
   );
 };

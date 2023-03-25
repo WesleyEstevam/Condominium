@@ -157,7 +157,7 @@ export const ListaImoveis = ({ customers, ...rest }) => {
                       display: 'flex',
                       gap: '5px'
                     }}>
-                    <Link href="../telas_acao/morador/btn-info">
+                    <Link href="../telas_acao/imoveis/btn-info">
                       <Button
                         color="success"
                         variant="contained"
@@ -165,7 +165,7 @@ export const ListaImoveis = ({ customers, ...rest }) => {
                         <InfoIcon />
                       </Button>
                     </Link>
-                    <Link href="../telas_acao/morador/btn-edit">
+                    <Link href="../telas_acao/imoveis/btn-edit">
                       <Button
                         color="primary"
                         variant="contained"
