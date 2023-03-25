@@ -29,15 +29,6 @@ const Page = () => (
             
           }}
         >
-
-          <Grid
-            item
-            lg={20}
-            md={6}
-            xs={12}
-          >
-            <PerfilMorador />
-          </Grid>
         </Grid>
         <Grid
           container

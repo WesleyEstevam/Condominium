@@ -5,12 +5,13 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Divider,
   Grid,
   TextField,
 } from '@mui/material';
 import Link from 'next/link';
 import axios from 'axios';
+import { Veiculo } from '../Atributos/veiculo';
+import { Telefone } from '../Atributos/telefone';
 
 export const NovoVisitante = (props) => {
   const [values, setValues] = useState({
@@ -25,7 +26,6 @@ export const NovoVisitante = (props) => {
   const data = {
     nome: setValues.nome,
     email: setValues.email,
-    telefone: setValues.telefone,
     documento: setValues.documento,
     nomePai: setValues.nomePai,
     nomeMae: setValues.nomeMae
@@ -33,9 +33,9 @@ export const NovoVisitante = (props) => {
 
   useEffect(() => {
     axios.post("http://localhost:3000/visitante", data)
-      .then((response) => setValues(response.data))
-      .catch((err) => {
-        console.error("ops! ocorreu um erro" + err);
+      .then((response) => console.log(response))
+      .catch((error) => {
+        console.error("ops! ocorreu um erro " + error);
       });
   }, []);
 
@@ -53,7 +53,6 @@ export const NovoVisitante = (props) => {
       {...props}
     >
       <Card>
-        <Divider />
         <CardContent>
           <Grid
             container
@@ -89,21 +88,7 @@ export const NovoVisitante = (props) => {
                 variant="outlined"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Contato"
-                name="telefone"
-                onChange={handleChange}
-                type="number"
-                value={values.telefone}
-                variant="outlined"
-              />
-            </Grid>
+
             <Grid
               item
               md={6}
@@ -151,6 +136,21 @@ export const NovoVisitante = (props) => {
               >
               </TextField>
             </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Empresa"
+                name="empresa"
+                onChange={handleChange}
+                required
+                variant="outlined"
+              >
+              </TextField>
+            </Grid>
             <input
               name="tipo"
               type="hidden"
@@ -164,76 +164,25 @@ export const NovoVisitante = (props) => {
             }}
           />
           <Grid
-            container
-            spacing={3}
+            item
+            xs={12}
+            mb={5}
           >
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Placa"
-                name="state"
-                onChange={handleChange}
-                required
-                value={values.state}
-                variant="outlined"
-              >
-              </TextField>
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Cor"
-                name="state"
-                onChange={handleChange}
-                required
-                value={values.state}
-                variant="outlined"
-              >
-              </TextField>
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Tipo"
-                name="state"
-                onChange={handleChange}
-                required
-                value={values.state}
-                variant="outlined"
-              >
-              </TextField>
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Modelo"
-                name="state"
-                onChange={handleChange}
-                required
-                value={values.state}
-                variant="outlined"
-              >
-              </TextField>
-            </Grid>
+            <Veiculo />
+          </Grid>
+          <CardHeader
+            title="Telefones"
+            sx={{
+              textAlign: 'center'
+            }}
+          />
+          <Grid
+            item
+            xs={12}
+          >
+            <Telefone />
           </Grid>
         </CardContent>
-        <Divider />
         <Box
           sx={{
             display: 'flex',

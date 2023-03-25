@@ -44,11 +44,6 @@ export const HeaderVeiculos = (props) => (
         >
           Exportar
         </Button>
-        <Link href="cadastros/novo-veiculo" color='primary'>
-          <Button color='primary' variant='contained'>
-            Novo Veículo
-          </Button>
-        </Link>
       </Box>
     </Box>
     <Box sx={{ mt: 3 }}>

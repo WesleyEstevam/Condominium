@@ -6,7 +6,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
 import Link from 'next/link';
-import { getInitials } from '../../utils/get-initials';
 import { DeletarItem } from '../btn_acao/btn-delet';
 
 import {
@@ -23,6 +22,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
+import { MenuGeral } from './menu-geral';
 
 export const CustomerListResults = ({ ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -90,6 +90,7 @@ export const CustomerListResults = ({ ...rest }) => {
         }}
       >
         <Box sx={{ minWidth: '100%' }}>
+          <MenuGeral />
           <Table>
             <TableHead>
               <TableRow >
