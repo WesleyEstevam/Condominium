@@ -189,7 +189,7 @@ export const NovoMorador = (props) => {
             p: 2
           }}
         >
-          <Link href='/visitantes'>
+          <Link href='/moradores'>
             <Button
               color="success"
               variant="contained"

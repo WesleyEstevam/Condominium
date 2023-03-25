@@ -111,8 +111,8 @@ export const NovoPrestador = (props) => {
             >
               <TextField
                 fullWidth
-                label="Nome do Pai"
-                name="nomePai"
+                label="Empresa"
+                name="empresa"
                 onChange={handleChange}
                 required
                 value={values.nomePai}
@@ -127,8 +127,8 @@ export const NovoPrestador = (props) => {
             >
               <TextField
                 fullWidth
-                label="Nome do Mãe"
-                name="nomeMae"
+                label="Nome do Pai"
+                name="nomePai"
                 onChange={handleChange}
                 required
                 value={values.nomeMae}
@@ -143,8 +143,8 @@ export const NovoPrestador = (props) => {
             >
               <TextField
                 fullWidth
-                label="Empresa"
-                name="empresa"
+                label="Nome do Mãe"
+                name="nomeMae"
                 onChange={handleChange}
                 required
                 variant="outlined"
@@ -190,7 +190,7 @@ export const NovoPrestador = (props) => {
             p: 2
           }}
         >
-          <Link href='/visitantes'>
+          <Link href='/prestadores'>
             <Button
               color="success"
               variant="contained"

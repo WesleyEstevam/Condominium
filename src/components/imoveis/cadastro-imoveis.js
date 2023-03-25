@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react';
+import { Veiculo } from '../Atributos/veiculo';
+import { Telefone } from '../Atributos/telefone';
+import axios from 'axios'
+import Link from 'next/link'
 import {
   Box,
   Button,
@@ -6,14 +10,11 @@ import {
   CardContent,
   CardHeader,
   Grid,
-  TextField,
+  TextField
 } from '@mui/material';
-import Link from 'next/link';
-import axios from 'axios';
-import { Veiculo } from '../Atributos/veiculo';
-import { Telefone } from '../Atributos/telefone';
+import { Imoveis } from '../Atributos/imoveis';
 
-export const NovoVisitante = (props) => {
+export const NovoImovel = (props) => {
   const [values, setValues] = useState({
     nome: '',
     email: '',
@@ -65,8 +66,8 @@ export const NovoVisitante = (props) => {
             >
               <TextField
                 fullWidth
-                label="Nome completo"
-                name="nome"
+                label="Quadra"
+                name="quadra"
                 onChange={handleChange}
                 required
                 value={values.nome}
@@ -80,8 +81,8 @@ export const NovoVisitante = (props) => {
             >
               <TextField
                 fullWidth
-                label="E-mail"
-                name="email"
+                label="Lote"
+                name="lote"
                 onChange={handleChange}
                 required
                 value={values.email}
@@ -96,8 +97,8 @@ export const NovoVisitante = (props) => {
             >
               <TextField
                 fullWidth
-                label="Documento"
-                name="documento"
+                label="Bloco"
+                name="bloco"
                 onChange={handleChange}
                 required
                 value={values.documento}
@@ -111,8 +112,8 @@ export const NovoVisitante = (props) => {
             >
               <TextField
                 fullWidth
-                label="Empresa"
-                name="empresa"
+                label="Apartamento"
+                name="apartamento"
                 onChange={handleChange}
                 required
                 value={values.nomePai}
@@ -120,67 +121,6 @@ export const NovoVisitante = (props) => {
               >
               </TextField>
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Nome do Mãe"
-                name="nomeMae"
-                onChange={handleChange}
-                required
-                value={values.nomeMae}
-                variant="outlined"
-              >
-              </TextField>
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Nome do Pai"
-                name="nomePai"
-                onChange={handleChange}
-                required
-                variant="outlined"
-              >
-              </TextField>
-            </Grid>
-            <input
-              name="tipo"
-              type="hidden"
-              value="visitante"
-            />
-          </Grid>
-          <CardHeader
-            title="Dados do Veículo"
-            sx={{
-              textAlign: 'center'
-            }}
-          />
-          <Grid
-            item
-            xs={12}
-            mb={5}
-          >
-            <Veiculo />
-          </Grid>
-          <CardHeader
-            title="Telefones"
-            sx={{
-              textAlign: 'center'
-            }}
-          />
-          <Grid
-            item
-            xs={12}
-          >
-            <Telefone />
           </Grid>
         </CardContent>
         <Box
@@ -190,7 +130,7 @@ export const NovoVisitante = (props) => {
             p: 2
           }}
         >
-          <Link href='/visitantes'>
+          <Link href='/imoveis'>
             <Button
               color="success"
               variant="contained"

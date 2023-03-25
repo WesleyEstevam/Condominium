@@ -85,7 +85,7 @@ export function Telefone() {
                     margin: '0px 0px 10px 0'
                 }}
             >
-                <Link href='/visitantes'>
+                <Link href='/cadastros/novo-telefone'>
                     <Button
                         color="primary"
                         variant="outlined"

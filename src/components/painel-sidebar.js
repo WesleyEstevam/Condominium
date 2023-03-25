@@ -14,6 +14,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SecurityIcon from '@mui/icons-material/Security';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 
 const items = [
   {
@@ -37,14 +38,19 @@ const items = [
     title: 'Prestadores'
   },
   {
-    href: '/veiculos',
-    icon: (<TimeToLeaveIcon fontSize="small" />),
-    title: 'Veiculos'
-  },
-  {
     href: '/ocorrencias',
     icon: (<CampaignIcon fontSize="small" />),
     title: 'Ocorrências'
+  },
+  {
+    href: '/imoveis',
+    icon: (<ApartmentIcon fontSize="small" />),
+    title: 'Imóveis'
+  },
+  {
+    href: '/veiculos',
+    icon: (<TimeToLeaveIcon fontSize="small" />),
+    title: 'Veiculos'
   },
   {
     href: '/cameras',
@@ -54,7 +60,7 @@ const items = [
   {
     href: '/logs',
     icon: (<SecurityIcon fontSize="small" />),
-    title: 'Logs'
+    title: 'Entradas e Saídas'
   },
 ];
 
