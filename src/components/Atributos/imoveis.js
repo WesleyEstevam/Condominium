@@ -87,7 +87,7 @@ export function Imoveis() {
                     margin: '0px 0px 10px 0'
                 }}
             >
-                <Link href='/cadastros/novo-veiculo'>
+                <Link href='/cadastros/novo-imovel'>
                     <Button
                         color="primary"
                         variant="outlined"

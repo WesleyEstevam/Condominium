@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Veiculo } from '../Atributos/veiculo';
 import { Telefone } from '../Atributos/telefone';
+
 import axios from 'axios'
 import Link from 'next/link'
 import {
@@ -15,6 +16,8 @@ import {
 import { Imoveis } from '../Atributos/imoveis';
 
 export const NovoMorador = (props) => {
+
+
   const [values, setValues] = useState({
     nome: '',
     email: '',

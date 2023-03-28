@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import axios from 'axios'
-import Link from 'next/link'
 import {
   Box,
   Button,
@@ -10,8 +10,8 @@ import {
   TextField
 } from '@mui/material';
 
-export const NovoImovel = (props) => {
-  const [values, setValues] = useState({
+  export function NovoImovel(props) {
+    const [values, setValues] = useState({
     nome: '',
     email: '',
     telefone: '',
@@ -19,6 +19,12 @@ export const NovoImovel = (props) => {
     nomePai: '',
     nomeMae: ''
   });
+
+  const router = useRouter();
+
+  function voltar() {
+    router.back();
+  }
 
   const data = {
     nome: setValues.nome,
@@ -126,15 +132,13 @@ export const NovoImovel = (props) => {
             p: 2
           }}
         >
-          <Link href='/imoveis'>
-            <Button
-              color="success"
-              variant="contained"
-              type="submit"
-            >
-              Cadastrar
-            </Button>
-          </Link>
+          <Button
+            onClick={voltar}
+            color="success"
+            variant="contained"
+          >
+            Cadastrar
+          </Button>
         </Box>
       </Card>
     </form>
