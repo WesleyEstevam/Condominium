@@ -43,7 +43,7 @@ const Login = () => {
           <img 
             src='static/logoCondominium.jpeg'
             style={{
-              margin: 'auto',
+              margin: '10px',
               width: '200px',
               borderRadius: '200px'
             }}
