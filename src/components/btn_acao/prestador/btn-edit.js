@@ -1,16 +1,19 @@
 import { useState } from 'react';
+import Link from 'next/link';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Imoveis } from '../../Atributos/imoveis'
+import { Veiculo } from '../../Atributos/veiculo'
+import { Telefone } from '../../Atributos/telefone'
+
 import {
   Box,
   Button,
   Card,
   CardContent,
   CardHeader,
-  Divider,
   Grid,
   TextField,
 } from '@mui/material';
-import Link from 'next/link';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const EditPrestador = (props) => {
   const [values, setValues] = useState({
@@ -31,8 +34,8 @@ export const EditPrestador = (props) => {
 
   return (
     <>
-      <div 
-        style={{ 
+      <div
+        style={{
           margin: 20,
           display: 'flex',
           justifyContent: 'space-between',
@@ -50,13 +53,11 @@ export const EditPrestador = (props) => {
         </Link>
       </div>
       <form
-        
         autoComplete="off"
         noValidate
         {...props}
       >
         <Card>
-          <Divider />
           <CardContent>
             <Grid
               container
@@ -69,26 +70,11 @@ export const EditPrestador = (props) => {
               >
                 <TextField
                   fullWidth
-                  label="Primeiro nome"
-                  name="firstName"
+                  label="Nome completo"
+                  name="nome"
                   onChange={handleChange}
                   required
-                  value={values.firstName}
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Sobrenome"
-                  name="lastName"
-                  onChange={handleChange}
-                  required
-                  value={values.lastName}
+                  value={values.nome}
                   variant="outlined"
                 />
               </Grid>
@@ -107,21 +93,7 @@ export const EditPrestador = (props) => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Contato"
-                  name="phone"
-                  onChange={handleChange}
-                  type="number"
-                  value={values.phone}
-                  variant="outlined"
-                />
-              </Grid>
+
               <Grid
                 item
                 md={6}
@@ -130,10 +102,10 @@ export const EditPrestador = (props) => {
                 <TextField
                   fullWidth
                   label="Documento"
-                  name="country"
+                  name="documento"
                   onChange={handleChange}
                   required
-                  value={values.country}
+                  value={values.documento}
                   variant="outlined"
                 />
               </Grid>
@@ -145,10 +117,10 @@ export const EditPrestador = (props) => {
                 <TextField
                   fullWidth
                   label="Nome do Pai"
-                  name="state"
+                  name="nomePai"
                   onChange={handleChange}
                   required
-                  value={values.state}
+                  value={values.nomePai}
                   variant="outlined"
                 >
                 </TextField>
@@ -161,111 +133,81 @@ export const EditPrestador = (props) => {
                 <TextField
                   fullWidth
                   label="Nome do Mãe"
-                  name="state"
+                  name="nomeMae"
                   onChange={handleChange}
                   required
-                  value={values.state}
+                  value={values.nomeMae}
                   variant="outlined"
                 >
                 </TextField>
               </Grid>
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
+                <TextField
+                  fullWidth
+                  label="Empresa"
+                  name="empresa"
+                  onChange={handleChange}
+                  required
+                  value={values.nomeMae}
+                  variant="outlined"
+                >
+                </TextField>
+              </Grid>
+              <input
+                name="tipo"
+                type="hidden"
+                value="morador"
+              />
             </Grid>
             <CardHeader
               title="Dados do Veículo"
-              sx={{ 
-                  textAlign: 'center'
-                }}
-              />
+              sx={{
+                textAlign: 'center'
+              }}
+            />
             <Grid
-              container
-              spacing={3}
+              item
+              xs={12}
+              mb={5}
             >
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Placa"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                >
-                </TextField>
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Cor"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                >
-                </TextField>
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Tipo"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                >
-                </TextField>
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Modelo"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                >
-                </TextField>
-              </Grid>
-              </Grid>  
+              <Veiculo />
+            </Grid>
+            <CardHeader
+              title="Telefones"
+              sx={{
+                textAlign: 'center'
+              }}
+            />
+            <Grid
+              item
+              xs={12}
+            >
+              <Telefone />
+            </Grid>
           </CardContent>
-          <Divider />
           <Box
-            sx={{ 
+            sx={{
               display: 'flex',
               justifyContent: 'center',
               p: 2
             }}
           >
-          <Link href="/prestadores">
-            <Button
-              variant="contained"
-              color='success'
-            >
-              Atualizar
-            </Button>
-          </Link>
-
+            <Link href='/prestadores'>
+              <Button
+                color="success"
+                variant="contained"
+                type="submit"
+              >
+                Atualizar
+              </Button>
+            </Link>
           </Box>
         </Card>
       </form>
-    </>  
+    </>
   );
 };

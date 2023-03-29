@@ -31,8 +31,8 @@ export const InfoVisitante = (props) => {
 
   return (
     <>
-      <div 
-        style={{ 
+      <div
+        style={{
           margin: 20,
           display: 'flex',
           justifyContent: 'space-between',
@@ -50,13 +50,11 @@ export const InfoVisitante = (props) => {
         </Link>
       </div>
       <form
-        
         autoComplete="off"
         noValidate
         {...props}
       >
         <Card>
-          <Divider />
           <CardContent>
             <Grid
               container
@@ -69,29 +67,12 @@ export const InfoVisitante = (props) => {
               >
                 <TextField
                   fullWidth
-                  label="Primeiro nome"
-                  name="firstName"
+                  label="Nome completo"
+                  name="nome"
                   onChange={handleChange}
-                  required
-                  value={values.firstName}
+                  disabled
+                  value={values.nome}
                   variant="outlined"
-                  disabled= "true"
-                />
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Sobrenome"
-                  name="lastName"
-                  onChange={handleChange}
-                  required
-                  value={values.lastName}
-                  variant="outlined"
-                  disabled= "true"
                 />
               </Grid>
               <Grid
@@ -104,28 +85,12 @@ export const InfoVisitante = (props) => {
                   label="E-mail"
                   name="email"
                   onChange={handleChange}
-                  required
+                  disabled
                   value={values.email}
                   variant="outlined"
-                  disabled= "true"
                 />
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Contato"
-                  name="phone"
-                  onChange={handleChange}
-                  type="number"
-                  value={values.phone}
-                  variant="outlined"
-                  disabled= "true"
-                />
-              </Grid>
+
               <Grid
                 item
                 md={6}
@@ -134,12 +99,11 @@ export const InfoVisitante = (props) => {
                 <TextField
                   fullWidth
                   label="Documento"
-                  name="country"
+                  name="documento"
                   onChange={handleChange}
-                  required
-                  value={values.country}
+                  disabled
+                  value={values.documento}
                   variant="outlined"
-                  disabled= "true"
                 />
               </Grid>
               <Grid
@@ -150,12 +114,11 @@ export const InfoVisitante = (props) => {
                 <TextField
                   fullWidth
                   label="Nome do Pai"
-                  name="state"
+                  name="nomePai"
                   onChange={handleChange}
-                  required
-                  value={values.state}
+                  disabled
+                  value={values.nomePai}
                   variant="outlined"
-                  disabled= "true"
                 >
                 </TextField>
               </Grid>
@@ -167,109 +130,64 @@ export const InfoVisitante = (props) => {
                 <TextField
                   fullWidth
                   label="Nome do Mãe"
-                  name="state"
+                  name="nomeMae"
                   onChange={handleChange}
-                  required
-                  value={values.state}
+                  disabled
+                  value={values.nomeMae}
                   variant="outlined"
-                  disabled= "true"
                 >
                 </TextField>
               </Grid>
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
+                <TextField
+                  fullWidth
+                  label="Empresa"
+                  name="empresa"
+                  onChange={handleChange}
+                  disabled
+                  value={values.nomeMae}
+                  variant="outlined"
+                >
+                </TextField>
+              </Grid>
+              <input
+                name="tipo"
+                type="hidden"
+                value="morador"
+              />
             </Grid>
             <CardHeader
               title="Dados do Veículo"
-              sx={{ 
-                  textAlign: 'center'
-                }}
-              />
+              sx={{
+                textAlign: 'center'
+              }}
+            />
             <Grid
-              container
-              spacing={3}
+              item
+              xs={12}
+              mb={5}
             >
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Placa"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                  disabled= "true"
-                >
-                </TextField>
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Cor"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                  disabled= "true"
-                >
-                </TextField>
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Tipo"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                  disabled= "true"
-                >
-                </TextField>
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Modelo"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                  disabled= "true"
-                  
-                >
-                </TextField>
-              </Grid>
-              </Grid>  
+              <Veiculo />
+            </Grid>
+            <CardHeader
+              title="Telefones"
+              sx={{
+                textAlign: 'center'
+              }}
+            />
+            <Grid
+              item
+              xs={12}
+            >
+              <Telefone />
+            </Grid>
           </CardContent>
-          <Divider />
-          <Box
-            sx={{ 
-              display: 'flex',
-              justifyContent: 'center',
-              p: 2
-            }}
-          >
-
-          </Box>
         </Card>
       </form>
-    </>  
+    </>
   );
 };

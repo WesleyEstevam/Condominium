@@ -1,6 +1,5 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { DashboardLayout } from '../../components/painel-layout';
-import { PerfilMorador } from '../../components/moradores/perfil-morador';
 import { NovoMorador } from '../../components/moradores/cadastro-morador'
 
 const Page = () => (
