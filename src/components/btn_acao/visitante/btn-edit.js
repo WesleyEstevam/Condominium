@@ -11,6 +11,8 @@ import {
 } from '@mui/material';
 import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Veiculo } from '../../Atributos/veiculo'
+import { Telefone } from '../../Atributos/telefone'
 
 export const EditVisitante = (props) => {
   const [values, setValues] = useState({
@@ -193,7 +195,7 @@ export const EditVisitante = (props) => {
               p: 2
             }}
           >
-            <Link href='/prestadores'>
+            <Link href='/visitantes'>
               <Button
                 color="success"
                 variant="contained"

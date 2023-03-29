@@ -20,7 +20,8 @@ export const NovoVisitante = (props) => {
     telefone: '',
     documento: '',
     nomePai: '',
-    nomeMae: ''
+    nomeMae: '',
+    empresa: ''
   });
 
   const data = {
@@ -40,6 +41,7 @@ export const NovoVisitante = (props) => {
   }, []);
 
   const handleChange = (event) => {
+    event.preventDefault();
     setValues({
       ...values,
       [event.target.name]: event.target.value
@@ -154,7 +156,7 @@ export const NovoVisitante = (props) => {
             <input
               name="tipo"
               type="hidden"
-              value="visitante"
+              value= "1"
             />
           </Grid>
           <CardHeader
@@ -192,6 +194,7 @@ export const NovoVisitante = (props) => {
         >
           <Link href='/visitantes'>
             <Button
+              onChange={handleChange}
               color="success"
               variant="contained"
               type="submit"

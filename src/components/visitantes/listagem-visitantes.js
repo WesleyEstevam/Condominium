@@ -81,7 +81,6 @@ export const CustomerListResults = ({ ...rest }) => {
 
   return (
     <Card {...rest}>
-
       <ImageList
         sx={{
           gridAutoFlow: "column",
@@ -93,7 +92,7 @@ export const CustomerListResults = ({ ...rest }) => {
           <MenuGeral />
           <Table>
             <TableHead>
-              <TableRow >
+              <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
                     checked={selectedCustomerIds.length === visitante.length}

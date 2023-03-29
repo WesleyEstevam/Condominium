@@ -117,13 +117,13 @@ export function Telefone() {
                                         onChange={handleSelectAll}
                                     />
                                 </TableCell>
-                                <TableCell>
+                                <TableCell align='center'>
                                     DDD
                                 </TableCell>
-                                <TableCell>
+                                <TableCell align='center'>
                                     Número
                                 </TableCell>
-                                <TableCell>
+                                <TableCell >
                                     Ação
                                 </TableCell>
                             </TableRow>
@@ -142,29 +142,18 @@ export function Telefone() {
                                             value="true"
                                         />
                                     </TableCell>
-                                    <TableCell>
-                                        <Box
-                                            sx={{
-                                                alignItems: 'center',
-                                                display: 'flex'
-                                            }}
+                                    <TableCell align='center'>
+                                        85 {getInitials(visitante.name)}
+
+                                        <Typography
+                                            color="textPrimary"
+                                            variant="body1"
                                         >
-
-                                            {getInitials(customer.name)}
-
-                                            <Typography
-                                                color="textPrimary"
-                                                variant="body1"
-                                            >
-                                                {customer.name}
-                                            </Typography>
-                                        </Box>
+                                            {visitante.name}
+                                        </Typography>
                                     </TableCell>
-                                    <TableCell>
-                                        {customer.phone}
-                                    </TableCell>
-                                    <TableCell>
-                                        {` ${customer.phone}`}
+                                    <TableCell align='center'>
+                                        000000{visitante.phone}
                                     </TableCell>
                                     <TableCell
                                         sx={{

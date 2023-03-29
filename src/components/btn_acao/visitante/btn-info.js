@@ -5,12 +5,13 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Divider,
   Grid,
   TextField,
 } from '@mui/material';
 import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Veiculo } from '../../Atributos/veiculo'
+import { Telefone } from '../../Atributos/telefone'
 
 export const InfoVisitante = (props) => {
   const [values, setValues] = useState({
