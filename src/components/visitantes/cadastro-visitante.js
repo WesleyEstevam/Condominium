@@ -71,7 +71,7 @@ export const NovoVisitante = () => {
                 label="Nome completo"
                 name="nomePessoa"
                 onChange={handleChange}
-                //required
+                required
                 value={values.nomePessoa}
                 variant="outlined"
               />
@@ -86,7 +86,7 @@ export const NovoVisitante = () => {
                 label="E-mail"
                 name="email"
                 onChange={handleChange}
-                //required
+                required
                 value={values.email}
                 variant="outlined"
               />
@@ -102,7 +102,7 @@ export const NovoVisitante = () => {
                 label="Documento"
                 name="documento"
                 onChange={handleChange}
-                //required
+                required
                 value={values.documento}
                 variant="outlined"
               />
@@ -117,7 +117,7 @@ export const NovoVisitante = () => {
                 label="Empresa"
                 name="empresa"
                 onChange={handleChange}
-                //required
+                required
                 value={values.nomePai}
                 variant="outlined"
               >
@@ -133,7 +133,7 @@ export const NovoVisitante = () => {
                 label="Nome do Mãe"
                 name="nomeMae"
                 onChange={handleChange}
-                //required
+                required
                 value={values.nomeMae}
                 variant="outlined"
               >
@@ -149,7 +149,7 @@ export const NovoVisitante = () => {
                 label="Nome do Pai"
                 name="nomePai"
                 onChange={handleChange}
-                //required
+                required
                 variant="outlined"
               >
               </TextField>

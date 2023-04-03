@@ -1,4 +1,7 @@
 import Swal from 'sweetalert2';
+//import { useEffect } from 'react';
+//import axios from 'axios'
+
 
 export function DeletarItem() {
     Swal.fire({

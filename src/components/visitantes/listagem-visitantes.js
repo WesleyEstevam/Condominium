@@ -23,6 +23,7 @@ import {
   Typography
 } from '@mui/material';
 import { MenuGeral } from './menu-geral';
+import { baseURL } from '../api/api'; 
 
 export const CustomerListResults = ({ ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -31,7 +32,7 @@ export const CustomerListResults = ({ ...rest }) => {
   const [visitante, setVisitante] = useState([])
 
   useEffect(() => {
-    axios.get("http://localhost:3000/visitante")
+    axios.get(baseURL + "visitante")
       .then((response) => {
         setVisitante(response.data)
       }).catch((error) => {
