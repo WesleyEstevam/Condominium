@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import {
   Box,
   Button,
@@ -8,37 +9,35 @@ import {
   Grid,
   TextField,
 } from '@mui/material';
-import Link from 'next/link';
 import axios from 'axios';
 import { Veiculo } from '../Atributos/veiculo';
 import { Telefone } from '../Atributos/telefone';
 
-export const NovoVisitante = (props) => {
+export const NovoVisitante = () => {
   const [values, setValues] = useState({
-    nome: '',
-    email: '',
-    telefone: '',
+    nomePessoa: '',
+    empresa: '',
     documento: '',
     nomePai: '',
     nomeMae: '',
-    empresa: ''
+    email: '',
+    //telefone: '',
+    nomeTipo: 'visitante'
   });
 
-  const data = {
-    nome: setValues.nome,
-    email: setValues.email,
-    documento: setValues.documento,
-    nomePai: setValues.nomePai,
-    nomeMae: setValues.nomeMae
-  }
+  const router = useRouter();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios.post("http://localhost:3000/visitante", values)
+      .then(() => {
 
-  useEffect(() => {
-    axios.post("http://localhost:3000/visitante", data)
-      .then((response) => console.log(response))
+        router.push('/visitantes');
+
+      })
       .catch((error) => {
         console.error("ops! ocorreu um erro " + error);
       });
-  }, []);
+  };
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -50,9 +49,11 @@ export const NovoVisitante = (props) => {
 
   return (
     <form
+      onSubmit={handleSubmit}
+      method='POST'
       autoComplete="off"
       noValidate
-      {...props}
+      
     >
       <Card>
         <CardContent>
@@ -68,10 +69,10 @@ export const NovoVisitante = (props) => {
               <TextField
                 fullWidth
                 label="Nome completo"
-                name="nome"
+                name="nomePessoa"
                 onChange={handleChange}
-                required
-                value={values.nome}
+                //required
+                value={values.nomePessoa}
                 variant="outlined"
               />
             </Grid>
@@ -85,7 +86,7 @@ export const NovoVisitante = (props) => {
                 label="E-mail"
                 name="email"
                 onChange={handleChange}
-                required
+                //required
                 value={values.email}
                 variant="outlined"
               />
@@ -101,7 +102,7 @@ export const NovoVisitante = (props) => {
                 label="Documento"
                 name="documento"
                 onChange={handleChange}
-                required
+                //required
                 value={values.documento}
                 variant="outlined"
               />
@@ -116,7 +117,7 @@ export const NovoVisitante = (props) => {
                 label="Empresa"
                 name="empresa"
                 onChange={handleChange}
-                required
+                //required
                 value={values.nomePai}
                 variant="outlined"
               >
@@ -132,7 +133,7 @@ export const NovoVisitante = (props) => {
                 label="Nome do Mãe"
                 name="nomeMae"
                 onChange={handleChange}
-                required
+                //required
                 value={values.nomeMae}
                 variant="outlined"
               >
@@ -148,16 +149,18 @@ export const NovoVisitante = (props) => {
                 label="Nome do Pai"
                 name="nomePai"
                 onChange={handleChange}
-                required
+                //required
                 variant="outlined"
               >
               </TextField>
             </Grid>
-            <input
+            <TextField
               name="tipo"
               type="hidden"
-              value= "1"
-            />
+              value={values.nomeTipo}
+              onChange={handleChange}
+            >
+            </TextField>
           </Grid>
           <CardHeader
             title="Dados do Veículo"
@@ -192,16 +195,13 @@ export const NovoVisitante = (props) => {
             p: 2
           }}
         >
-          <Link href='/visitantes'>
-            <Button
-              onChange={handleChange}
-              color="success"
-              variant="contained"
-              type="submit"
-            >
-              Cadastrar
-            </Button>
-          </Link>
+          <Button
+            color="success"
+            variant="contained"
+            type="submit"
+          >
+            Cadastrar
+          </Button>
         </Box>
       </Card>
     </form>
