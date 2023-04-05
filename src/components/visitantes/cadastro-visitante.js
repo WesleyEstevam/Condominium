@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
+import { Veiculo } from '../Atributos/veiculo';
+import { Telefone } from '../Atributos/telefone';
+import { baseURL } from '../api/api'
 import {
   Box,
   Button,
@@ -9,9 +13,6 @@ import {
   Grid,
   TextField,
 } from '@mui/material';
-import axios from 'axios';
-import { Veiculo } from '../Atributos/veiculo';
-import { Telefone } from '../Atributos/telefone';
 
 export const NovoVisitante = () => {
   const [values, setValues] = useState({
@@ -28,7 +29,7 @@ export const NovoVisitante = () => {
   const router = useRouter();
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:3000/visitante", values)
+    axios.post(baseURL + "visitante", values)
       .then(() => {
 
         router.push('/visitantes');

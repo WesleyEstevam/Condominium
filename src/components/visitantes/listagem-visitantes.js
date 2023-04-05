@@ -6,10 +6,10 @@ import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
 import Link from 'next/link';
-import { DeletarItem } from '../btn_acao/btn-delet';
+import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 
 import {
-  Avatar,
   Box,
   Button,
   Card,
@@ -31,6 +31,28 @@ export const CustomerListResults = ({ ...rest }) => {
   const [page, setPage] = useState(0);
   const [visitante, setVisitante] = useState([])
 
+  function alerta() {
+    Swal.fire(
+      'Você apagou!',
+      'Registro apagado com sucesso!',
+      'success'
+    )  
+  }
+
+  //CÓDIGO QUEBRADO :(
+  const router = useRouter();
+  async function handleDelete(idPessoa) {
+    try {
+      await axios.delete(baseURL + 'visitante/' + `${idPessoa}`)
+      .then(() => {
+        alerta();
+        //router.push('/visitantes')
+      })
+    } catch (error) {
+      console.error('ops, erro ao deletar ' + error);
+    }
+  }
+
   useEffect(() => {
     axios.get(baseURL + "visitante")
       .then((response) => {
@@ -44,7 +66,7 @@ export const CustomerListResults = ({ ...rest }) => {
     let newSelectedCustomerIds;
 
     if (event.target.checked) {
-      newSelectedCustomerIds = visitante.map((customer) => customer.id);
+      newSelectedCustomerIds = visitante.map((visitante) => visitante.id);
     } else {
       newSelectedCustomerIds = [];
     }
@@ -54,7 +76,7 @@ export const CustomerListResults = ({ ...rest }) => {
 
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = [];
+    let newSelectedCustomerIds = visitante;
 
     if (selectedIndex === -1) {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
@@ -184,7 +206,7 @@ export const CustomerListResults = ({ ...rest }) => {
                     <Button
                       color="error"
                       variant="contained"
-                      onClick={DeletarItem}
+                      onClick={() => handleDelete(visitante.idPessoa)}
                     >
                       <DeleteForeverIcon />
                     </Button>
