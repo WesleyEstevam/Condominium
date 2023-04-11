@@ -1,46 +1,45 @@
 import Swal from 'sweetalert2';
-import PropTypes from 'prop-types';
-import { baseURL } from '../api/api'; 
-//import { useRouter } from 'next/router';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { Button } from '@mui/material';
 
-export function DeletarItem(props) {
-  const { idPessoa } = props;
-  //const router = useRouter()
+export const DeletarItem = ({ onDelete }) => {
 
-  async function handleDelete() {
-    try {
-      await axios.delete(baseURL + 'visitante/' + `${idPessoa}`)
-
-    } catch (error) {
-      console.error('ops, erro ao deletar ' + error);
-    }
-  }
-
-  function confirmDelete() {
+  const handleDelete = () => {
     Swal.fire({
       title: 'Tem certeza?',
-      text: 'Você não será capaz de reverter isso!',
+      text: "Você não poderá reverter isso!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, apague!',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Apagar',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        handleDelete(id);
-        Swal.fire('Excluído!', 'O registro foi excluído.', 'success');
+        Swal.fire(
+          'Excluído!',
+          'Seu arquivo foi excluído com sucesso.',
+          'success',
+          onDelete()
+        )
       }
-    });
+    })
   }
-
   return (
-    <button onClick={confirmDelete} className="delete-button">
-      Excluir
-    </button>
+    <div>
+      {/* Renderização do botão ou link que dispara o modal */}
+      <Button
+        color="error"
+        variant="contained"
+        onClick={handleDelete}
+      >
+        <DeleteForeverIcon />
+      </Button>
+    </div>
   );
-}
+};
 
+/*
 DeletarItem.propTypes = {
   idPessoa: PropTypes.number.isRequired
-};
+};*/

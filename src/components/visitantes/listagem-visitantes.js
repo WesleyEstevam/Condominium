@@ -1,14 +1,9 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Swal from 'sweetalert2';
-
 import {
   Box,
   Button,
@@ -22,8 +17,10 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
+import { DeletarItem } from '../btn_acao/btn-delet';
+import { useEffect, useState } from 'react';
 import { MenuGeral } from './menu-geral';
-import { baseURL } from '../api/api'; 
+import { baseURL } from '../api/api';  
 
 export const CustomerListResults = ({ ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -31,22 +28,12 @@ export const CustomerListResults = ({ ...rest }) => {
   const [page, setPage] = useState(0);
   const [visitante, setVisitante] = useState([])
 
-  function alerta() {
-    Swal.fire(
-      'Você apagou!',
-      'Registro apagado com sucesso!',
-      'success'
-    )  
-  }
-
-  //CÓDIGO QUEBRADO :(
-  const router = useRouter();
   async function handleDelete(idPessoa) {
     try {
       await axios.delete(baseURL + 'visitante/' + `${idPessoa}`)
       .then(() => {
-        alerta();
-        //router.push('/visitantes')
+        const novaLista = visitante.filter((visitantes) => visitantes.idPessoa !== idPessoa)
+        setVisitante(novaLista)
       })
     } catch (error) {
       console.error('ops, erro ao deletar ' + error);
@@ -203,13 +190,10 @@ export const CustomerListResults = ({ ...rest }) => {
                         <EditIcon />
                       </Button>
                     </Link>
-                    <Button
-                      color="error"
-                      variant="contained"
-                      onClick={() => handleDelete(visitante.idPessoa)}
-                    >
-                      <DeleteForeverIcon />
-                    </Button>
+                    <DeletarItem 
+                      onDelete={() => handleDelete(visitante.idPessoa) }
+                    />
+
                     <Link href="../telas_acao/visitante/alocarDestino">
                       <Button
                         color="warning"
