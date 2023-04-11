@@ -119,7 +119,7 @@ export const NovoVisitante = () => {
                 name="empresa"
                 onChange={handleChange}
                 required
-                value={values.nomePai}
+                value={values.empresa}
                 variant="outlined"
               >
               </TextField>
