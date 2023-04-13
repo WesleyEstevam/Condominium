@@ -21,12 +21,15 @@ import { DeletarItem } from '../btn_acao/btn-delet';
 import { useEffect, useState } from 'react';
 import { MenuGeral } from './menu-geral';
 import { baseURL } from '../api/api';  
+import { InfoVisitante } from '../btn_acao/visitante/btn-info';
+import { useRouter } from 'next/router'
 
 export const CustomerListResults = ({ ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
   const [visitante, setVisitante] = useState([])
+  const router = useRouter()
 
   async function handleDelete(idPessoa) {
     try {
@@ -37,6 +40,15 @@ export const CustomerListResults = ({ ...rest }) => {
       })
     } catch (error) {
       console.error('ops, erro ao deletar ' + error);
+    }
+  }
+
+  async function handleFindOne(tipoPessoa) {
+    try {
+      router.push(`/telas_acao/visitante/btn-info?data=${JSON.stringify(tipoPessoa.idPessoa)}`)
+
+    } catch (error) {
+      console.error('ops, erro ao listar id ' + error);
     }
   }
 
@@ -174,14 +186,15 @@ export const CustomerListResults = ({ ...rest }) => {
                       display: 'flex',
                       gap: '5px'
                     }}>
-                    <Link href="../telas_acao/visitante/btn-info">
+            
                       <Button
                         color="success"
                         variant="contained"
+                        onClick={() => handleFindOne(visitante)}
                       >
                         <InfoIcon />
                       </Button>
-                    </Link>
+                    
                     <Link href="../telas_acao/visitante/btn-edit">
                       <Button
                         color="primary"

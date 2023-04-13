@@ -39,7 +39,3 @@ export const DeletarItem = ({ onDelete }) => {
   );
 };
 
-/*
-DeletarItem.propTypes = {
-  idPessoa: PropTypes.number.isRequired
-};*/

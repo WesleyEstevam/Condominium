@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import Link from 'next/link';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import axios from 'axios'
+import { useState, useEffect } from 'react';
 import {
-  Box,
   Button,
   Card,
   CardContent,
@@ -8,20 +10,25 @@ import {
   Grid,
   TextField,
 } from '@mui/material';
-import Link from 'next/link';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Veiculo } from '../../Atributos/veiculo'
 import { Telefone } from '../../Atributos/telefone'
+import { useRouter } from 'next/router'
+import { baseURL } from '../../api/api';
 
-export const InfoVisitante = (props) => {
-  const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
-  });
+export const InfoVisitante = () => {
+  const [visitante, setVisitante] = useState([])
+  const router = useRouter()
+  const data = router.query.data ? JSON.parse(router.query.data) : null
+
+  useEffect(()=> {
+      axios.get(baseURL + 'visitante/' + data)
+      .then((response)=> {
+        setVisitante(response.data)
+      }) 
+    .catch((error) => {
+      console.log('Ops, deu erro na listagem do id' + error)
+    })
+  }, [])
 
   const handleChange = (event) => {
     setValues({
@@ -53,7 +60,6 @@ export const InfoVisitante = (props) => {
       <form
         autoComplete="off"
         noValidate
-        {...props}
       >
         <Card>
           <CardContent>
@@ -66,13 +72,13 @@ export const InfoVisitante = (props) => {
                 md={6}
                 xs={12}
               >
+                <label>Nome do visitante:</label>
                 <TextField
                   fullWidth
-                  label="Nome completo"
                   name="nome"
                   onChange={handleChange}
                   disabled
-                  value={values.nome}
+                  value={visitante.nomePessoa}
                   variant="outlined"
                 />
               </Grid>
@@ -81,13 +87,13 @@ export const InfoVisitante = (props) => {
                 md={6}
                 xs={12}
               >
+                <label>E-mail:</label>
                 <TextField
                   fullWidth
-                  label="E-mail"
                   name="email"
                   onChange={handleChange}
                   disabled
-                  value={values.email}
+                  value={visitante.email}
                   variant="outlined"
                 />
               </Grid>
@@ -97,13 +103,13 @@ export const InfoVisitante = (props) => {
                 md={6}
                 xs={12}
               >
+                <label>Documento:</label>
                 <TextField
                   fullWidth
-                  label="Documento"
                   name="documento"
                   onChange={handleChange}
                   disabled
-                  value={values.documento}
+                  value={visitante.documento}
                   variant="outlined"
                 />
               </Grid>
@@ -112,45 +118,45 @@ export const InfoVisitante = (props) => {
                 md={6}
                 xs={12}
               >
+                <label>Empresa:</label>
                 <TextField
                   fullWidth
-                  label="Nome do Pai"
-                  name="nomePai"
-                  onChange={handleChange}
-                  disabled
-                  value={values.nomePai}
-                  variant="outlined"
-                >
-                </TextField>
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Nome do Mãe"
-                  name="nomeMae"
-                  onChange={handleChange}
-                  disabled
-                  value={values.nomeMae}
-                  variant="outlined"
-                >
-                </TextField>
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Empresa"
                   name="empresa"
                   onChange={handleChange}
                   disabled
-                  value={values.nomeMae}
+                  value={visitante.empresa}
+                  variant="outlined"
+                >
+                </TextField>
+              </Grid>
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
+                <label>Nome da Mãe:</label>
+                <TextField
+                  fullWidth
+                  name="nomeMae"
+                  onChange={handleChange}
+                  disabled
+                  value={visitante.nomeMae}
+                  variant="outlined"
+                >
+                </TextField>
+              </Grid>
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
+                <label>Nome do Pai:</label>
+                <TextField
+                  fullWidth
+                  name="nomePai"
+                  onChange={handleChange}
+                  disabled
+                  value={visitante.nomePai}
                   variant="outlined"
                 >
                 </TextField>
