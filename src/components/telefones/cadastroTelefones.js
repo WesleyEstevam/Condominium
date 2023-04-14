@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { baseURL } from './../api/api'
+import axios from 'axios'
 import {
   Box,
   Button,
@@ -8,36 +10,25 @@ import {
   Grid,
   TextField
 } from '@mui/material';
-
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
-
- export function NovoTelefone(props) {
+export function NovoTelefone() {
   const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
+    DDD: '',
+    numeroTelefone: ''
   });
 
   const router = useRouter();
 
-  function voltar() {
-    router.back();
+  async function cadastrarTelefone() {
+    axios.post(baseURL + "telefone", values)
+      .then((response) => {
+        
+        router.back();
+      })
+      .catch((error) => {
+        console.log("Ops! Erro ao cadastrar um telefone " + error);
+      })
+
+
   }
 
   const handleChange = (event) => {
@@ -48,67 +39,69 @@ const states = [
   };
 
   return (
-      <form
-        autoComplete="off"
-        noValidate
-        {...props}
-      >
-        <Card>
-          <CardContent>
-            <Grid
-              container
-              spacing={3}
-            >
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="DDD"
-                  name="ddd"
-                  onChange={handleChange}
-                  required
-                  value={values.phone}
-                  variant="outlined"
-                  helperText="EX: (85)"
-                />
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Número"
-                  name="numero"
-                  onChange={handleChange}
-                  required
-                  value={values.phone}
-                  variant="outlined"
-                  helperText="EX: 0 0000-0000"
-                />
-              </Grid>
-            </Grid>
-          </CardContent>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              p: 2
-            }}
+    <form
+      onSubmit={cadastrarTelefone}
+      autoComplete="off"
+      noValidate
+    >
+      <Card>
+        <CardContent>
+          <Grid
+            container
+            spacing={3}
           >
-            <Button
-              onClick={voltar}
-              color="success"
-              variant="contained"
+            <Grid
+              item
+              md={6}
+              xs={12}
             >
-              Cadastrar
-            </Button>
-          </Box>
-        </Card>
-      </form>
+              <TextField
+                fullWidth
+                type="number"
+                label="DDD"
+                name="DDD"
+                onChange={handleChange}
+                required
+                value={values.DDD}
+                variant="outlined"
+                helperText="EX: (85)"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                type="number"
+                label="Número"
+                name="numeroTelefone"
+                onChange={handleChange}
+                required
+                value={values.numeroTelefone}
+                variant="outlined"
+                helperText="EX: 0 0000-0000"
+              />
+            </Grid>
+          </Grid>
+        </CardContent>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            p: 2
+          }}
+        >
+          <Button
+            onClick={cadastrarTelefone}
+            color="success"
+            variant="contained"
+          >
+            Cadastrar
+          </Button>
+        </Box>
+      </Card>
+    </form>
   );
 };

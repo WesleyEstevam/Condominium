@@ -21,17 +21,18 @@ import {
     TableRow,
     Typography
 } from '@mui/material';
+import { baseURL } from '../api/api';
 
 export function Telefone() {
     const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(0);
-    const [visitante, setVisitante] = useState([])
+    const [telefone, setTelefone] = useState([])
 
     useEffect(() => {
-        axios.get("http://localhost:3000/visitante")
+        axios.get(baseURL + "telefone")
             .then((response) => {
-                setVisitante(response.data)
+                setTelefone(response.data)
             }).catch((error) => {
                 console.error(error)
             })
@@ -108,11 +109,11 @@ export function Telefone() {
                             <TableRow>
                                 <TableCell padding="checkbox">
                                     <Checkbox
-                                        checked={selectedCustomerIds.length === visitante.length}
+                                        checked={selectedCustomerIds.length === telefone.length}
                                         color="primary"
                                         indeterminate={
                                             selectedCustomerIds.length > 0
-                                            && selectedCustomerIds.length < visitante.length
+                                            && selectedCustomerIds.length < telefone.length
                                         }
                                         onChange={handleSelectAll}
                                     />
@@ -129,31 +130,29 @@ export function Telefone() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {visitante.slice(0, limit).map((visitante) => (
+                            {telefone.slice(0, limit).map((telefone) => (
                                 <TableRow
                                     hover
-                                    key={visitante.id}
-                                    selected={selectedCustomerIds.indexOf(visitante.id) !== -1}
+                                    key={telefone.id}
+                                    selected={selectedCustomerIds.indexOf(telefone.id) !== -1}
                                 >
                                     <TableCell padding="checkbox">
                                         <Checkbox
-                                            checked={selectedCustomerIds.indexOf(visitante.id) !== -1}
-                                            onChange={(event) => handleSelectOne(event, visitante.id)}
+                                            checked={selectedCustomerIds.indexOf(telefone.id) !== -1}
+                                            onChange={(event) => handleSelectOne(event, telefone.id)}
                                             value="true"
                                         />
                                     </TableCell>
                                     <TableCell align='center'>
-                                        85 {getInitials(visitante.name)}
-
                                         <Typography
                                             color="textPrimary"
                                             variant="body1"
                                         >
-                                            {visitante.name}
+                                            {telefone.DDD}
                                         </Typography>
                                     </TableCell>
                                     <TableCell align='center'>
-                                        000000{visitante.phone}
+                                        {telefone.numeroTelefone}
                                     </TableCell>
                                     <TableCell
                                         sx={{
@@ -192,7 +191,7 @@ export function Telefone() {
             </ImageList>
             <TablePagination
                 component="div"
-                count={visitante.length}
+                count={telefone.length}
                 onPageChange={handlePageChange}
                 onRowsPerPageChange={handleLimitChange}
                 page={page}

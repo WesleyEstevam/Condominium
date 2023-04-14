@@ -21,7 +21,6 @@ import { DeletarItem } from '../btn_acao/btn-delet';
 import { useEffect, useState } from 'react';
 import { MenuGeral } from './menu-geral';
 import { baseURL } from '../api/api';  
-import { InfoVisitante } from '../btn_acao/visitante/btn-info';
 import { useRouter } from 'next/router'
 
 export const CustomerListResults = ({ ...rest }) => {
