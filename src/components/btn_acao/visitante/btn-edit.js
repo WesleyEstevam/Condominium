@@ -6,6 +6,7 @@ import { baseURL } from '../../api/api';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios'
 import Link from 'next/link';
+import { alerta } from '../alertaEdit';
 import {
   Box,
   Button,
@@ -50,6 +51,7 @@ export const EditVisitante = () => {
         .then(() => {
           //setVisitante(response.data);
           router.push('/visitantes')
+          alerta()
         })
         .catch((error) => {
           console.log('Ops, deu erro na atualização: ' + error);

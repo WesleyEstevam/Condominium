@@ -18,7 +18,7 @@ export const DeletarItem = ({ onDelete }) => {
       if (result.isConfirmed) {
         Swal.fire(
           'Excluído!',
-          'Seu arquivo foi excluído com sucesso.',
+          'Seu registro foi excluído com sucesso.',
           'success',
           onDelete()
         )
