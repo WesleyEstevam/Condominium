@@ -160,7 +160,7 @@ export const EditPrestador = (props) => {
               <input
                 name="tipo"
                 type="hidden"
-                value="morador"
+                value="prestador"
               />
             </Grid>
             <CardHeader

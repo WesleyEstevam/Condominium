@@ -2,7 +2,6 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
-import { getInitials } from '../../utils/get-initials';
 import { DeletarItem } from '../btn_acao/btn-delet';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -28,6 +27,18 @@ export function Telefone() {
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(0);
     const [telefone, setTelefone] = useState([])
+
+    async function handleDelete(idTelefone) {
+        try {
+            await axios.delete(baseURL + 'telefone/' + `${idTelefone}`)
+                .then(() => {
+                    const novaLista = telefone.filter((telefones) => telefones.idTelefone !== idTelefone)
+                    setTelefone(novaLista)
+                })
+        } catch (error) {
+            console.error('ops, erro ao deletar ' + error);
+        }
+    }
 
     useEffect(() => {
         axios.get(baseURL + "telefone")
@@ -159,14 +170,7 @@ export function Telefone() {
                                             display: 'flex',
                                             gap: '5px'
                                         }}>
-                                        <Link href="../telas_acao/veiculo/btn-info">
-                                            <Button
-                                                color="success"
-                                                variant="contained"
-                                            >
-                                                <InfoIcon />
-                                            </Button>
-                                        </Link>
+                                            
                                         <Link href="../telas_acao/veiculo/btn-edit">
                                             <Button
                                                 color="primary"
@@ -175,13 +179,9 @@ export function Telefone() {
                                                 <EditIcon />
                                             </Button>
                                         </Link>
-                                        <Button
-                                            color="error"
-                                            variant="contained"
-                                            onClick={DeletarItem}
-                                        >
-                                            <DeleteForeverIcon />
-                                        </Button>
+                                        <DeletarItem
+                                            onDelete={() => handleDelete(telefone.idTelefone)}
+                                        />
                                     </TableCell>
                                 </TableRow>
                             ))}

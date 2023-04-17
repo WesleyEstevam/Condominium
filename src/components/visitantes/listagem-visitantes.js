@@ -30,6 +30,7 @@ export const CustomerListResults = ({ ...rest }) => {
   const [visitante, setVisitante] = useState([])
   const router = useRouter()
 
+// EXCLUSÃO DE VISITANTES
   async function handleDelete(idPessoa) {
     try {
       await axios.delete(baseURL + 'visitante/' + `${idPessoa}`)
@@ -42,6 +43,7 @@ export const CustomerListResults = ({ ...rest }) => {
     }
   }
 
+// LISTAGEM DE VISITANTES POR ID
   async function handleFindOne(tipoPessoa) {
     try {
       router.push(`/telas_acao/visitante/btn-info?data=${JSON.stringify(tipoPessoa.idPessoa)}`)
@@ -51,6 +53,16 @@ export const CustomerListResults = ({ ...rest }) => {
     }
   }
 
+// ATUALIZAÇÃO DE VISITANTES
+  async function handleUpdate(tipoPessoa) {
+    try {
+      router.push(`/telas_acao/visitante/btn-edit?data=${JSON.stringify(tipoPessoa.idPessoa)}`)
+      
+    } catch (error) {
+      console.error('ops, erro ao editar id ' + error);
+    }
+  }
+// LISTAGEM DE VISITANTES
   useEffect(() => {
     axios.get(baseURL + "visitante")
       .then((response) => {
@@ -185,7 +197,7 @@ export const CustomerListResults = ({ ...rest }) => {
                       display: 'flex',
                       gap: '5px'
                     }}>
-            
+          
                       <Button
                         color="success"
                         variant="contained"
@@ -194,18 +206,17 @@ export const CustomerListResults = ({ ...rest }) => {
                         <InfoIcon />
                       </Button>
                     
-                    <Link href="../telas_acao/visitante/btn-edit">
                       <Button
                         color="primary"
                         variant="contained"
+                        onClick={() => handleUpdate(visitante)}
                       >
                         <EditIcon />
                       </Button>
-                    </Link>
+
                     <DeletarItem 
                       onDelete={() => handleDelete(visitante.idPessoa) }
                     />
-
                     <Link href="../telas_acao/visitante/alocarDestino">
                       <Button
                         color="warning"

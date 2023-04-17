@@ -178,14 +178,7 @@ export function Veiculo() {
                                             display: 'flex',
                                             gap: '5px'
                                         }}>
-                                        <Link href="../telas_acao/veiculo/btn-info">
-                                            <Button
-                                                color="success"
-                                                variant="contained"
-                                            >
-                                                <InfoIcon />
-                                            </Button>
-                                        </Link>
+                                            
                                         <Link href="../telas_acao/veiculo/btn-edit">
                                             <Button
                                                 color="primary"

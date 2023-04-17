@@ -164,7 +164,7 @@ export const InfoVisitante = () => {
               <input
                 name="tipo"
                 type="hidden"
-                value="morador"
+                value="visitante"
               />
             </Grid>
             <CardHeader
