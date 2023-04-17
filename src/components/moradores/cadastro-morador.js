@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { Veiculo } from '../Atributos/veiculo';
 import { Telefone } from '../Atributos/telefone';
 import { Imoveis } from '../Atributos/imoveis';
-
+import { baseURL } from '../api/api';
+import { useRouter } from 'next/router';
+import { alertaCadastro } from '../btn_acao/alertas';
 import axios from 'axios'
-import Link from 'next/link'
 import {
   Box,
   Button,
@@ -15,32 +16,32 @@ import {
   TextField
 } from '@mui/material';
 
-
-export const NovoMorador = (props) => {
+export const NovoMorador = () => {
   const [values, setValues] = useState({
-    nome: '',
-    email: '',
-    telefone: '',
+    nomePessoa: '',
+    empresa: '',
     documento: '',
     nomePai: '',
-    nomeMae: ''
+    nomeMae: '',
+    email: '',
+    //telefone: '',
+    nomeTipo: 'morador'
   });
 
-  const data = {
-    nome: setValues.nome,
-    email: setValues.email,
-    documento: setValues.documento,
-    nomePai: setValues.nomePai,
-    nomeMae: setValues.nomeMae
-  }
-
-  useEffect(() => {
-    axios.post("http://localhost:3000/visitante", data)
-      .then((response) => console.log(response))
+  
+  const router = useRouter();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios.post(baseURL + "morador", values)
+      .then(() => {
+        router.push('/moradores');
+        alertaCadastro()
+      })
       .catch((error) => {
         console.error("ops! ocorreu um erro " + error);
       });
-  }, []);
+  };
+
 
   const handleChange = (event) => {
     setValues({
@@ -53,7 +54,7 @@ export const NovoMorador = (props) => {
     <form
       autoComplete="off"
       noValidate
-      {...props}
+      onSubmit={handleSubmit}
     >
       <Card>
         <CardContent>
@@ -69,10 +70,10 @@ export const NovoMorador = (props) => {
               <TextField
                 fullWidth
                 label="Nome completo"
-                name="nome"
+                name="nomePessoa"
                 onChange={handleChange}
                 required
-                value={values.nome}
+                value={values.nomePessoa}
                 variant="outlined"
               />
             </Grid>
@@ -191,15 +192,13 @@ export const NovoMorador = (props) => {
             p: 2
           }}
         >
-          <Link href='/moradores'>
-            <Button
-              color="success"
-              variant="contained"
-              type="submit"
-            >
-              Cadastrar
-            </Button>
-          </Link>
+          <Button
+            color="success"
+            variant="contained"
+            type="submit"
+          >
+            Cadastrar
+          </Button>
         </Box>
       </Card>
     </form>

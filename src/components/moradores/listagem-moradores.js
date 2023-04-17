@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
+import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ImageList from "@mui/material/ImageList";
 import Link from 'next/link';
-
+import axios from 'axios'
 import {
-  Avatar,
   Box,
   Card,
   Button,
@@ -19,19 +18,64 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-import { getInitials } from '../../utils/get-initials';
 import { DeletarItem } from '../btn_acao/btn-delet';
+import { useRouter } from 'next/router'
+import { baseURL } from '../api/api';
 
-export const ListaMoradores = ({ customers, ...rest }) => {
+export const ListaMoradores = () => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+  const [morador, setMorador] = useState([])
+  const router = useRouter()
+
+// EXCLUSÃO DE MORADORES
+  async function handleDelete(idPessoa) {
+    try {
+      await axios.delete(baseURL + 'morador/' + `${idPessoa}`)
+      .then(() => {
+        const novaLista = morador.filter((morador) => morador.idPessoa !== idPessoa)
+        setMorador(novaLista)
+      })
+    } catch (error) {
+      console.error('ops, erro ao deletar ' + error);
+    }
+  }
+
+// LISTAGEM DE MORADORES POR ID
+  async function handleFindOne(tipoPessoa) {
+    try {
+      router.push(`/telas_acao/morador/btn-info?data=${JSON.stringify(tipoPessoa.idPessoa)}`)
+
+    } catch (error) {
+      console.error('ops, erro ao listar id ' + error);
+    }
+  }
+
+// ATUALIZAÇÃO DE MORADORES
+  async function handleUpdate(tipoPessoa) {
+    try {
+      router.push(`/telas_acao/morador/btn-edit?data=${JSON.stringify(tipoPessoa.idPessoa)}`)
+      
+    } catch (error) {
+      console.error('ops, erro ao editar id ' + error);
+    }
+  }
+// LISTAGEM DE MORADORES
+  useEffect(() => {
+    axios.get(baseURL + "morador")
+      .then((response) => {
+        setMorador(response.data)
+      }).catch((error) => {
+        console.error(error)
+      })
+  }, [])
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
 
     if (event.target.checked) {
-      newSelectedCustomerIds = customers.map((customer) => customer.id);
+      newSelectedCustomerIds = visitante.map((visitante) => visitante.id);
     } else {
       newSelectedCustomerIds = [];
     }
@@ -41,7 +85,7 @@ export const ListaMoradores = ({ customers, ...rest }) => {
 
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = [];
+    let newSelectedCustomerIds = visitante;
 
     if (selectedIndex === -1) {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
@@ -68,28 +112,28 @@ export const ListaMoradores = ({ customers, ...rest }) => {
   };
 
   return (
-    <Card {...rest}>
-      <ImageList
-        sx={{
-          gridAutoFlow: "column",
-          gridTemplateColumns: "repeat(auto-fit, minmax(160px,1fr)) !important",
-          gridAutoColumns: "minmax(160px, 1fr)"
-        }}
-      >
-        <Box sx={{ minWidth: '100%' }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
-                    color="primary"
-                    indeterminate={
-                      selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
-                    }
-                    onChange={handleSelectAll}
-                  />
+    <Card>
+    <ImageList
+      sx={{
+        gridAutoFlow: "column",
+        gridTemplateColumns: "repeat(auto-fit, minmax(160px,1fr)) !important",
+        gridAutoColumns: "minmax(160px, 1fr)"
+      }}
+    >
+      <Box sx={{ minWidth: '100%' }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell padding="checkbox">
+                <Checkbox
+                  checked={selectedCustomerIds.length === morador.length}
+                  color="primary"
+                  indeterminate={
+                    selectedCustomerIds.length > 0
+                    && selectedCustomerIds.length < morador.length
+                  }
+                  onChange={handleSelectAll}
+                />
                 </TableCell>
                 <TableCell>
                   Nome
@@ -109,16 +153,16 @@ export const ListaMoradores = ({ customers, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+            {morador.slice(0, limit).map((morador) => (
                 <TableRow
                   hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                  key={morador.id}
+                  selected={selectedCustomerIds.indexOf(morador.id) !== -1}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
+                      checked={selectedCustomerIds.indexOf(morador.id) !== -1}
+                      onChange={(event) => handleSelectOne(event, morador.id)}
                       value="true"
                     />
                   </TableCell>
@@ -129,67 +173,58 @@ export const ListaMoradores = ({ customers, ...rest }) => {
                         display: 'flex'
                       }}
                     >
-                      <Avatar
-                        src={customer.avatarUrl}
-                        sx={{ mr: 2 }}
-                      >
-                        {getInitials(customer.name)}
-                      </Avatar>
                       <Typography
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.name}
+                        {morador.nomePessoa}
                       </Typography>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {customer.email}
+                    {morador.email}
                   </TableCell>
                   <TableCell>
-                    {` ${customer.address.state}`}
+                    {` ${morador.documento}`}
                   </TableCell>
                   <TableCell>
-                    {customer.phone}
+                    {morador.telefoneID}
                   </TableCell>
                   <TableCell
                     sx={{
                       display: 'flex',
                       gap: '5px'
                     }}>
-                    <Link href="../telas_acao/morador/btn-info">
+          
                       <Button
                         color="success"
                         variant="contained"
+                        onClick={() => handleFindOne(morador)}
                       >
                         <InfoIcon />
                       </Button>
-                    </Link>
-                    <Link href="../telas_acao/morador/btn-edit">
+                    
                       <Button
                         color="primary"
                         variant="contained"
+                        onClick={() => handleUpdate(morador)}
                       >
                         <EditIcon />
                       </Button>
-                    </Link>
-                    <Button
-                      color="error"
-                      variant="contained"
-                      onClick={DeletarItem}
-                    >
-                      <DeleteForeverIcon />
-                    </Button>
+
+                    <DeletarItem 
+                      onDelete={() => handleDelete(morador.idPessoa) }
+                    />
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </Box>
-      </ImageList >
+      </ImageList>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={morador.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}

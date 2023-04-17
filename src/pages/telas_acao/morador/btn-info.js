@@ -14,7 +14,7 @@ const Page = () => (
     >
       <Container maxWidth={false}>
         <Box sx={{ mt: 3 }}>
-          <InfoMorador customers={customers} />
+          <InfoMorador />
         </Box>
       </Container>
     </Box>

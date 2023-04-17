@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { Veiculo } from '../Atributos/veiculo';
 import { Telefone } from '../Atributos/telefone';
+import axios from 'axios';
 import { baseURL } from '../api/api'
 import {
   Box,
@@ -31,9 +31,8 @@ export const NovoVisitante = () => {
     event.preventDefault();
     axios.post(baseURL + "visitante", values)
       .then(() => {
-
         router.push('/visitantes');
-
+        alertaCadastro()
       })
       .catch((error) => {
         console.error("ops! ocorreu um erro " + error);

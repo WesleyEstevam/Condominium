@@ -23,7 +23,7 @@ import { MenuGeral } from './menu-geral';
 import { baseURL } from '../api/api';  
 import { useRouter } from 'next/router'
 
-export const CustomerListResults = ({ ...rest }) => {
+export const CustomerListResults = () => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -113,7 +113,7 @@ export const CustomerListResults = ({ ...rest }) => {
   };
 
   return (
-    <Card {...rest}>
+    <Card>
       <ImageList
         sx={{
           gridAutoFlow: "column",

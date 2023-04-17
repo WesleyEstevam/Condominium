@@ -7,3 +7,12 @@ export function alerta() {
       'success'
     )
   }
+
+
+export function alertaCadastro() {
+    Swal.fire(
+      'Bom trabalho!',
+      'Registro cadastrado com sucesso!',
+      'success'
+    )
+  }

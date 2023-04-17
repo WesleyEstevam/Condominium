@@ -3,9 +3,6 @@ import { Telefone } from '../../Atributos/telefone'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 import { baseURL } from '../../api/api';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import axios from 'axios'
-import Link from 'next/link';
 import { alerta } from '../alertaEdit';
 import {
   Box,
@@ -16,6 +13,9 @@ import {
   Grid,
   TextField,
 } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import axios from 'axios'
+import Link from 'next/link';
 
 export const EditVisitante = () => {
   const [visitante, setVisitante] = useState({
@@ -49,7 +49,6 @@ export const EditVisitante = () => {
     if (data) {
       axios.patch(baseURL + 'visitante/' + data, visitante)
         .then(() => {
-          //setVisitante(response.data);
           router.push('/visitantes')
           alerta()
         })

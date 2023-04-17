@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useState, useEffect } from 'react';
 import { Imoveis } from '../../Atributos/imoveis'
 import { Veiculo } from '../../Atributos/veiculo'
 import { Telefone } from '../../Atributos/telefone'
-
+import { baseURL } from '../../api/api';
+import { useRouter } from 'next/router'
+import { alerta } from '../alertas'
 import {
   Box,
   Button,
@@ -14,23 +14,58 @@ import {
   Grid,
   TextField,
 } from '@mui/material';
+import Link from 'next/link';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import axios from 'axios';
 
-export const EditMorador = (props) => {
-  const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
+export const EditMorador = () => {
+  const [morador, setMorador] = useState({
+    nomePessoa: "", // Estado inicial do nomePessoa
+    email: "", // Estado inicial do email
+    documento: "", // Estado inicial do documento
+    nomePai: "", // Estado inicial do nomePai
+    nomeMae: "", // Estado inicial do nomeMae
+    empresa: "", // Estado inicial do empresa
   });
 
+  const router = useRouter();
+  const data = router.query.data ? JSON.parse(router.query.data) : null; //ID DO MORADOR
+
+  // Carregar os dados do visitante quando o componente for montado
+  useEffect(() => {
+    if (data) {
+      axios.get(baseURL + 'morador/' + data)
+        .then((response) => {
+          setMorador(response.data);
+        })
+        .catch((error) => {
+          console.log('Ops, deu erro na obtenção dos dados do morador: ' + error);
+        });
+    }
+  }, [data]);
+
+  // Atualizar as informações de cada input
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Evita o envio padrão do formulário
+    if (data) {
+      axios.patch(baseURL + 'morador/' + data, morador)
+        .then(() => {
+          router.push('/moradores')
+          alerta()
+        })
+        .catch((error) => {
+          console.log('Ops, deu erro na atualização: ' + error);
+        });
+    }
+  }
+
   const handleChange = (event) => {
-    setValues({
-      ...values,
+    setMorador({
+      ...morador,
       [event.target.name]: event.target.value
     });
   };
+
 
   return (
     <>
@@ -55,7 +90,6 @@ export const EditMorador = (props) => {
       <form
       autoComplete="off"
       noValidate
-      {...props}
     >
       <Card>
         <CardContent>
@@ -71,10 +105,10 @@ export const EditMorador = (props) => {
               <TextField
                 fullWidth
                 label="Nome completo"
-                name="nome"
+                name="nomePessoa"
                 onChange={handleChange}
                 required
-                value={values.nome}
+                value={morador.nomePessoa}
                 variant="outlined"
               />
             </Grid>
@@ -89,7 +123,7 @@ export const EditMorador = (props) => {
                 name="email"
                 onChange={handleChange}
                 required
-                value={values.email}
+                value={morador.email}
                 variant="outlined"
               />
             </Grid>
@@ -105,7 +139,7 @@ export const EditMorador = (props) => {
                 name="documento"
                 onChange={handleChange}
                 required
-                value={values.documento}
+                value={morador.documento}
                 variant="outlined"
               />
             </Grid>
@@ -120,7 +154,7 @@ export const EditMorador = (props) => {
                 name="nomePai"
                 onChange={handleChange}
                 required
-                value={values.nomePai}
+                value={morador.nomePai}
                 variant="outlined"
               >
               </TextField>
@@ -136,7 +170,7 @@ export const EditMorador = (props) => {
                 name="nomeMae"
                 onChange={handleChange}
                 required
-                value={values.nomeMae}
+                value={morador.nomeMae}
                 variant="outlined"
               >
               </TextField>
@@ -198,8 +232,9 @@ export const EditMorador = (props) => {
               color="success"
               variant="contained"
               type="submit"
+              onClick={handleSubmit}
             >
-              Cadastrar
+              Atualizar
             </Button>
           </Link>
         </Box>

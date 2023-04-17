@@ -5,7 +5,6 @@ import ImageList from "@mui/material/ImageList";
 import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link';
 import axios from 'axios';
-import { getInitials } from '../../utils/get-initials';
 import { DeletarItem } from '../btn_acao/btn-delet';
 import { useEffect, useState } from 'react';
 
@@ -157,28 +156,22 @@ export function Imoveis() {
                                                 display: 'flex'
                                             }}
                                         >
-                                            <Avatar
-                                                src={customer.avatarUrl}
-                                                sx={{ mr: 2 }}
-                                            >
-                                                {getInitials(customer.name)}
-                                            </Avatar>
                                             <Typography
                                                 color="textPrimary"
                                                 variant="body1"
                                             >
-                                                {customer.name}
+                                                {visitante.nomePessoa}
                                             </Typography>
                                         </Box>
                                     </TableCell>
                                     <TableCell>
-                                        {customer.email}
+                                        {visitante.email}
                                     </TableCell>
                                     <TableCell>
-                                        {` ${customer.address.state}`}
+                                        {` ${visitante.documento}`}
                                     </TableCell>
                                     <TableCell>
-                                        {customer.phone}
+                                        {visitante.nomeMae}
                                     </TableCell>
                                     <TableCell
                                         sx={{

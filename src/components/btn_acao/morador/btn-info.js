@@ -1,12 +1,8 @@
-import { useState } from 'react';
 import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Imoveis } from '../../Atributos/imoveis'
-import { Veiculo } from '../../Atributos/veiculo'
-import { Telefone } from '../../Atributos/telefone'
-
+import axios from 'axios'
+import { useState, useEffect } from 'react';
 import {
-  Box,
   Button,
   Card,
   CardContent,
@@ -14,16 +10,25 @@ import {
   Grid,
   TextField,
 } from '@mui/material';
+import { Veiculo } from '../../Atributos/veiculo'
+import { Telefone } from '../../Atributos/telefone'
+import { useRouter } from 'next/router'
+import { baseURL } from '../../api/api';
 
-export const InfoMorador = (props) => {
-  const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
-  });
+export const InfoMorador = () => {
+  const [morador, setMorador] = useState([])
+  const router = useRouter()
+  const data = router.query.data ? JSON.parse(router.query.data) : null
+
+  useEffect(()=> {
+      axios.get(baseURL + 'morador/' + data)
+      .then((response)=> {
+        setMorador(response.data)
+      }) 
+    .catch((error) => {
+      console.log('Ops, deu erro na listagem do id' + error)
+    })
+  }, [])
 
   const handleChange = (event) => {
     setValues({
@@ -34,15 +39,15 @@ export const InfoMorador = (props) => {
 
   return (
     <>
-      <div 
-        style={{ 
+      <div
+        style={{
           margin: 20,
           display: 'flex',
           justifyContent: 'space-between',
 
         }}
       >
-        <h1>Morador</h1>
+        <h1>Moradores</h1>
         <Link href="/moradores">
           <Button
             startIcon={(<ArrowBackIcon fontSize="small" />)}
@@ -53,141 +58,143 @@ export const InfoMorador = (props) => {
         </Link>
       </div>
       <form
-      autoComplete="off"
-      noValidate
-      {...props}
-    >
-      <Card>
-        <CardContent>
-          <Grid
-            container
-            spacing={3}
-          >
+        autoComplete="off"
+        noValidate
+      >
+        <Card>
+          <CardContent>
             <Grid
-              item
-              md={6}
-              xs={12}
+              container
+              spacing={3}
             >
-              <TextField
-                fullWidth
-                label="Nome completo"
-                name="nome"
-                onChange={handleChange}
-                disabled
-                value={values.nome}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="E-mail"
-                name="email"
-                onChange={handleChange}
-                disabled
-                value={values.email}
-                variant="outlined"
-              />
-            </Grid>
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
+                <label>Nome do morador:</label>
+                <TextField
+                  fullWidth
+                  name="nome"
+                  onChange={handleChange}
+                  disabled
+                  value={morador.nomePessoa}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
+                <label>E-mail:</label>
+                <TextField
+                  fullWidth
+                  name="email"
+                  onChange={handleChange}
+                  disabled
+                  value={morador.email}
+                  variant="outlined"
+                />
+              </Grid>
 
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Documento"
-                name="documento"
-                onChange={handleChange}
-                disabled
-                value={values.documento}
-                variant="outlined"
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
+                <label>Documento:</label>
+                <TextField
+                  fullWidth
+                  name="documento"
+                  onChange={handleChange}
+                  disabled
+                  value={morador.documento}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
+                <label>Empresa:</label>
+                <TextField
+                  fullWidth
+                  name="empresa"
+                  onChange={handleChange}
+                  disabled
+                  value={morador.empresa}
+                  variant="outlined"
+                >
+                </TextField>
+              </Grid>
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
+                <label>Nome da Mãe:</label>
+                <TextField
+                  fullWidth
+                  name="nomeMae"
+                  onChange={handleChange}
+                  disabled
+                  value={morador.nomeMae}
+                  variant="outlined"
+                >
+                </TextField>
+              </Grid>
+              <Grid
+                item
+                md={6}
+                xs={12}
+              >
+                <label>Nome do Pai:</label>
+                <TextField
+                  fullWidth
+                  name="nomePai"
+                  onChange={handleChange}
+                  disabled
+                  value={morador.nomePai}
+                  variant="outlined"
+                >
+                </TextField>
+              </Grid>
+              <input
+                name="tipo"
+                type="hidden"
+                value="morador"
               />
             </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Nome do Pai"
-                name="nomePai"
-                onChange={handleChange}
-                disabled
-                value={values.nomePai}
-                variant="outlined"
-              >
-              </TextField>
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Nome do Mãe"
-                name="nomeMae"
-                onChange={handleChange}
-                disabled
-                value={values.nomeMae}
-                variant="outlined"
-              >
-              </TextField>
-            </Grid>
-            <input
-              name="tipo"
-              type="hidden"
-              value="morador"
+            <CardHeader
+              title="Dados do Veículo"
+              sx={{
+                textAlign: 'center'
+              }}
             />
-          </Grid>
-          <CardHeader
-            title="Imóveis"
-            sx={{
-              textAlign: 'center'
-            }}
-          />
-          <Grid
-            item
-            xs={12}
-            mb={5}
-          >
-            <Imoveis />
-          </Grid>
-          <CardHeader
-            title="Dados do Veículo"
-            sx={{
-              textAlign: 'center'
-            }}
-          />
-          <Grid
-            item
-            xs={12}
-            mb={5}
-          >
-            <Veiculo />
-          </Grid>
-          <CardHeader
-            title="Telefones"
-            sx={{
-              textAlign: 'center'
-            }}
-          />
-          <Grid
-            item
-            xs={12}
-          >
-            <Telefone />
-          </Grid>
-        </CardContent>
-      </Card>
-    </form>
-    </>  
+            <Grid
+              item
+              xs={12}
+              mb={5}
+            >
+              <Veiculo />
+            </Grid>
+            <CardHeader
+              title="Telefones"
+              sx={{
+                textAlign: 'center'
+              }}
+            />
+            <Grid
+              item
+              xs={12}
+            >
+              <Telefone />
+            </Grid>
+          </CardContent>
+        </Card>
+      </form>
+    </>
   );
 };
