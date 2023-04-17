@@ -1,4 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Veiculo } from '../Atributos/veiculo';
+import { Telefone } from '../Atributos/telefone';
+import { baseURL } from '../api/api';
+import { useRouter } from 'next/router';
+import { alertaCadastro } from '../btn_acao/alertas';
+import axios from 'axios'
 import {
   Box,
   Button,
@@ -6,38 +12,35 @@ import {
   CardContent,
   CardHeader,
   Grid,
-  TextField,
+  TextField
 } from '@mui/material';
-import Link from 'next/link';
-import axios from 'axios';
-import { Veiculo } from '../Atributos/veiculo';
-import { Telefone } from '../Atributos/telefone';
 
-export const NovoPrestador = (props) => {
+export const NovoPrestador = () => {
   const [values, setValues] = useState({
-    nome: '',
-    email: '',
-    telefone: '',
+    nomePessoa: '',
+    empresa: '',
     documento: '',
     nomePai: '',
-    nomeMae: ''
+    nomeMae: '',
+    email: '',
+    //telefone: '',
+    nomeTipo: 'prestador'
   });
 
-  const data = {
-    nome: setValues.nome,
-    email: setValues.email,
-    documento: setValues.documento,
-    nomePai: setValues.nomePai,
-    nomeMae: setValues.nomeMae
-  }
-
-  useEffect(() => {
-    axios.post("http://localhost:3000/visitante", data)
-      .then((response) => console.log(response))
+  
+  const router = useRouter();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios.post(baseURL + "prestador", values)
+      .then(() => {
+        router.push('/prestadores');
+        alertaCadastro()
+      })
       .catch((error) => {
         console.error("ops! ocorreu um erro " + error);
       });
-  }, []);
+  };
+
 
   const handleChange = (event) => {
     setValues({
@@ -45,12 +48,11 @@ export const NovoPrestador = (props) => {
       [event.target.name]: event.target.value
     });
   };
-
   return (
     <form
       autoComplete="off"
       noValidate
-      {...props}
+      onSubmit={handleSubmit}
     >
       <Card>
         <CardContent>
@@ -66,10 +68,10 @@ export const NovoPrestador = (props) => {
               <TextField
                 fullWidth
                 label="Nome completo"
-                name="nome"
+                name="nomePessoa"
                 onChange={handleChange}
                 required
-                value={values.nome}
+                value={values.nomePessoa}
                 variant="outlined"
               />
             </Grid>
@@ -115,7 +117,7 @@ export const NovoPrestador = (props) => {
                 name="empresa"
                 onChange={handleChange}
                 required
-                value={values.nomePai}
+                value={values.empresa}
                 variant="outlined"
               >
               </TextField>
@@ -131,7 +133,7 @@ export const NovoPrestador = (props) => {
                 name="nomePai"
                 onChange={handleChange}
                 required
-                value={values.nomeMae}
+                value={values.nomePai}
                 variant="outlined"
               >
               </TextField>
@@ -147,6 +149,7 @@ export const NovoPrestador = (props) => {
                 name="nomeMae"
                 onChange={handleChange}
                 required
+                value={values.nomeMae}
                 variant="outlined"
               >
               </TextField>
@@ -190,15 +193,13 @@ export const NovoPrestador = (props) => {
             p: 2
           }}
         >
-          <Link href='/prestadores'>
-            <Button
-              color="success"
-              variant="contained"
-              type="submit"
-            >
-              Cadastrar
-            </Button>
-          </Link>
+          <Button
+            color="success"
+            variant="contained"
+            type="submit"
+          >
+            Cadastrar
+          </Button>
         </Box>
       </Card>
     </form>

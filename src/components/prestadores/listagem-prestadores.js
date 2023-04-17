@@ -1,14 +1,11 @@
-import { useState } from 'react';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import EditIcon from '@mui/icons-material/Edit';
-import InfoIcon from '@mui/icons-material/Info';
-import ImageList from "@mui/material/ImageList";
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { DeletarItem } from '../btn_acao/btn-delet';
+import { useRouter } from 'next/router';
+import { baseURL } from '../api/api';
 import {
-  Avatar,
   Box,
-  Button,
   Card,
+  Button,
   Checkbox,
   Table,
   TableBody,
@@ -18,19 +15,66 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-import { getInitials } from '../../utils/get-initials';
-import { DeletarItem } from '../btn_acao/btn-delet';
+import EditIcon from '@mui/icons-material/Edit';
+import InfoIcon from '@mui/icons-material/Info';
+import ImageList from "@mui/material/ImageList";
+import axios from 'axios'
 
-export const ListaPrestadores = ({ customers, ...rest }) => {
+
+export const ListaPrestadores = () => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+  const [prestador, setPrestador] = useState([])
+  const router = useRouter()
+
+// EXCLUSÃO DE MORADORES
+  async function handleDelete(idPessoa) {
+    try {
+      await axios.delete(baseURL + 'prestador/' + `${idPessoa}`)
+      .then(() => {
+        const novaLista = prestador.filter((prestador) => prestador.idPessoa !== idPessoa)
+        setPrestador(novaLista)
+      })
+    } catch (error) {
+      console.error('ops, erro ao deletar ' + error);
+    }
+  }
+
+// LISTAGEM DE PRESTADORES POR ID
+  async function handleFindOne(tipoPessoa) {
+    try {
+      router.push(`/telas_acao/prestador/btn-info?data=${JSON.stringify(tipoPessoa.idPessoa)}`)
+
+    } catch (error) {
+      console.error('ops, erro ao listar id ' + error);
+    }
+  }
+
+// ATUALIZAÇÃO DE PRESTADORES
+  async function handleUpdate(tipoPessoa) {
+    try {
+      router.push(`/telas_acao/prestador/btn-edit?data=${JSON.stringify(tipoPessoa.idPessoa)}`)
+      
+    } catch (error) {
+      console.error('ops, erro ao editar id ' + error);
+    }
+  }
+// LISTAGEM DE PRESTADORES
+  useEffect(() => {
+    axios.get(baseURL + "prestador")
+      .then((response) => {
+        setPrestador(response.data)
+      }).catch((error) => {
+        console.error(error)
+      })
+  }, [])
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
 
     if (event.target.checked) {
-      newSelectedCustomerIds = customers.map((customer) => customer.id);
+      newSelectedCustomerIds = visitante.map((visitante) => visitante.id);
     } else {
       newSelectedCustomerIds = [];
     }
@@ -40,7 +84,7 @@ export const ListaPrestadores = ({ customers, ...rest }) => {
 
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = [];
+    let newSelectedCustomerIds = visitante;
 
     if (selectedIndex === -1) {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
@@ -67,7 +111,7 @@ export const ListaPrestadores = ({ customers, ...rest }) => {
   };
 
   return (
-    <Card {...rest}>
+    <Card>
       <ImageList
         sx={{
           gridAutoFlow: "column",
@@ -81,11 +125,11 @@ export const ListaPrestadores = ({ customers, ...rest }) => {
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
+                    checked={selectedCustomerIds.length === prestador.length}
                     color="primary"
                     indeterminate={
                       selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
+                      && selectedCustomerIds.length < prestador.length
                     }
                     onChange={handleSelectAll}
                   />
@@ -108,16 +152,16 @@ export const ListaPrestadores = ({ customers, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {prestador.slice(0, limit).map((prestador) => (
                 <TableRow
                   hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                  key={prestador.id}
+                  selected={selectedCustomerIds.indexOf(prestador.id) !== -1}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
+                      checked={selectedCustomerIds.indexOf(prestador.id) !== -1}
+                      onChange={(event) => handleSelectOne(event, prestador.id)}
                       value="true"
                     />
                   </TableCell>
@@ -128,57 +172,47 @@ export const ListaPrestadores = ({ customers, ...rest }) => {
                         display: 'flex'
                       }}
                     >
-                      <Avatar
-                        src={customer.avatarUrl}
-                        sx={{ mr: 2 }}
-                      >
-                        {getInitials(customer.name)}
-                      </Avatar>
                       <Typography
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.name}
+                        {prestador.nomePessoa}
                       </Typography>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {customer.email}
+                    {prestador.documento}
                   </TableCell>
                   <TableCell>
-                    {` ${customer.address.state}`}
+                    {` ${prestador.empresa}`}
                   </TableCell>
                   <TableCell>
-                    {customer.phone}
+                    {prestador.telefone}
                   </TableCell>
                   <TableCell
                     sx={{
                       display: 'flex',
                       gap: '5px'
                     }}>
-                    <Link href="../telas_acao/prestador/btn-info">
-                      <Button
+                    <Button
                         color="success"
                         variant="contained"
+                        onClick={() => handleFindOne(prestador)}
                       >
                         <InfoIcon />
                       </Button>
-                    </Link>
-                    <Link href="../telas_acao/prestador/btn-edit">
+                    
                       <Button
                         color="primary"
                         variant="contained"
+                        onClick={() => handleUpdate(prestador)}
                       >
                         <EditIcon />
                       </Button>
-                    </Link>
-                    <Button
-                      color="error"
-                      variant="contained"
-                      onClick={DeletarItem}
-                    >
-                      <DeleteForeverIcon />
-                    </Button>
+
+                    <DeletarItem 
+                      onDelete={() => handleDelete(prestador.idPessoa) }
+                    />
                   </TableCell>
                 </TableRow>
               ))}
@@ -188,7 +222,7 @@ export const ListaPrestadores = ({ customers, ...rest }) => {
       </ImageList>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={prestador.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}

@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
-import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
-import Link from 'next/link';
 import axios from 'axios'
 import {
   Box,

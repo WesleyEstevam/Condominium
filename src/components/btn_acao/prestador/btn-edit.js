@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useState, useEffect } from 'react';
 import { Imoveis } from '../../Atributos/imoveis'
 import { Veiculo } from '../../Atributos/veiculo'
 import { Telefone } from '../../Atributos/telefone'
-
+import { baseURL } from '../../api/api';
+import { useRouter } from 'next/router'
+import { alerta } from '../alertas'
 import {
   Box,
   Button,
@@ -14,23 +14,58 @@ import {
   Grid,
   TextField,
 } from '@mui/material';
+import Link from 'next/link';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import axios from 'axios';
 
 export const EditPrestador = (props) => {
-  const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
+  const [prestador, setPrestador] = useState({
+    nomePessoa: "", // Estado inicial do nomePessoa
+    email: "", // Estado inicial do email
+    documento: "", // Estado inicial do documento
+    nomePai: "", // Estado inicial do nomePai
+    nomeMae: "", // Estado inicial do nomeMae
+    empresa: "", // Estado inicial do empresa
   });
 
+  const router = useRouter();
+  const data = router.query.data ? JSON.parse(router.query.data) : null; //ID DO MORADOR
+
+  // Carregar os dados do visitante quando o componente for montado
+  useEffect(() => {
+    if (data) {
+      axios.get(baseURL + 'prestador/' + data)
+        .then((response) => {
+          setPrestador(response.data);
+        })
+        .catch((error) => {
+          console.log('Ops, deu erro na obtenção dos dados do prestador: ' + error);
+        });
+    }
+  }, [data]);
+
+  // Atualizar as informações de cada input
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Evita o envio padrão do formulário
+    if (data) {
+      axios.patch(baseURL + 'prestador/' + data, prestador)
+        .then(() => {
+          router.push('/prestadores')
+          alerta()
+        })
+        .catch((error) => {
+          console.log('Ops, deu erro na atualização: ' + error);
+        });
+    }
+  }
+
   const handleChange = (event) => {
-    setValues({
-      ...values,
+    setPrestador({
+      ...prestador,
       [event.target.name]: event.target.value
     });
   };
+
 
   return (
     <>
@@ -55,7 +90,6 @@ export const EditPrestador = (props) => {
       <form
         autoComplete="off"
         noValidate
-        {...props}
       >
         <Card>
           <CardContent>
@@ -71,10 +105,10 @@ export const EditPrestador = (props) => {
                 <TextField
                   fullWidth
                   label="Nome completo"
-                  name="nome"
+                  name="nomePessoa"
                   onChange={handleChange}
                   required
-                  value={values.nome}
+                  value={prestador.nomePessoa}
                   variant="outlined"
                 />
               </Grid>
@@ -89,7 +123,7 @@ export const EditPrestador = (props) => {
                   name="email"
                   onChange={handleChange}
                   required
-                  value={values.email}
+                  value={prestador.email}
                   variant="outlined"
                 />
               </Grid>
@@ -105,7 +139,7 @@ export const EditPrestador = (props) => {
                   name="documento"
                   onChange={handleChange}
                   required
-                  value={values.documento}
+                  value={prestador.documento}
                   variant="outlined"
                 />
               </Grid>
@@ -120,7 +154,7 @@ export const EditPrestador = (props) => {
                   name="nomePai"
                   onChange={handleChange}
                   required
-                  value={values.nomePai}
+                  value={prestador.nomePai}
                   variant="outlined"
                 >
                 </TextField>
@@ -136,7 +170,7 @@ export const EditPrestador = (props) => {
                   name="nomeMae"
                   onChange={handleChange}
                   required
-                  value={values.nomeMae}
+                  value={prestador.nomeMae}
                   variant="outlined"
                 >
                 </TextField>
@@ -152,7 +186,7 @@ export const EditPrestador = (props) => {
                   name="empresa"
                   onChange={handleChange}
                   required
-                  value={values.nomeMae}
+                  value={prestador.nomeMae}
                   variant="outlined"
                 >
                 </TextField>
@@ -196,15 +230,14 @@ export const EditPrestador = (props) => {
               p: 2
             }}
           >
-            <Link href='/prestadores'>
-              <Button
-                color="success"
-                variant="contained"
-                type="submit"
-              >
-                Atualizar
-              </Button>
-            </Link>
+            <Button
+              color="success"
+              variant="contained"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              Atualizar
+            </Button>
           </Box>
         </Card>
       </form>
