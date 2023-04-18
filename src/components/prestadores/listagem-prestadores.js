@@ -181,13 +181,12 @@ export const ListaPrestadores = () => {
                     </Box>
                   </TableCell>
                   <TableCell>
+                  </TableCell>
+                  <TableCell>
                     {prestador.documento}
                   </TableCell>
                   <TableCell>
-                    {` ${prestador.empresa}`}
-                  </TableCell>
-                  <TableCell>
-                    {prestador.telefone}
+                  {prestador.empresa}
                   </TableCell>
                   <TableCell
                     sx={{

@@ -3,7 +3,7 @@ import { Telefone } from '../../Atributos/telefone'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 import { baseURL } from '../../api/api';
-import { alerta } from '../alertaEdit';
+import { alerta } from '../alertas';
 import {
   Box,
   Button,
