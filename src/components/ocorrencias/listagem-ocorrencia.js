@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { DeletarItem } from '../btn_acao/btn-delet';
+import { baseURL } from '../api/api';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
-import { getInitials } from '../../utils/get-initials';
-import { DeletarItem } from '../btn_acao/btn-delet';
-import Link from 'next/link';
+import axios from 'axios'
 
 import {
   Avatar,
@@ -22,16 +22,59 @@ import {
   Typography
 } from '@mui/material';
 
-export const ListaOcorrencia = ({ customers, ...rest }) => {
+export const ListaOcorrencia = () => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+  const [ocorrencia, setOcorrencia] = useState([])
+  const router = useRouter()
+
+// EXCLUSÃO DE OCORRENCIAS
+  async function handleDelete(idPessoa) {
+    try {
+      await axios.delete(baseURL + 'ocorrencia/' + `${idPessoa}`)
+      .then(() => {
+        const novaLista = ocorrencia.filter((ocorrencia) => ocorrencia.idPessoa !== idPessoa)
+        setOcorrencia(novaLista)
+      })
+    } catch (error) {
+      console.error('ops, erro ao deletar ' + error);
+    }
+  }
+
+// LISTAGEM DE OCORRENCIAS POR ID
+  async function handleFindOne(listaOcorrencia) {
+    try {
+      router.push(`/telas_acao/ocorrencia/btn-info?data=${JSON.stringify(listaOcorrencia.idOcorrencia)}`)
+    } catch (error) {
+      console.error('ops, erro ao listar id ' + error);
+    }
+  }
+
+// ATUALIZAÇÃO DE OCORRENCIAS
+  async function handleUpdate(atualizarOcorrencia) {
+    try {
+      router.push(`/telas_acao/ocorrencia/btn-edit?data=${JSON.stringify(atualizarOcorrencia.idOcorrencia)}`)
+      
+    } catch (error) {
+      console.error('ops, erro ao editar id ' + error);
+    }
+  }
+// LISTAGEM DE OCORRENCIAS
+  useEffect(() => {
+    axios.get(baseURL + "ocorrencia")
+      .then((response) => {
+        setOcorrencia(response.data)
+      }).catch((error) => {
+        console.error(error)
+      })
+  }, [])
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
 
     if (event.target.checked) {
-      newSelectedCustomerIds = customers.map((customer) => customer.id);
+      newSelectedCustomerIds = ocorrencia.map((ocorrencia) => ocorrencia.id);
     } else {
       newSelectedCustomerIds = [];
     }
@@ -41,7 +84,7 @@ export const ListaOcorrencia = ({ customers, ...rest }) => {
 
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = [];
+    let newSelectedCustomerIds = ocorrencia;
 
     if (selectedIndex === -1) {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
@@ -68,7 +111,7 @@ export const ListaOcorrencia = ({ customers, ...rest }) => {
   };
 
   return (
-    <Card {...rest}>
+    <Card>
       <ImageList
         sx={{
           gridAutoFlow: "column",
@@ -82,17 +125,20 @@ export const ListaOcorrencia = ({ customers, ...rest }) => {
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
+                    checked={selectedCustomerIds.length === ocorrencia.length}
                     color="primary"
                     indeterminate={
                       selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
+                      && selectedCustomerIds.length < ocorrencia.length
                     }
                     onChange={handleSelectAll}
                   />
                 </TableCell>
                 <TableCell>
-                  Nome
+                  Nome Porteiro
+                </TableCell>
+                <TableCell>
+                  Descrição
                 </TableCell>
                 <TableCell>
                   Status
@@ -101,7 +147,7 @@ export const ListaOcorrencia = ({ customers, ...rest }) => {
                   Tipo
                 </TableCell>
                 <TableCell>
-                  Descrição
+                  Data/Hora
                 </TableCell>
                 <TableCell>
                   Ação
@@ -109,16 +155,16 @@ export const ListaOcorrencia = ({ customers, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {ocorrencia.slice(0, limit).map((ocorrencias) => (
                 <TableRow
                   hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                  key={ocorrencias.id}
+                  selected={selectedCustomerIds.indexOf(ocorrencias.id) !== -1}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
+                      checked={selectedCustomerIds.indexOf(ocorrencias.id) !== -1}
+                      onChange={(event) => handleSelectOne(event, ocorrencias.id)}
                       value="true"
                     />
                   </TableCell>
@@ -129,57 +175,51 @@ export const ListaOcorrencia = ({ customers, ...rest }) => {
                         display: 'flex'
                       }}
                     >
-                      <Avatar
-                        src={customer.avatarUrl}
-                        sx={{ mr: 2 }}
-                      >
-                        {getInitials(customer.name)}
-                      </Avatar>
                       <Typography
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.name}
+                        {ocorrencias.nomePorteiro}
                       </Typography>
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {customer.email}
+                    {ocorrencias.descOcorrencia}
                   </TableCell>
                   <TableCell>
-                    {` ${customer.address.state}`}
+                    {ocorrencias.statusOcorrencia.descStatusOcorrencia}
                   </TableCell>
                   <TableCell>
-                    {customer.phone}
+                    {ocorrencias.tipoOcorrencia.descTipoOcorrencia}
+                  </TableCell>
+                  <TableCell>
+                    {ocorrencias.dataOcorrencia}
                   </TableCell>
                   <TableCell
                     sx={{
                       display: 'flex',
                       gap: '5px'
                     }}>
-                    <Link href="../telas_acao/ocorrencia/btn-info">
+          
                       <Button
                         color="success"
                         variant="contained"
+                        onClick={() => handleFindOne(ocorrencias)}
                       >
                         <InfoIcon />
                       </Button>
-                    </Link>
-                    <Link href="../telas_acao/ocorrencia/btn-edit">
+                    
                       <Button
                         color="primary"
                         variant="contained"
+                        onClick={() => handleUpdate(ocorrencias)}
                       >
                         <EditIcon />
                       </Button>
-                    </Link>
-                    <Button
-                      color="error"
-                      variant="contained"
-                      onClick={DeletarItem}
-                    >
-                      <DeleteForeverIcon />
-                    </Button>
+
+                    <DeletarItem 
+                      onDelete={() => handleDelete(ocorrencias.idPessoa) }
+                    />
                   </TableCell>
                 </TableRow>
               ))}
@@ -189,7 +229,7 @@ export const ListaOcorrencia = ({ customers, ...rest }) => {
       </ImageList>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={ocorrencia.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}

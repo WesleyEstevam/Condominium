@@ -1,42 +1,76 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { baseURL } from '../../api/api';
+import { useRouter } from 'next/router'
+import { alerta } from '../alertas'
+import { Search as SearchIcon } from '../../../icons/search';
 import {
   Box,
   Button,
   Card,
   CardContent,
-  CardHeader,
-  Divider,
+  InputAdornment,
   Grid,
   TextField,
+  SvgIcon
 } from '@mui/material';
 import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import axios from 'axios';
 
-export const EditOcorrencia = (props) => {
-  const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
+export const EditOcorrencia = () => {
+  const [ocorrencia, setOcorrencia] = useState({
+    nomePorteiro: "", // Estado inicial do nomePorteiro
+    statusOcorrencia: "", // Estado inicial do status
+    tipoOcorrencia: "", // Estado inicial do tipo
+    dataOcorencia: "", // Estado inicial da data
+    descOcorrencia: "", // Estado inicial da descricao
   });
 
+  const router = useRouter();
+  const data = router.query.data ? JSON.parse(router.query.data) : null; //ID DA OCORRENCIA
+
+  // Carregar os dados das ocorrencias quando o componente for montado
+  useEffect(() => {
+    if (data) {
+      axios.get(baseURL + 'ocorrencia/' + data)
+        .then((response) => {
+          setOcorrencia(response.data);
+        })
+        .catch((error) => {
+          console.log('Ops, deu erro na obtenção dos dados da ocorrencia: ' + error);
+        });
+    }
+  }, [data]);
+
+  // Atualizar as informações de cada input
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Evita o envio padrão do formulário
+    if (data) {
+      axios.patch(baseURL + 'ocorrencia/' + data, ocorrencia)
+        .then(() => {
+          router.push('/ocorrencias')
+          alerta()
+        })
+        .catch((error) => {
+          console.log('Ops, deu erro na atualização: ' + error);
+        });
+    }
+  }
+
   const handleChange = (event) => {
-    setValues({
-      ...values,
+    setOcorrencia({
+      ...ocorrencia,
       [event.target.name]: event.target.value
     });
   };
 
   return (
     <>
-      <div 
-        style={{ 
+      <div
+        style={{
           margin: 20,
           display: 'flex',
           justifyContent: 'space-between',
-
         }}
       >
         <h1>Ocorrência</h1>
@@ -50,13 +84,10 @@ export const EditOcorrencia = (props) => {
         </Link>
       </div>
       <form
-        
         autoComplete="off"
         noValidate
-        {...props}
       >
         <Card>
-          <Divider />
           <CardContent>
             <Grid
               container
@@ -67,13 +98,12 @@ export const EditOcorrencia = (props) => {
                 md={6}
                 xs={12}
               >
+                <label>Nome do Porteiro:</label>
                 <TextField
                   fullWidth
-                  label="Primeiro nome"
-                  name="firstName"
+                  name="nomePorteiro"
                   onChange={handleChange}
-                  required
-                  value={values.firstName}
+                  value={ocorrencia.nomePorteiro}
                   variant="outlined"
                 />
               </Grid>
@@ -82,13 +112,12 @@ export const EditOcorrencia = (props) => {
                 md={6}
                 xs={12}
               >
+                <label>Status: </label>
                 <TextField
                   fullWidth
-                  label="Sobrenome"
-                  name="lastName"
+                  name="statusOcorrencia"
                   onChange={handleChange}
-                  required
-                  value={values.lastName}
+                  value={ocorrencia.statusOcorrencia.descStatusOcorrencia}
                   variant="outlined"
                 />
               </Grid>
@@ -97,14 +126,14 @@ export const EditOcorrencia = (props) => {
                 md={6}
                 xs={12}
               >
+                <label>Descrição: </label>
                 <TextField
                   fullWidth
-                  label="E-mail"
-                  name="email"
-                  onChange={handleChange}
-                  required
-                  value={values.email}
-                  variant="outlined"
+                  name="descOcorrencia"
+                  value={ocorrencia.descOcorrencia}
+                  id="outlined-multiline-static"
+                  multiline
+                  rows={10}
                 />
               </Grid>
               <Grid
@@ -112,160 +141,44 @@ export const EditOcorrencia = (props) => {
                 md={6}
                 xs={12}
               >
+                <label>Tipo: </label>
                 <TextField
                   fullWidth
-                  label="Contato"
-                  name="phone"
+                  name="tipoOcorrencia"
                   onChange={handleChange}
-                  type="number"
-                  value={values.phone}
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Documento"
-                  name="country"
-                  onChange={handleChange}
-                  required
-                  value={values.country}
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Nome do Pai"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
+                  value={ocorrencia.tipoOcorrencia.descTipoOcorrencia}
                   variant="outlined"
                 >
+                  {/* ocorrencia.map((option) => (
+                  <option
+                    key={option.idOcorrencia}
+                    value={option.tipoOcorrencia}
+                  >
+                    {option.label}
+                  </option>
+                ))*/}
                 </TextField>
               </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Nome do Mãe"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                >
-                </TextField>
-              </Grid>
+
             </Grid>
-            <CardHeader
-              title="Dados do Veículo"
-              sx={{ 
-                  textAlign: 'center'
-                }}
-              />
-            <Grid
-              container
-              spacing={3}
-            >
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Placa"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                >
-                </TextField>
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Cor"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                >
-                </TextField>
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Tipo"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                >
-                </TextField>
-              </Grid>
-              <Grid
-                item
-                md={6}
-                xs={12}
-              >
-                <TextField
-                  fullWidth
-                  label="Modelo"
-                  name="state"
-                  onChange={handleChange}
-                  required
-                  value={values.state}
-                  variant="outlined"
-                >
-                </TextField>
-              </Grid>
-              </Grid>  
           </CardContent>
-          <Divider />
           <Box
-            sx={{ 
+            sx={{
               display: 'flex',
               justifyContent: 'center',
               p: 2
             }}
           >
-          <Link href="/ocorrencias">
             <Button
+              color="success"
               variant="contained"
-              color='success'
+              onClick={handleSubmit}
             >
               Atualizar
             </Button>
-          </Link>
-
           </Box>
         </Card>
       </form>
-    </>  
+    </>
   );
 };
