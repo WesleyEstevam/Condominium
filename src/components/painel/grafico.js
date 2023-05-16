@@ -1,7 +1,7 @@
 import { Bar } from 'react-chartjs-2';
 import { Box, Button, Card, CardContent, CardHeader, Divider, useTheme } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ModalComponent from '../../components/btn_acao/btn-previsao'
 
 export const Grafico = (props) => {
   const theme = useTheme();
@@ -92,7 +92,7 @@ export const Grafico = (props) => {
             Ùltimos 7 dias
           </Button>
         )}
-        title="Entrada e Saída"
+        title="Entradas e Saídas"
       />
       <Divider />
       <CardContent>
@@ -116,13 +116,18 @@ export const Grafico = (props) => {
           p: 2
         }}
       >
-        <Button
+
+        <ModalComponent />
+
+        {/* <Button
+          onClick={DayPickerModal}
           color="primary"
-          endIcon={<ArrowRightIcon fontSize="small" />}
+          endIcon={<CalendarMonthIcon fontSize="small" />}
           size="small"
         >
-          Visão geral
-        </Button>
+          Previsão
+        </Button> */}
+
       </Box>
     </Card>
   );
