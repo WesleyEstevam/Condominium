@@ -10,6 +10,10 @@ import { createEmotionCache } from '../utils/create-emotion-cache';
 import { registerChartJs } from '../utils/register-chart-js';
 import { theme } from '../theme';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
+
 registerChartJs();
 
 const clientSideEmotionCache = createEmotionCache();
@@ -18,6 +22,17 @@ const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   const getLayout = Component.getLayout ?? ((page) => page);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const { token } = parseCookies();
+    if (!token && router.pathname !== '/login') {
+      router.push('/login');
+    }
+  }, []);
+
+  //return <Component {...pageProps} />;
 
   return (
     <CacheProvider value={emotionCache}>

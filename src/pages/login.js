@@ -1,32 +1,40 @@
+import { Box, Button, Container, Divider, Link, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { baseURL } from '../components/api/api';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 import NextLink from 'next/link';
-import Router from 'next/router';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { Box, Button, Container, Divider, Link, TextField, Typography} from '@mui/material';
+import { erroLogin } from '../components/btn_acao/alertas';
 
-const Login = () => {
-  const formik = useFormik({
-    initialValues: {
-      email: 'demo@devias.io',
-      password: 'Password123'
-    },
-    validationSchema: Yup.object({
-      email: Yup
-        .string()
-        .email('Must be a valid email')
-        .max(255)
-        .required('Email is required'),
-      password: Yup
-        .string()
-        .max(255)
-        .required('Password is required')
-    }),
-    onSubmit: () => {
-      Router
-        .push('/')
-        .catch(console.error);
-    },
-  });
+export function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const values = {
+    username,
+    password
+  };
+  const router = useRouter();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post(baseURL + 'login', values);
+      const token = response.data;
+
+      // Converte o objeto do token em uma string
+      const tokenString = JSON.stringify(token);
+
+      // Armazena o token JWT no localStorage ou em um cookie para autenticar as solicitações subsequentes.
+      localStorage.setItem('token', tokenString);
+      router.push('/');
+
+    } catch (error) {
+      erroLogin();
+      console.error('Problema ao realizar a autenticação:', error);
+    }
+  };
+
   return (
     <>
       <Box
@@ -40,7 +48,7 @@ const Login = () => {
         }}
       >
         <Container maxWidth="sm">
-          <img 
+          <img
             src='static/logoCondominium.jpeg'
             style={{
               margin: '10px',
@@ -48,21 +56,21 @@ const Login = () => {
               borderRadius: '200px'
             }}
           />
-          <Typography variant="h5" 
+          <Typography variant="h5"
             style={{
-              fontFamily: "Poppins", 
+              fontFamily: "Poppins",
               fontSize: '5vh',
               fontWeight: "300",
               textAlign: 'center',
               fontStyle: 'medium',
 
-          }}>
-            Bem vindo ao 
+            }}>
+            Bem vindo ao
           </Typography>
-          <Typography 
+          <Typography
             style={{
-              display:'flex',
-              flexDirection:'row',
+              display: 'flex',
+              flexDirection: 'row',
               justifyContent: 'flex-end',
               fontSize: '5vh',
               fontFamily: 'Poppins',
@@ -73,7 +81,7 @@ const Login = () => {
           >
             CONDOMINIUM
           </Typography>
-          <Divider 
+          <Divider
             sx={{
               display: 'flex',
               marginLeft: "auto",
@@ -83,45 +91,45 @@ const Login = () => {
 
             }}
           />
-          <Box 
-            sx={{ 
-              my: '10%', 
+          <Box
+            sx={{
+              my: '10%',
               backgroundColor: '#ffffff',
-              borderRadius: '15px', 
-              p: '20px' 
+              borderRadius: '15px',
+              p: '20px'
             }}>
-            <form onSubmit={formik.handleSubmit}>
-              
+            <form onSubmit={handleSubmit}>
+
               <TextField
-                error={Boolean(formik.touched.email && formik.errors.email)}
+                //error={Boolean(email && errors.email)}
                 fullWidth
-                helperText={formik.touched.email && formik.errors.email}
-                label="Endereço de Email"
+                //helperText={email && errors.email}
+                label="Nome de usuário"
                 margin="normal"
-                name="email"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
+                name="username"
+                //onBlur={handleBlur}
+                onChange={(event) => setUsername(event.target.value)}
                 type="email"
-                value={formik.values.email}
+                //value={values.email}
                 variant="outlined"
               />
               <TextField
-                error={Boolean(formik.touched.password && formik.errors.password)}
+                //error={Boolean(password && errors.password)}
                 fullWidth
-                helperText={formik.touched.password && formik.errors.password}
-                label="Senha"
+                //helperText={password && errors.password}
+                label="password"
                 margin="normal"
                 name="password"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
+                //onBlur={handleBlur}
+                onChange={(event) => setPassword(event.target.value)}
                 type="password"
-                value={formik.values.password}
+                //value={values.password}
                 variant="outlined"
               />
               <Box sx={{ py: 2 }}>
                 <Button
                   color="success"
-                  disabled={formik.isSubmitting}
+                  //disabled={isSubmitting}
                   fullWidth
                   size="large"
                   type="submit"
@@ -151,8 +159,8 @@ const Login = () => {
                   </Link>
                 </NextLink>
               </Typography>
-          </form>
-        </Box>
+            </form>
+          </Box>
         </Container>
       </Box>
     </>

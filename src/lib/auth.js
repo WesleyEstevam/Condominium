@@ -1,11 +1,29 @@
-import { Auth } from '@zalter/identity-js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
-const noop = () => {};
+export const generateToken = (payload) => {
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: '1d',
+  });
+  return token;
+};
 
-export const ENABLE_AUTH = process.env.NEXT_PUBLIC_ENABLE_ZALTER_AUTH === 'true';
+export const verifyToken = (token) => {
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return decoded;
+  } catch (err) {
+    return null;
+  }
+};
 
-export const auth = ENABLE_AUTH
-  ? new Auth({
-    projectId: process.env.NEXT_PUBLIC_ZALTER_PROJECT_ID
-  })
-  : noop();
+export const hashPassword = async (password) => {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  return hashedPassword;
+};
+
+export const comparePasswords = async (password, hashedPassword) => {
+  const isValid = await bcrypt.compare(password, hashedPassword);
+  return isValid;
+};
