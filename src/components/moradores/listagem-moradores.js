@@ -73,7 +73,7 @@ export const ListaMoradores = () => {
     let newSelectedCustomerIds;
 
     if (event.target.checked) {
-      newSelectedCustomerIds = visitante.map((visitante) => visitante.id);
+      newSelectedCustomerIds = morador.map((morador) => morador.id);
     } else {
       newSelectedCustomerIds = [];
     }
@@ -83,7 +83,7 @@ export const ListaMoradores = () => {
 
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = visitante;
+    let newSelectedCustomerIds = morador;
 
     if (selectedIndex === -1) {
       newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
