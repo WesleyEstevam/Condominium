@@ -20,7 +20,7 @@ import {
 import { DeletarItem } from '../btn_acao/btn-delet';
 import { useEffect, useState } from 'react';
 import { MenuGeral } from './menu-geral';
-import { baseURL } from '../api/api';  
+import { baseURL } from '../api/api';
 import { useRouter } from 'next/router'
 
 export const CustomerListResults = () => {
@@ -30,20 +30,20 @@ export const CustomerListResults = () => {
   const [visitante, setVisitante] = useState([])
   const router = useRouter()
 
-// EXCLUSÃO DE VISITANTES
+  // EXCLUSÃO DE VISITANTES
   async function handleDelete(idPessoa) {
     try {
       await axios.delete(baseURL + 'visitante/' + `${idPessoa}`)
-      .then(() => {
-        const novaLista = visitante.filter((visitantes) => visitantes.idPessoa !== idPessoa)
-        setVisitante(novaLista)
-      })
+        .then(() => {
+          const novaLista = visitante.filter((visitantes) => visitantes.idPessoa !== idPessoa)
+          setVisitante(novaLista)
+        })
     } catch (error) {
       console.error('ops, erro ao deletar ' + error);
     }
   }
 
-// LISTAGEM DE VISITANTES POR ID
+  // LISTAGEM DE VISITANTES POR ID
   async function handleFindOne(tipoPessoa) {
     try {
       router.push(`/telas_acao/visitante/btn-info?data=${JSON.stringify(tipoPessoa.idPessoa)}`)
@@ -53,16 +53,17 @@ export const CustomerListResults = () => {
     }
   }
 
-// ATUALIZAÇÃO DE VISITANTES
+  // ATUALIZAÇÃO DE VISITANTES
   async function handleUpdate(tipoPessoa) {
     try {
       router.push(`/telas_acao/visitante/btn-edit?data=${JSON.stringify(tipoPessoa.idPessoa)}`)
-      
+
     } catch (error) {
       console.error('ops, erro ao editar id ' + error);
     }
   }
-// LISTAGEM DE VISITANTES
+  // LISTAGEM DE VISITANTES
+
   useEffect(() => {
     axios.get(baseURL + "visitante")
       .then((response) => {
@@ -70,6 +71,20 @@ export const CustomerListResults = () => {
       }).catch((error) => {
         console.error(error)
       })
+  }, [])
+
+  // ATUALIZAÇÃO DA LISTA DE VISITANTES
+  useEffect(() => {
+    const updateListagem = () => {
+      axios.get(baseURL + "visitante")
+        .then((response) => {
+          setVisitante(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    updateListagem();
   }, [])
 
   const handleSelectAll = (event) => {
@@ -197,25 +212,25 @@ export const CustomerListResults = () => {
                       display: 'flex',
                       gap: '5px'
                     }}>
-          
-                      <Button
-                        color="success"
-                        variant="contained"
-                        onClick={() => handleFindOne(visitante)}
-                      >
-                        <InfoIcon />
-                      </Button>
-                    
-                      <Button
-                        color="primary"
-                        variant="contained"
-                        onClick={() => handleUpdate(visitante)}
-                      >
-                        <EditIcon />
-                      </Button>
 
-                    <DeletarItem 
-                      onDelete={() => handleDelete(visitante.idPessoa) }
+                    <Button
+                      color="success"
+                      variant="contained"
+                      onClick={() => handleFindOne(visitante)}
+                    >
+                      <InfoIcon />
+                    </Button>
+
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() => handleUpdate(visitante)}
+                    >
+                      <EditIcon />
+                    </Button>
+
+                    <DeletarItem
+                      onDelete={() => handleDelete(visitante.idPessoa)}
                     />
                     <Link href="../telas_acao/visitante/alocarDestino">
                       <Button

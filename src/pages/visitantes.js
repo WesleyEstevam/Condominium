@@ -2,7 +2,6 @@ import { Box, Container } from '@mui/material';
 import { CustomerListResults } from '../components/visitantes/listagem-visitantes';
 import { CustomerListToolbar } from '../components/visitantes/visitantes-header';
 import { DashboardLayout } from '../components/painel-layout';
-import { customers } from '../__mocks__/customers';
 
 const Page = () => (
   <>
@@ -16,7 +15,7 @@ const Page = () => (
       <Container maxWidth={false}>
         <CustomerListToolbar />
         <Box sx={{ mt: 3 }}>
-          <CustomerListResults customers={customers} />
+          <CustomerListResults />
         </Box>
       </Container>
     </Box>

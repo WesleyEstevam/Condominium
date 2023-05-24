@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { Typography, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { Typography, TextField, InputAdornment } from '@mui/material';
 
 const ModalComponent = () => {
   const [open, setOpen] = useState(false);
@@ -49,14 +49,6 @@ const ModalComponent = () => {
           <TextField
             fullWidth
             type="datetime-local"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-
-                </InputAdornment>
-              )
-            }}
-            placeholder="Data/Hora"
             variant="outlined"
           />
 

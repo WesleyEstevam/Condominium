@@ -9,13 +9,13 @@ import {
 } from '@mui/material';
 import Link  from 'next/link';
 import { Search as SearchIcon } from '../../icons/search';
-import { Upload as UploadIcon } from '../../icons/upload';
 import { Download as DownloadIcon } from '../../icons/download';
 import { Importar } from '../btn_acao/btn-importar';
+import { updateListagem } from '../../components/visitantes/listagem-visitantes'
 
 export const CustomerListToolbar = (props) => (
 
-  <Box {...props}>
+  <Box>
     <Box
       sx={{
         alignItems: 'center',
@@ -31,14 +31,8 @@ export const CustomerListToolbar = (props) => (
       >
         Visitantes
       </Typography>
-      <Box sx={{ m: 1 }}>
-        <Button
-          startIcon={(<UploadIcon fontSize="small" />)}
-          sx={{ mr: 1 }}
-          onClick={Importar}
-        >
-          Importar
-        </Button>
+      <Box sx={{ m: 1, display: 'flex'}}>
+          <Importar onUpdateListagem={updateListagem} />
         <Button
           startIcon={(<DownloadIcon fontSize="small" />)}
           sx={{ mr: 1 }}
