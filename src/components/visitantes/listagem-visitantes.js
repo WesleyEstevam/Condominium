@@ -73,20 +73,6 @@ export const CustomerListResults = () => {
       })
   }, [])
 
-  // ATUALIZAÇÃO DA LISTA DE VISITANTES
-  useEffect(() => {
-    const updateListagem = () => {
-      axios.get(baseURL + "visitante")
-        .then((response) => {
-          setVisitante(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
-    updateListagem();
-  }, [])
-
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
 
@@ -205,7 +191,7 @@ export const CustomerListResults = () => {
                     {` ${visitante.documento}`}
                   </TableCell>
                   <TableCell>
-                    {visitante.telefoneID}
+                    {visitante.numeroTelefone}
                   </TableCell>
                   <TableCell
                     sx={{

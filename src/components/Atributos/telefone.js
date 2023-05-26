@@ -1,6 +1,4 @@
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
-import InfoIcon from '@mui/icons-material/Info';
 import ImageList from "@mui/material/ImageList";
 import { DeletarItem } from '../btn_acao/btn-delet';
 import Link from 'next/link';
@@ -39,7 +37,7 @@ export function Telefone() {
             console.error('ops, erro ao deletar ' + error);
         }
     }
-
+    
     useEffect(() => {
         axios.get(baseURL + "telefone")
             .then((response) => {

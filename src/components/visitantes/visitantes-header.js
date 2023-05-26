@@ -11,7 +11,6 @@ import Link  from 'next/link';
 import { Search as SearchIcon } from '../../icons/search';
 import { Download as DownloadIcon } from '../../icons/download';
 import { Importar } from '../btn_acao/btn-importar';
-import { updateListagem } from '../../components/visitantes/listagem-visitantes'
 
 export const CustomerListToolbar = (props) => (
 
@@ -32,7 +31,7 @@ export const CustomerListToolbar = (props) => (
         Visitantes
       </Typography>
       <Box sx={{ m: 1, display: 'flex'}}>
-          <Importar onUpdateListagem={updateListagem} />
+          <Importar />
         <Button
           startIcon={(<DownloadIcon fontSize="small" />)}
           sx={{ mr: 1 }}

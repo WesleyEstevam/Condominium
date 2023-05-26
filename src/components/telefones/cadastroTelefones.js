@@ -20,8 +20,7 @@ export function NovoTelefone() {
 
   async function cadastrarTelefone() {
     axios.post(baseURL + "telefone", values)
-      .then((response) => {
-        
+      .then(() => {
         router.back();
       })
       .catch((error) => {

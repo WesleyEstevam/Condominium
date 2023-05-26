@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { Typography, TextField } from '@mui/material';
 import { Upload as UploadIcon } from '../../icons/upload';
 import { baseURL } from '../api/api'
-import { useRouter } from 'next/router';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import axios from 'axios'
-import { updateListagem } from '../../components/visitantes/listagem-visitantes'
 
 export const Importar = () => {
   const [open, setOpen] = useState(false);
@@ -32,12 +30,11 @@ export const Importar = () => {
       formData.append("file", file);
       await axios.post(baseURL + "visitante/upload", formData)
         .then(() => {
-          console.log("CSV enviado com sucesso!");
-          updateListagem();
+          
         })
         .catch((error) => {
           console.log("Erro ao enviar o arquivo CSV: ", error);
-      })
+        })
     }
     handleClose();
   }

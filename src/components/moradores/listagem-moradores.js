@@ -137,13 +137,16 @@ export const ListaMoradores = () => {
                   Nome
                 </TableCell>
                 <TableCell>
-                  Quadra
+                  Documento
                 </TableCell>
                 <TableCell>
-                  Lote
+                  E-mail
                 </TableCell>
                 <TableCell>
                   Telefone
+                </TableCell>
+                <TableCell>
+                  AP/Casa
                 </TableCell>
                 <TableCell>
                   Ação
@@ -180,13 +183,16 @@ export const ListaMoradores = () => {
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {morador.email}
+                    {morador.documento}
                   </TableCell>
                   <TableCell>
-                    {` ${morador.documento}`}
+                    {` ${morador.email}`}
                   </TableCell>
                   <TableCell>
                     {morador.telefoneID}
+                  </TableCell>
+                  <TableCell>
+                    {morador.Endereco?.lote}
                   </TableCell>
                   <TableCell
                     sx={{

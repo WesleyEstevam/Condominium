@@ -22,7 +22,6 @@ export const NovoVisitante = () => {
     nomePai: '',
     nomeMae: '',
     email: '',
-    //telefone: '',
     nomeTipo: 'visitante'
   });
 

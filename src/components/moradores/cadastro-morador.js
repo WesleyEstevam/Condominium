@@ -25,6 +25,10 @@ export const NovoMorador = () => {
     nomeMae: '',
     email: '',
     //telefone: '',
+    quadra: '',
+    lote: '',
+    bloco: '',
+    apartamento: '',
     nomeTipo: 'morador'
   });
 
@@ -136,6 +140,66 @@ export const NovoMorador = () => {
                 onChange={handleChange}
                 required
                 value={values.nomeMae}
+                variant="outlined"
+              >
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Quadra"
+                name="quadra"
+                onChange={handleChange}
+                value={values.quadra}
+                variant="outlined"
+              >
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Bloco"
+                name="bloco"
+                onChange={handleChange}
+                value={values.bloco}
+                variant="outlined"
+              >
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Lote"
+                name="lote"
+                onChange={handleChange}
+                value={values.lote}
+                variant="outlined"
+              >
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Apartamento"
+                name="apartamento"
+                onChange={handleChange}
+                value={values.apartamento}
                 variant="outlined"
               >
               </TextField>
