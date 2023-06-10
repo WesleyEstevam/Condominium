@@ -2,9 +2,11 @@ import { Bar } from 'react-chartjs-2';
 import { Box, Button, Card, CardContent, CardHeader, Divider, useTheme } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ModalComponent from '../../components/btn_acao/btn-previsao'
+import { useState } from 'react';
 
 export const Grafico = (props) => {
   const theme = useTheme();
+  const [previsao, setPrevisao] = useState([]);
 
   const data = {
     datasets: [
@@ -14,24 +16,15 @@ export const Grafico = (props) => {
         barThickness: 12,
         borderRadius: 4,
         categoryPercentage: 0.5,
-        data: [18, 5, 19, 27, 29, 19, 20],
+        data: previsao,  //[18, 5, 19, 27, 29, 19, 20],
         label: 'Visitantes',
         maxBarThickness: 10
       },
-      {
-        backgroundColor: 'gray',
-        barPercentage: 0.5,
-        barThickness: 12,
-        borderRadius: 4,
-        categoryPercentage: 0.5,
-        data: [11, 20, 12, 29, 30, 25, 13],
-        label: 'Prestadores de serviço',
-        maxBarThickness: 10
-      }
     ],
-    labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '7 aug']
-  };
+    //labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '7 aug']
+    labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo']
 
+  };
   const options = {
     animation: true,
     cornerRadius: 20,
@@ -79,6 +72,7 @@ export const Grafico = (props) => {
       mode: 'index',
       titleFontColor: theme.palette.text.primary
     }
+
   };
 
   return (
@@ -117,7 +111,7 @@ export const Grafico = (props) => {
         }}
       >
 
-        <ModalComponent />
+        <ModalComponent setPrevisao={setPrevisao} />
 
         {/* <Button
           onClick={DayPickerModal}

@@ -62,6 +62,11 @@ const items = [
     icon: (<SecurityIcon fontSize="small" />),
     title: 'Entradas e Saídas'
   },
+  {
+    href: '/relatorios',
+    icon: (<SecurityIcon fontSize="small" />),
+    title: 'relatorios'
+  }
 ];
 
 export const DashboardSidebar = (props) => {
@@ -185,17 +190,17 @@ export const DashboardSidebar = (props) => {
             backgroundColor: 'neutral.900',
             color: '#FFFFFF',
             width: 280,
-            
+
             '::-webkit-scrollbar': { /* Estiliza a barra de rolagem */
               width: '5px',
             },
-           
+
             '::-webkit-scrollbar-thumb': { /* Estiliza o botão de rolagem */
               backgroundColor: 'green',
               borderRadius: '10px'
             },
 
-           '::-webkit-scrollbar-track': { /* Estiliza o fundo da barra de rolagem */
+            '::-webkit-scrollbar-track': { /* Estiliza o fundo da barra de rolagem */
               backgroundColor: 'bfbfbf',
             },
 

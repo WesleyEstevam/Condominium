@@ -4,9 +4,11 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import axios from 'axios'
 
-const ModalComponent = () => {
+const ModalComponent = ({ setPrevisao }) => {
   const [open, setOpen] = useState(false);
+  //const [previsao, setPrevisao] = useState()
 
   const handleOpen = () => {
     setOpen(true);
@@ -15,6 +17,16 @@ const ModalComponent = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleSubmit = () => {
+    axios.get('http://127.0.0.1:5000')
+    .then((response) => {
+      setPrevisao(response.data) //ARRAY DE PREVISÕES
+    })
+    .catch((error) => {
+      console.log(error + 'DEU RUIM, ERRO NA PREVISÃO')
+    })
+  }
 
   return (
     <div>
@@ -52,7 +64,7 @@ const ModalComponent = () => {
             variant="outlined"
           />
 
-          <Button variant='contained' onClick={handleClose} sx={{ mt: 5, ml: 15 }}>
+          <Button variant='contained' onClick={handleSubmit} sx={{ mt: 5, ml: 15 }}>
             Verificar
           </Button>
         </Box>
