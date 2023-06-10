@@ -30,14 +30,8 @@ import {
         >
             Moradores
         </Typography>
-        <Box sx={{ m: 1 }}>
-          <Button
-            startIcon={(<UploadIcon fontSize="small" />)}
-            sx={{ mr: 1 }}
-            onClick={Importar}
-          >
-            Importar
-          </Button>
+        <Box sx={{ m: 1, display: 'flex'}}>
+            <Importar />
           <Button
             startIcon={(<DownloadIcon fontSize="small" />)}
             sx={{ mr: 1 }}
