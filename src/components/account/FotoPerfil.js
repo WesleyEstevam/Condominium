@@ -9,7 +9,7 @@ import {
 import { useState, useEffect } from 'react';
 
 const user = {
-  avatar: '/_next/static/media/doorman.ea0c7569.png'
+  avatar: '/images/avatars/doorman.png'
 };
 
 export const FotoPerfil = () => {
@@ -58,7 +58,7 @@ export const FotoPerfil = () => {
             }}
           >
             <Avatar
-              src={user.avatar}
+              src= {user.avatar}
               sx={{
                 height: 150,
                 mb: 2,
