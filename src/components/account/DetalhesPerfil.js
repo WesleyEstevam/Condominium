@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
-  Button,
   Card,
   CardContent,
   CardHeader,
@@ -10,30 +9,34 @@ import {
   TextField
 } from '@mui/material';
 
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
-
 export const DetalhesPerfil = (props) => {
   const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
+    username: '',
+    nomeCompleto: ''
+    // Adicione outras propriedades do estado aqui
   });
+
+  useEffect(() => {
+    // Passo 1: Acessar o localStorage
+    const token = localStorage.getItem('token');
+
+    // Passo 2: Verificar se o valor do token não é nulo ou indefinido
+    if (token) {
+      // Passo 3: Decodificar o token JWT
+      const tokenParts = token.split('.');
+      const payload = JSON.parse(atob(tokenParts[1]));
+
+      console.log(payload)
+
+      // Agora você pode acessar as informações do token
+      setValues((prevValues) => ({
+        ...prevValues,
+        ...payload
+      }));
+    } else {
+      console.log('Token JWT não encontrado no localStorage.');
+    }
+  }, []); // O array de dependências vazio garante que o efeito seja executado apenas uma vez, após a renderização inicial
 
   const handleChange = (event) => {
     setValues({
@@ -70,7 +73,7 @@ export const DetalhesPerfil = (props) => {
                 name="firstName"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={values.nomeCompleto}
                 variant="outlined"
               />
             </Grid>
@@ -85,7 +88,7 @@ export const DetalhesPerfil = (props) => {
                 name="lastName"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                //value={values.lastName}
                 variant="outlined"
               />
             </Grid>
@@ -100,7 +103,7 @@ export const DetalhesPerfil = (props) => {
                 name="email"
                 onChange={handleChange}
                 required
-                value={values.email}
+                value={values.username}
                 variant="outlined"
               />
             </Grid>
@@ -115,7 +118,7 @@ export const DetalhesPerfil = (props) => {
                 name="phone"
                 onChange={handleChange}
                 type="number"
-                value={values.phone}
+                //value={values.phone}
                 variant="outlined"
               />
             </Grid>
@@ -130,7 +133,7 @@ export const DetalhesPerfil = (props) => {
                 name="country"
                 onChange={handleChange}
                 required
-                value={values.country}
+                //value={values.country}
                 variant="outlined"
               />
             </Grid>
@@ -149,14 +152,14 @@ export const DetalhesPerfil = (props) => {
                 value={values.state}
                 variant="outlined"
               >
-                {states.map((option) => (
+                {/*{states.map((option) => (
                   <option
                     key={option.value}
                     value={option.value}
                   >
                     {option.label}
                   </option>
-                ))}
+                ))} */}
               </TextField>
             </Grid>
           </Grid>

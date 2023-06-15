@@ -1,71 +1,89 @@
 import {
   Avatar,
   Box,
-  Button,
   Card,
-  CardActions,
   CardContent,
   Divider,
   Typography
 } from '@mui/material';
+import { useState, useEffect } from 'react';
 
 const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  city: 'Los Angeles',
-  country: 'USA',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith',
-  timezone: 'GTM-7'
+  avatar: '/_next/static/media/doorman.ea0c7569.png'
 };
 
-export const FotoPerfil = (props) => (
-  <Card {...props}>
-    <CardContent>
-      <Box
-        sx={{
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column'
-        }}
-      >
-        <Avatar
-          src={user.avatar}
-          sx={{
-            height: 64,
-            mb: 2,
-            width: 64
-          }}
-        />
-        <Typography
-          color="textPrimary"
-          gutterBottom
-          variant="h5"
-        >
-          {user.name}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {`${user.city} ${user.country}`}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {user.timezone}
-        </Typography>
-      </Box>
-    </CardContent>
-    <Divider />
-    <CardActions>
-      <Button
-        color="primary"
-        fullWidth
-        variant="text"
-      >
-        Adicionar foto
-      </Button>
-    </CardActions>
-  </Card>
-);
+export const FotoPerfil = () => {
+  const [values, setValues] = useState({
+    username: '',
+    nomeCompleto: ''
+    // Adicione outras propriedades do estado aqui
+  });
+
+  useEffect(() => {
+    // Passo 1: Acessar o localStorage
+    const token = localStorage.getItem('token');
+
+    // Passo 2: Verificar se o valor do token não é nulo ou indefinido
+    if (token) {
+      // Passo 3: Decodificar o token JWT
+      const tokenParts = token.split('.');
+      const payload = JSON.parse(atob(tokenParts[1]));
+
+      // Agora você pode acessar as informações do token
+      setValues((prevValues) => ({
+        ...prevValues,
+        ...payload
+      }));
+    } else {
+      console.log('Token JWT não encontrado no localStorage.');
+    }
+  }, []); // O array de dependências vazio garante que o efeito seja executado apenas uma vez, após a renderização inicial
+
+  /*   const handleChange = (event) => {
+      setValues({
+        ...values,
+        [event.target.name]: event.target.value
+      });
+    }; */
+
+  return (
+    <Box >
+      <Card sx={{ display: 'flex', justifyContent: 'center' }}>
+        <CardContent sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box
+            sx={{
+              alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
+            <Avatar
+              src={user.avatar}
+              sx={{
+                height: 150,
+                mb: 2,
+                width: 150
+              }}
+            />
+            <Typography
+              color="textPrimary"
+              gutterBottom
+              variant="h5"
+            >
+              {values.nomeCompleto}
+            </Typography>
+            <Typography
+              color="textPrimary"
+              gutterBottom
+            //variant="h5"
+            >
+              {values.username}
+            </Typography>
+            Porteiro
+          </Box>
+        </CardContent>
+        <Divider />
+      </Card>
+    </Box>
+  )
+};

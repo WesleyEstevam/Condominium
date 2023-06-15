@@ -8,38 +8,37 @@ const Page = () => (
     <Box
       component="main"
       sx={{
+        display: 'flex',
+        justifyContent: 'center',
         flexGrow: 1,
         py: 8
       }}
     >
+
       <Container maxWidth="lg">
         <Typography
-          sx={{ mb: 3 }}
+          sx={{ mb: 3, ml: 3 }}
           variant="h4"
         >
           Perfil
         </Typography>
         <Grid
-          container
-          spacing={3}
+          item
+          lg={4}
+          md={6}
+          xs={12}
         >
-          <Grid
-            item
-            lg={4}
-            md={6}
-            xs={12}
-          >
-            <FotoPerfil />
-          </Grid>
-          <Grid
+          <FotoPerfil />
+        </Grid>
+        {/*           <Grid
             item
             lg={8}
             md={6}
             xs={12}
           >
             <DetalhesPerfil />
-          </Grid>
-        </Grid>
+          </Grid> */}
+
       </Container>
     </Box>
   </>
