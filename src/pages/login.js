@@ -1,37 +1,44 @@
-import { Box, Button, Container, Divider, Link, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
-import { baseURL } from '../components/api/api';
-import { useRouter } from 'next/router';
-import axios from 'axios';
-import NextLink from 'next/link';
-import { erroLogin } from '../components/btn_acao/alertas';
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
+import { baseURL } from "../components/api/api";
+import { useRouter } from "next/router";
+import axios from "axios";
+import NextLink from "next/link";
+import { erroLogin } from "../components/btn_acao/alertas";
 
 export function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const values = {
     username,
-    password
+    password,
   };
   const router = useRouter();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(baseURL + 'login', values);
+      const response = await axios.post(baseURL + "login", values);
       const token = response.data;
 
       // Converte o objeto do token em uma string
       const tokenString = JSON.stringify(token);
 
       // Armazena o token JWT no localStorage ou em um cookie para autenticar as solicitações subsequentes.
-      localStorage.setItem('token', tokenString);
-      router.push('/');
-
+      localStorage.setItem("token", tokenString);
+      router.push("/");
     } catch (error) {
       erroLogin();
-      console.error('Problema ao realizar a autenticação:', error);
+      console.error("Problema ao realizar a autenticação:", error);
     }
   };
 
@@ -40,66 +47,65 @@ export function Login() {
       <Box
         component="main"
         sx={{
-          display: 'flex',
+          display: "flex",
           flexGrow: 1,
-          backgroundColor: '#FFFAFA',
-          justifyContent: 'center',
-          alignItems: 'center'
+          backgroundColor: "#FFFAFA",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Container maxWidth="sm">
           <img
-            src='static/logoCondominium.jpeg'
+            src="static/logoCondominium.jpeg"
             style={{
-              margin: '10px',
-              width: '200px',
-              borderRadius: '200px'
+              margin: "10px",
+              width: "200px",
+              borderRadius: "10px",
             }}
           />
-          <Typography variant="h5"
+          <Typography
+            variant="h5"
             style={{
               fontFamily: "Poppins",
-              fontSize: '5vh',
+              fontSize: "5vh",
               fontWeight: "300",
-              textAlign: 'center',
-              fontStyle: 'medium',
-
-            }}>
+              textAlign: "center",
+              fontStyle: "medium",
+            }}
+          >
             Bem vindo ao
           </Typography>
           <Typography
             style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              fontSize: '5vh',
-              fontFamily: 'Poppins',
-              fontStyle: 'thin',
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              fontSize: "5vh",
+              fontFamily: "Poppins",
+              fontStyle: "thin",
               fontWeight: "50",
             }}
-
           >
             CONDOMINIUM
           </Typography>
           <Divider
             sx={{
-              display: 'flex',
+              display: "flex",
               marginLeft: "auto",
-              backgroundColor: 'orange',
-              width: '100px',
-              height: '7px',
-
+              backgroundColor: "orange",
+              width: "100px",
+              height: "7px",
             }}
           />
           <Box
             sx={{
-              my: '10%',
-              backgroundColor: '#ffffff',
-              borderRadius: '15px',
-              p: '20px'
-            }}>
+              my: "10%",
+              backgroundColor: "#ffffff",
+              borderRadius: "15px",
+              p: "20px",
+            }}
+          >
             <form onSubmit={handleSubmit}>
-
               <TextField
                 //error={Boolean(email && errors.email)}
                 fullWidth
@@ -138,21 +144,15 @@ export function Login() {
                   Entrar
                 </Button>
               </Box>
-              <Typography
-                color="textSecondary"
-                variant="body2"
-              >
-                Não tem uma conta??
-                {' '}
-                <NextLink
-                  href="/cadastro"
-                >
+              <Typography color="textSecondary" variant="body2">
+                Não tem uma conta??{" "}
+                <NextLink href="/cadastro">
                   <Link
                     to="/register"
                     variant="subtitle2"
                     underline="hover"
                     sx={{
-                      cursor: 'pointer'
+                      cursor: "pointer",
                     }}
                   >
                     Cadastrar-se
@@ -165,6 +165,6 @@ export function Login() {
       </Box>
     </>
   );
-};
+}
 
 export default Login;
