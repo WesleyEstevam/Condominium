@@ -64,11 +64,11 @@ const items = [
     icon: <CameraAltIcon fontSize="small" />,
     title: "Câmeras",
   },
-  {
-    href: "/logs",
-    icon: <SecurityIcon fontSize="small" />,
-    title: "Entradas e Saídas",
-  },
+  // {
+  //   href: "/logs",
+  //   icon: <SecurityIcon fontSize="small" />,
+  //   title: "Entradas e Saídas",
+  // },
   {
     href: "/relatorios",
     icon: <SecurityIcon fontSize="small" />,

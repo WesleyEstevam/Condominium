@@ -103,7 +103,6 @@ export const Relatorios = () => {
                 <TableCell>Entrada</TableCell>
                 <TableCell>Saída</TableCell>
                 <TableCell>Endereço</TableCell>
-
                 <TableCell>Descrição</TableCell>
               </TableRow>
             </TableHead>
