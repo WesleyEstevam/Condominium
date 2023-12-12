@@ -116,8 +116,8 @@ export const Relatorios = () => {
                   <TableCell>{morador.pessoas.nomePessoa}</TableCell>
                   <TableCell>{morador.dhEntrada}</TableCell>
                   <TableCell>{` ${morador.dhSaida}`}</TableCell>
-                  <TableCell>{morador.telefoneID}</TableCell>
-                  <TableCell>{morador.Endereco?.lote}</TableCell>
+                  <TableCell>{morador.Endereco?.apartamento}</TableCell>
+                  <TableCell>{morador.desDescricao}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
