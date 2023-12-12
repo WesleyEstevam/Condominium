@@ -117,7 +117,7 @@ export const Relatorios = () => {
                   <TableCell>{morador.dhEntrada}</TableCell>
                   <TableCell>{` ${morador.dhSaida}`}</TableCell>
                   <TableCell>{morador.Endereco?.apartamento}</TableCell>
-                  <TableCell>{morador.desDescricao}</TableCell>
+                  <TableCell>{morador.descDestino}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
