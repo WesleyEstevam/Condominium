@@ -1,17 +1,33 @@
-import { useState } from "react";
-import { Box, Button, Card, CardContent, Grid, TextField } from "@mui/material";
 import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  TextField,
+} from "@mui/material";
+import { useRouter } from "next/router";
+import { baseURL } from "../../api/api";
 
-export const InfoImovel = (props) => {
-  const [values, setValues] = useState({
-    firstName: "Katarina",
-    lastName: "Smith",
-    email: "demo@devias.io",
-    phone: "",
-    state: "Alabama",
-    country: "USA",
-  });
+export const InfoCoroinha = () => {
+  const [coroinha, setCoroinha] = useState([]);
+  const router = useRouter();
+  const data = router.query.data ? JSON.parse(router.query.data) : null;
+
+  useEffect(() => {
+    axios
+      .get(baseURL + "coroinhas/" + data)
+      .then((response) => {
+        setCoroinha(response.data);
+      })
+      .catch((error) => {
+        console.log("Ops, deu erro na listagem do id" + error);
+      });
+  }, []);
 
   const handleChange = (event) => {
     setValues({
@@ -29,8 +45,8 @@ export const InfoImovel = (props) => {
           justifyContent: "space-between",
         }}
       >
-        <h1>Imóveis</h1>
-        <Link href="/imoveis">
+        <h1>Coroinhas</h1>
+        <Link href="/coroinhas">
           <Button
             startIcon={<ArrowBackIcon fontSize="small" />}
             variant="contained"
@@ -39,64 +55,57 @@ export const InfoImovel = (props) => {
           </Button>
         </Link>
       </div>
-      <form autoComplete="off" noValidate {...props}>
+      <form autoComplete="off" noValidate>
         <Card>
           <CardContent>
             <Grid container spacing={3}>
               <Grid item md={6} xs={12}>
+                <label>Nome do coroinha:</label>
                 <TextField
                   fullWidth
-                  label="Quadra"
-                  name="quadra"
+                  name="nome_coroinha"
                   onChange={handleChange}
                   disabled
-                  value={values.nome}
+                  value={coroinha.nome_coroinha}
                   variant="outlined"
                 />
               </Grid>
               <Grid item md={6} xs={12}>
+                <label>Altura:</label>
                 <TextField
                   fullWidth
-                  label="Lote"
-                  name="lote"
+                  name="alura"
                   onChange={handleChange}
                   disabled
-                  value={values.email}
+                  value={coroinha.altura_coroinha}
                   variant="outlined"
                 />
               </Grid>
 
               <Grid item md={6} xs={12}>
+                <label>Sexo:</label>
                 <TextField
                   fullWidth
-                  label="Bloco"
-                  name="bloco"
+                  name="sexo"
                   onChange={handleChange}
                   disabled
-                  value={values.documento}
+                  value={coroinha.sexo_coroinha}
                   variant="outlined"
                 />
               </Grid>
               <Grid item md={6} xs={12}>
+                <label>Tipo:</label>
                 <TextField
                   fullWidth
-                  label="Apartamento"
-                  name="apartamento"
+                  name="tipo_coroinha"
                   onChange={handleChange}
                   disabled
-                  value={values.nomePai}
+                  value={coroinha.tipo_coroinha}
                   variant="outlined"
                 ></TextField>
               </Grid>
             </Grid>
           </CardContent>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              p: 2,
-            }}
-          ></Box>
         </Card>
       </form>
     </>

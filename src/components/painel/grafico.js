@@ -1,8 +1,16 @@
-import { Bar } from 'react-chartjs-2';
-import { Box, Button, Card, CardContent, CardHeader, Divider, useTheme } from '@mui/material';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ModalComponent from '../../components/btn_acao/btn-previsao'
-import { useState } from 'react';
+import { Bar } from "react-chartjs-2";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  useTheme,
+} from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ModalComponent from "../../components/btn_acao/btn-previsao";
+import { useState } from "react";
 
 export const Grafico = (props) => {
   const theme = useTheme();
@@ -11,19 +19,26 @@ export const Grafico = (props) => {
   const data = {
     datasets: [
       {
-        backgroundColor: '#3F51B5',
+        backgroundColor: "#3F51B5",
         barPercentage: 0.5,
         barThickness: 12,
         borderRadius: 4,
         categoryPercentage: 0.5,
-        data: previsao,  //[18, 5, 19, 27, 29, 19, 20],
-        label: 'Visitantes',
-        maxBarThickness: 10
+        data: previsao, //[18, 5, 19, 27, 29, 19, 20],
+        label: "Visitantes",
+        maxBarThickness: 10,
       },
     ],
     //labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '7 aug']
-    labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo']
-
+    labels: [
+      "Segunda",
+      "Terça",
+      "Quarta",
+      "Quinta",
+      "Sexta",
+      "Sábado",
+      "Domingo",
+    ],
   };
   const options = {
     animation: true,
@@ -35,20 +50,20 @@ export const Grafico = (props) => {
     xAxes: [
       {
         ticks: {
-          fontColor: theme.palette.text.secondary
+          fontColor: theme.palette.text.secondary,
         },
         gridLines: {
           display: false,
-          drawBorder: false
-        }
-      }
+          drawBorder: false,
+        },
+      },
     ],
     yAxes: [
       {
         ticks: {
           fontColor: theme.palette.text.secondary,
           beginAtZero: true,
-          min: 0
+          min: 0,
         },
         gridLines: {
           borderDash: [2],
@@ -57,9 +72,9 @@ export const Grafico = (props) => {
           drawBorder: false,
           zeroLineBorderDash: [2],
           zeroLineBorderDashOffset: [2],
-          zeroLineColor: theme.palette.divider
-        }
-      }
+          zeroLineColor: theme.palette.divider,
+        },
+      },
     ],
     tooltips: {
       backgroundColor: theme.palette.background.paper,
@@ -69,50 +84,40 @@ export const Grafico = (props) => {
       enabled: true,
       footerFontColor: theme.palette.text.secondary,
       intersect: false,
-      mode: 'index',
-      titleFontColor: theme.palette.text.primary
-    }
-
+      mode: "index",
+      titleFontColor: theme.palette.text.primary,
+    },
   };
 
   return (
     <Card {...props}>
       <CardHeader
-        action={(
-          <Button
-            endIcon={<ArrowDropDownIcon fontSize="small" />}
-            size="small"
-          >
+        action={
+          <Button endIcon={<ArrowDropDownIcon fontSize="small" />} size="small">
             Ùltimos 7 dias
           </Button>
-        )}
-        title="Entradas e Saídas"
+        }
+        title="Calendario de serviços"
       />
       <Divider />
       <CardContent>
         <Box
           sx={{
             height: 400,
-            position: 'relative'
+            position: "relative",
           }}
         >
-          <Bar
-            data={data}
-            options={options}
-          />
+          <Bar data={data} options={options} />
         </Box>
       </CardContent>
       <Divider />
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          p: 2
+          display: "flex",
+          justifyContent: "flex-end",
+          p: 2,
         }}
       >
-
-        <ModalComponent setPrevisao={setPrevisao} />
-
         {/* <Button
           onClick={DayPickerModal}
           color="primary"
@@ -121,7 +126,6 @@ export const Grafico = (props) => {
         >
           Previsão
         </Button> */}
-
       </Box>
     </Card>
   );

@@ -22,6 +22,7 @@ import SecurityIcon from "@mui/icons-material/Security";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 import ApartmentIcon from "@mui/icons-material/Apartment";
+import InsertChartIcon from "@mui/icons-material/InsertChartOutlined";
 
 const items = [
   {
@@ -30,49 +31,19 @@ const items = [
     title: "Painel",
   },
   {
-    href: "/visitantes",
-    icon: <UsersIcon fontSize="small" />,
-    title: "Visitantes",
-  },
-  {
-    href: "/moradores",
+    href: "/despensas",
     icon: <HomeIcon fontSize="small" />,
-    title: "Moradores",
+    title: "Despensas",
   },
   {
-    href: "/prestadores",
-    icon: <HandymanIcon fontSize="small" />,
-    title: "Prestadores",
+    href: "/coroinhas",
+    icon: <UsersIcon fontSize="small" />,
+    title: "Coroinhas",
   },
   {
-    href: "/ocorrencias",
-    icon: <CampaignIcon fontSize="small" />,
-    title: "Ocorrências",
-  },
-  {
-    href: "/imoveis",
-    icon: <ApartmentIcon fontSize="small" />,
-    title: "Imóveis",
-  },
-  {
-    href: "/veiculos",
-    icon: <TimeToLeaveIcon fontSize="small" />,
-    title: "Veiculos",
-  },
-  {
-    href: "/cameras",
-    icon: <CameraAltIcon fontSize="small" />,
-    title: "Câmeras",
-  },
-  // {
-  //   href: "/logs",
-  //   icon: <SecurityIcon fontSize="small" />,
-  //   title: "Entradas e Saídas",
-  // },
-  {
-    href: "/relatorios",
-    icon: <SecurityIcon fontSize="small" />,
-    title: "relatorios",
+    href: "/escalas",
+    icon: <InsertChartIcon fontSize="small" />,
+    title: "Escalas",
   },
 ];
 
@@ -110,10 +81,11 @@ export const DashboardSidebar = (props) => {
         <Box sx={{ p: 3, marginBottom: -3, textAlign: "center" }}>
           <NextLink href="/" passHref>
             <img
-              src="/static/logoCondominium.jpeg"
+              src="/static/logoParoquia.jpeg"
+              alt="Logo Paroquia São José Lagoa Redonda"
               style={{
                 display: "inline-block",
-                width: "200px",
+                width: "150px",
                 borderRadius: "10px",
               }}
             />
@@ -135,42 +107,6 @@ export const DashboardSidebar = (props) => {
             title={item.title}
           />
         ))}
-      </Box>
-      <Divider sx={{ borderColor: "#2D3748" }} />
-      <Box
-        sx={{
-          px: 2,
-          marginTop: "-20%",
-        }}
-      >
-        <Button
-          color="success"
-          variant="contained"
-          component="a"
-          endIcon={<MeetingRoomIcon />}
-          fullWidth
-          sx={{ mb: 3, mt: -1 }}
-        >
-          Abrir Portão
-        </Button>
-        <Typography color="neutral.100" variant="subtitle2">
-          Deseja deslogar do sistema?
-        </Typography>
-        <Typography color="neutral.500" variant="body2">
-          Clique no botão sair.
-        </Typography>
-        <NextLink href="/login" passHref>
-          <Button
-            color="error"
-            component="a"
-            endIcon={<OpenInNewIcon />}
-            fullWidth
-            sx={{ mt: 2, mb: 2 }}
-            variant="contained"
-          >
-            Sair
-          </Button>
-        </NextLink>
       </Box>
     </Box>
   );
