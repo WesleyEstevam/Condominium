@@ -11,6 +11,8 @@ import {
   Grid,
   Box,
   IconButton,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { Delete as DeleteIcon } from "@mui/icons-material";
 import axios from "axios";
@@ -31,7 +33,10 @@ const CadastrarEscala = () => {
   const [coroinhas, setCoroinhas] = useState([
     { id_coroinha: "", id_objeto: "" },
   ]);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const [step, setStep] = useState(1);
+  const [coroinhasComErro, setCoroinhasComErro] = useState([]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -90,7 +95,20 @@ const CadastrarEscala = () => {
     setStep(2);
   };
 
+  const verificarAlturaCoroinhas = async (idCoroinha1, idCoroinha2) => {
+    try {
+      const response = await axios.get(`${baseURL}escalas/verificarAltura`, {
+        params: { idCoroinha1, idCoroinha2 },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao verificar a altura dos coroinhas:", error);
+      throw error;
+    }
+  };
+
   const handleSaveEscala = async () => {
+    setCoroinhasComErro([]);
     if (
       coroinhas.length === 0 ||
       coroinhas.some((c) => !c.id_coroinha || !c.id_objeto)
@@ -98,8 +116,39 @@ const CadastrarEscala = () => {
       console.error(
         "Por favor, adicione pelo menos um coroinha com seu objeto litúrgico."
       );
+      setSnackbarMessage(
+        "Por favor, adicione pelo menos um coroinha com seu objeto litúrgico."
+      );
+      setSnackbarOpen(true);
       return;
     }
+
+    const objetosLiturgicosEspecificos = [4, 5, 6];
+
+    const coroinhasParaVerificar = coroinhas.filter((coroinha) =>
+      objetosLiturgicosEspecificos.includes(parseInt(coroinha.id_objeto))
+    );
+
+    if (coroinhasParaVerificar.length >= 2) {
+      for (let i = 0; i < coroinhasParaVerificar.length; i++) {
+        for (let j = i + 1; j < coroinhasParaVerificar.length; j++) {
+          const resultado = await verificarAlturaCoroinhas(
+            coroinhasParaVerificar[i].id_coroinha,
+            coroinhasParaVerificar[j].id_coroinha
+          );
+          if (resultado.message.includes("Muita diferença de altura")) {
+            setSnackbarMessage(resultado.message);
+            setSnackbarOpen(true);
+            setCoroinhasComErro([
+              coroinhasParaVerificar[i].id_coroinha,
+              coroinhasParaVerificar[j].id_coroinha,
+            ]);
+            return;
+          }
+        }
+      }
+    }
+
     try {
       const response = await axios.post(`${baseURL}escalas`, {
         ...escala,
@@ -114,6 +163,8 @@ const CadastrarEscala = () => {
       navigate.push("/escalas");
     } catch (error) {
       console.error("Ops! Ocorreu um erro:", error);
+      setSnackbarMessage("Ops! Ocorreu um erro ao salvar a escala.");
+      setSnackbarOpen(true);
     }
   };
 
@@ -127,6 +178,17 @@ const CadastrarEscala = () => {
       novasCoroinhas.splice(index, 1);
       return novasCoroinhas;
     });
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+    setSnackbarMessage("");
+  };
+
+  const getCoroinhaErrorStyle = (idCoroinha) => {
+    return coroinhasComErro.includes(idCoroinha)
+      ? { borderColor: "red", borderWidth: "2px", borderStyle: "solid" }
+      : {};
   };
 
   return (
@@ -178,26 +240,25 @@ const CadastrarEscala = () => {
                     <MenuItem value="18:00h">18:00h</MenuItem>
                     <MenuItem value="18:30h">18:30h</MenuItem>
                     <MenuItem value="19:00h">19:00h</MenuItem>
-                    <MenuItem value="19:30h">19:30h</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  fullWidth
-                  label="Tipo de cerimônia"
                   name="tipo_cerimonia"
+                  label="Tipo de Cerimônia"
+                  fullWidth
                   value={escala.tipo_cerimonia}
                   onChange={handleChange}
-                  placeholder="Ex: Domingo de Ramos"
+                  InputLabelProps={{ shrink: true }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  fullWidth
-                  label="Data da Escala"
                   name="data_escala"
+                  label="Data"
                   type="date"
+                  fullWidth
                   value={escala.data_escala}
                   onChange={handleChange}
                   InputLabelProps={{ shrink: true }}
@@ -236,6 +297,7 @@ const CadastrarEscala = () => {
                           e.target.value
                         )
                       }
+                      style={getCoroinhaErrorStyle(coroinha.id_coroinha)}
                     >
                       <MenuItem value="">
                         <em>-</em>
@@ -259,6 +321,7 @@ const CadastrarEscala = () => {
                       onChange={(e) =>
                         handleChangeCoroinha(index, "id_objeto", e.target.value)
                       }
+                      style={getCoroinhaErrorStyle(coroinha.id_coroinha)}
                     >
                       <MenuItem value="">
                         <em>-</em>
@@ -300,6 +363,16 @@ const CadastrarEscala = () => {
           </>
         )}
       </Container>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert onClose={handleCloseSnackbar} severity="error">
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
