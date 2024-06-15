@@ -68,7 +68,7 @@ const CadastrarEscala = () => {
 
     const fetchNomesCoroinhas = async () => {
       try {
-        const response = await axios.get(`${baseURL}coroinhas`);
+        const response = await axios.get(`${baseURL}coroinhas/ativos`);
         setNomesCoroinhas(response.data);
       } catch (error) {
         console.error("Erro ao buscar nomes dos coroinhas:", error);
@@ -323,9 +323,6 @@ const CadastrarEscala = () => {
                       }
                       style={getCoroinhaErrorStyle(coroinha.id_coroinha)}
                     >
-                      <MenuItem value="">
-                        <em>-</em>
-                      </MenuItem>
                       {nomesObjetosLiturgicos.map((objeto) => (
                         <MenuItem
                           key={objeto.id_objeto}

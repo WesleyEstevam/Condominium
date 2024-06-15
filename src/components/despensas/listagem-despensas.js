@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import EditIcon from "@mui/icons-material/Edit";
-import InfoIcon from "@mui/icons-material/Info";
+import HotelIcon from "@mui/icons-material/Hotel";
+import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import ImageList from "@mui/material/ImageList";
 import axios from "axios";
 import {
   Box,
   Card,
   Button,
-  Checkbox,
   Table,
   TableBody,
   TableCell,
@@ -16,7 +15,6 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { DeletarItem } from "../btn_acao/btn-delet";
 import { useRouter } from "next/router";
 import { baseURL } from "../api/api";
 
@@ -24,71 +22,37 @@ export const ListaDespensas = () => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-  const [despensa, setDespensa] = useState([]);
+  const [coroinhas, setCoroinhas] = useState([]);
   const router = useRouter();
 
-  // LISTAGEM DE despensa POR ID
-  async function handleFindOne(tipoPessoa) {
-    try {
-      router.push(
-        `/telas_acao/despensa/btn-info?data=${JSON.stringify(
-          tipoPessoa.idPessoa
-        )}`
-      );
-    } catch (error) {
-      console.error("ops, erro ao listar id " + error);
-    }
-  }
-
-  // LISTAGEM DE despensa
+  // LISTAGEM DE coroinhas
   useEffect(() => {
     axios
       .get(baseURL + "coroinhas")
       .then((response) => {
-        setDespensa(response.data);
+        setCoroinhas(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-  const handleSelectAll = (event) => {
-    let newSelectedCustomerIds;
-
-    if (event.target.checked) {
-      newSelectedCustomerIds = despensa.map((despensa) => despensa.id);
-    } else {
-      newSelectedCustomerIds = [];
+  const dispensarCoroinha = async (id_coroinha) => {
+    try {
+      await axios.patch(`${baseURL}coroinhas/${id_coroinha}/dispensar`);
+      setCoroinhas((prevCoroinhas) =>
+        prevCoroinhas.map((coroinha) =>
+          coroinha.id_coroinha === id_coroinha
+            ? {
+                ...coroinha,
+                status: coroinha.status === "ativo" ? "dispensado" : "ativo",
+              }
+            : coroinha
+        )
+      );
+    } catch (error) {
+      console.error("Erro ao dispensar coroinha:", error);
     }
-
-    setSelectedCustomerIds(newSelectedCustomerIds);
-  };
-
-  const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = despensa;
-
-    if (selectedIndex === -1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds,
-        id
-      );
-    } else if (selectedIndex === 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(1)
-      );
-    } else if (selectedIndex === selectedCustomerIds.length - 1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(0, -1)
-      );
-    } else if (selectedIndex > 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(0, selectedIndex),
-        selectedCustomerIds.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
   const handleLimitChange = (event) => {
@@ -116,15 +80,17 @@ export const ListaDespensas = () => {
                 <TableCell>Sexo</TableCell>
                 <TableCell>Altura</TableCell>
                 <TableCell>Tipo</TableCell>
-                <TableCell>Ação</TableCell>
+                <TableCell>Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {despensa.slice(0, limit).map((despensa) => (
+              {coroinhas.slice(0, limit).map((coroinha) => (
                 <TableRow
                   hover
-                  key={despensa.id}
-                  selected={selectedCustomerIds.indexOf(despensa.id) !== -1}
+                  key={coroinha.id_coroinha}
+                  selected={
+                    selectedCustomerIds.indexOf(coroinha.id_coroinha) !== -1
+                  }
                 >
                   <TableCell>
                     <Box
@@ -134,13 +100,13 @@ export const ListaDespensas = () => {
                       }}
                     >
                       <Typography color="textPrimary" variant="body1">
-                        {despensa.nome_coroinha}
+                        {coroinha.nome_coroinha}
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>{despensa.sexo_coroinha}</TableCell>
-                  <TableCell>{despensa.altura_coroinha}</TableCell>
-                  <TableCell>{despensa.tipo_coroinha}</TableCell>
+                  <TableCell>{coroinha.sexo_coroinha}</TableCell>
+                  <TableCell>{coroinha.altura_coroinha}</TableCell>
+                  <TableCell>{coroinha.tipo_coroinha}</TableCell>
                   <TableCell
                     sx={{
                       display: "flex",
@@ -148,11 +114,17 @@ export const ListaDespensas = () => {
                     }}
                   >
                     <Button
-                      color="success"
+                      color={
+                        coroinha.status === "dispensado" ? "info" : "success"
+                      }
                       variant="contained"
-                      onClick={() => handleFindOne(despensa)}
+                      onClick={() => dispensarCoroinha(coroinha.id_coroinha)}
                     >
-                      <InfoIcon />
+                      {coroinha.status === "dispensado" ? (
+                        <HotelIcon />
+                      ) : (
+                        <LightbulbIcon />
+                      )}
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -163,7 +135,7 @@ export const ListaDespensas = () => {
       </ImageList>
       <TablePagination
         component="div"
-        count={despensa.length}
+        count={coroinhas.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}

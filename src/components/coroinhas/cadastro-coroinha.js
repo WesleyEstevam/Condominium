@@ -7,29 +7,34 @@ import {
   Button,
   Card,
   CardContent,
-  CardHeader,
   Grid,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
 
 export const NovoCoroinha = () => {
   const [values, setValues] = useState({
-    nomePessoa: "",
-    empresa: "",
-    documento: "",
-    nomePai: "",
-    nomeMae: "",
-    email: "",
-    nomeTipo: "visitante",
+    nome_coroinha: "",
+    altura_coroinha: "",
+    sexo_coroinha: "",
+    tipo_coroinha: "",
   });
 
   const router = useRouter();
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    const data = {
+      ...values,
+      altura_coroinha: parseFloat(values.altura_coroinha),
+    };
+
     axios
-      .post(baseURL + "visitante", values)
+      .post(baseURL + "coroinhas", data)
       .then(() => {
-        router.push("/visitantes");
+        router.push("/coroinhas");
         alertaCadastro();
       })
       .catch((error) => {
@@ -38,10 +43,10 @@ export const NovoCoroinha = () => {
   };
 
   const handleChange = (event) => {
-    event.preventDefault();
+    const { name, value } = event.target;
     setValues({
       ...values,
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
   };
 
@@ -54,10 +59,10 @@ export const NovoCoroinha = () => {
               <TextField
                 fullWidth
                 label="Nome completo"
-                name="nomePessoa"
+                name="nome_coroinha"
                 onChange={handleChange}
                 required
-                value={values.nomePessoa}
+                value={values.nome_coroinha}
                 variant="outlined"
               />
             </Grid>
@@ -65,10 +70,11 @@ export const NovoCoroinha = () => {
               <TextField
                 fullWidth
                 label="Altura"
-                name="altura"
+                name="altura_coroinha"
+                type="number" // Ensure the input only accepts numeric values
                 onChange={handleChange}
                 required
-                value={values.email}
+                value={values.altura_coroinha}
                 variant="outlined"
               />
             </Grid>
@@ -77,30 +83,26 @@ export const NovoCoroinha = () => {
               <TextField
                 fullWidth
                 label="Sexo"
-                name="sexo"
+                name="sexo_coroinha"
                 onChange={handleChange}
                 required
-                value={values.documento}
+                value={values.sexo_coroinha}
                 variant="outlined"
               />
             </Grid>
             <Grid item md={6} xs={12}>
-              <TextField
+              <InputLabel>Tipo</InputLabel>
+              <Select
                 fullWidth
-                label="Tipo"
-                name="tipo"
+                name="tipo_coroinha" // Added the name attribute
+                value={values.tipo_coroinha}
                 onChange={handleChange}
-                required
-                value={values.empresa}
                 variant="outlined"
-              ></TextField>
+              >
+                <MenuItem value="Coroinha">Coroinha</MenuItem>
+                <MenuItem value="Cerimoniário">Cerimoniário</MenuItem>
+              </Select>
             </Grid>
-            <TextField
-              name="tipo"
-              type="hidden"
-              value={values.nomeTipo}
-              onChange={handleChange}
-            ></TextField>
           </Grid>
         </CardContent>
         <Box

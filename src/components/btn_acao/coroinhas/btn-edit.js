@@ -7,11 +7,12 @@ import {
   Button,
   Card,
   CardContent,
-  CardHeader,
   Grid,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import axios from "axios";
 import Link from "next/link";
 
@@ -19,7 +20,7 @@ export const EditCoroinha = () => {
   const [coroinha, setCoroinha] = useState({
     nome_coroinha: "",
     sexo_coroinha: "",
-    altura_coroinha: "",
+    altura_coroinha: "", // Use a string here for controlled input
     tipo_coroinha: "",
   });
 
@@ -45,9 +46,14 @@ export const EditCoroinha = () => {
   // Atualizar as informações de cada input
   const handleSubmit = (event) => {
     event.preventDefault(); // Evita o envio padrão do formulário
+    const updatedCoroinha = {
+      ...coroinha,
+      altura_coroinha: parseFloat(coroinha.altura_coroinha), // Ensure it's a number
+    };
+
     if (data) {
       axios
-        .patch(baseURL + "coroinhas/" + data, coroinha)
+        .patch(baseURL + "coroinhas/" + data, updatedCoroinha)
         .then(() => {
           router.push("/coroinhas");
           alerta();
@@ -59,9 +65,10 @@ export const EditCoroinha = () => {
   };
 
   const handleChange = (event) => {
+    const { name, value } = event.target;
     setCoroinha({
       ...coroinha,
-      [event.target.name]: event.target.value,
+      [name]: name === "altura_coroinha" ? parseFloat(value) : value,
     });
   };
 
@@ -74,14 +81,9 @@ export const EditCoroinha = () => {
           justifyContent: "space-between",
         }}
       >
-        <h1>coroinhas</h1>
+        <h1>Coroinhas</h1>
         <Link href="/coroinhas">
-          <Button
-            startIcon={<ArrowBackIcon fontSize="small" />}
-            variant="contained"
-          >
-            Voltar
-          </Button>
+          <Button variant="contained">Voltar</Button>
         </Link>
       </div>
       <form autoComplete="off">
@@ -89,7 +91,7 @@ export const EditCoroinha = () => {
           <CardContent>
             <Grid container spacing={3}>
               <Grid item md={6} xs={12}>
-                <label>Nome do coroinha:</label>
+                <InputLabel>Nome do coroinha</InputLabel>
                 <TextField
                   fullWidth
                   name="nome_coroinha"
@@ -99,10 +101,11 @@ export const EditCoroinha = () => {
                 />
               </Grid>
               <Grid item md={6} xs={12}>
-                <label>Altura:</label>
+                <InputLabel>Altura</InputLabel>
                 <TextField
                   fullWidth
                   name="altura_coroinha"
+                  type="number" // Ensure it's a number input
                   onChange={handleChange}
                   value={coroinha.altura_coroinha}
                   variant="outlined"
@@ -110,7 +113,7 @@ export const EditCoroinha = () => {
               </Grid>
 
               <Grid item md={6} xs={12}>
-                <label>Sexo:</label>
+                <InputLabel>Sexo</InputLabel>
                 <TextField
                   fullWidth
                   name="sexo_coroinha"
@@ -120,14 +123,17 @@ export const EditCoroinha = () => {
                 />
               </Grid>
               <Grid item md={6} xs={12}>
-                <label>Tipo:</label>
-                <TextField
+                <InputLabel>Tipo</InputLabel>
+                <Select
                   fullWidth
-                  name="tipo_coroinha"
-                  onChange={handleChange}
+                  name="tipo_coroinha" // Ensure the name is set
                   value={coroinha.tipo_coroinha}
+                  onChange={handleChange}
                   variant="outlined"
-                />
+                >
+                  <MenuItem value="Coroinha">Coroinha</MenuItem>
+                  <MenuItem value="Cerimoniário">Cerimoniário</MenuItem>
+                </Select>
               </Grid>
               <Grid item xs={12}>
                 <Box display="flex" justifyContent="center" mt={3}>
