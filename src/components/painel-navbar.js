@@ -61,18 +61,6 @@ export const DashboardNavbar = (props) => {
           </IconButton>
 
           <Box sx={{ flexGrow: 1 }} />
-          <Avatar
-            onClick={() => setOpenAccountPopover(true)}
-            ref={settingsRef}
-            sx={{
-              cursor: "pointer",
-              height: 40,
-              width: 40,
-              ml: 1,
-            }}
-          >
-            <UserCircleIcon fontSize="small" />
-          </Avatar>
         </Toolbar>
       </DashboardNavbarRoot>
       <AccountPopover

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -8,69 +9,114 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-import Link from "next/link";
-import { Search as SearchIcon } from "../../icons/search";
-import { Download as DownloadIcon } from "../../icons/download";
-import { Importar } from "../btn_acao/btn-importar";
+import { Search as SearchIcon, Clear as ClearIcon } from "@mui/icons-material";
+import axios from "axios";
+import { baseURL } from "../api/api";
+import { ListagemCoroinhas } from "./listagem-coroinhas";
 
-export const HeaderCoroinhas = (props) => (
-  <Box>
-    <Box
-      sx={{
-        alignItems: "center",
-        display: "flex",
-        justifyContent: "space-between",
-        flexWrap: "wrap",
-        m: -1,
-      }}
-    >
-      <Typography sx={{ m: 1 }} variant="h4">
-        Coroinhas
-      </Typography>
-      <Box sx={{ m: 1, display: "flex" }}>
-        <Importar />
-        <Button startIcon={<DownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
-          Exportar
-        </Button>
-        <Link href="/cadastros/novo-coroinha" color="primary">
+export const HeaderCoroinhas = (props) => {
+  const [searchValue, setSearchValue] = useState("");
+  const [searchResult, setSearchResult] = useState(null);
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        `${baseURL}coroinhas/nome/${searchValue}`
+      );
+      setSearchResult([response.data]); // Definir resultados da pesquisa como array para ListagemCoroinhas
+    } catch (error) {
+      console.error("Erro ao buscar coroinha:", error);
+      setSearchResult([]); // Definir array vazio em caso de erro
+    }
+  };
+
+  const handleClear = () => {
+    setSearchValue("");
+    setSearchResult(null); // Limpar resultados da pesquisa
+  };
+
+  return (
+    <Box {...props}>
+      <Box
+        sx={{
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          m: -1,
+        }}
+      >
+        <Typography sx={{ m: 1 }} variant="h4">
+          Coroinhas
+        </Typography>
+        <Box sx={{ m: 1, display: "flex" }}>
+          {/* Link para página de novo coroinha */}
           <Button color="primary" variant="contained">
             Novo Coroinha
           </Button>
-        </Link>
+        </Box>
       </Box>
-    </Box>
-    <Box sx={{ mt: 3 }}>
-      <Card>
-        <CardContent>
-          <Box sx={{ maxWidth: 1000, display: "flex", alignContent: "center" }}>
-            <TextField
-              fullWidth
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SvgIcon color="action" fontSize="small">
-                      <SearchIcon />
-                    </SvgIcon>
-                  </InputAdornment>
-                ),
-              }}
-              placeholder="Nome do coroinha"
-              variant="outlined"
-            />
-            <Button
-              sx={{
-                display: "flex",
-                justifyContent: "space-around",
-                margin: "0px 10px",
-              }}
-              color="success"
-              variant="contained"
+      <Box sx={{ mt: 3 }}>
+        <Card>
+          <CardContent>
+            <Box
+              sx={{ maxWidth: 1000, display: "flex", alignContent: "center" }}
             >
-              Pesquisar
-            </Button>
-          </Box>
-        </CardContent>
-      </Card>
+              {/* Campo de pesquisa */}
+              <TextField
+                fullWidth
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SvgIcon color="action" fontSize="small">
+                        <SearchIcon />
+                      </SvgIcon>
+                    </InputAdornment>
+                  ),
+                }}
+                placeholder="Nome do coroinha"
+                variant="outlined"
+                value={searchValue}
+                onChange={handleSearchChange}
+              />
+              {/* Botão de Pesquisar */}
+              <Button
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  margin: "0px 10px",
+                }}
+                color="success"
+                variant="contained"
+                onClick={handleSearch}
+                startIcon={<SearchIcon />} // Ícone de lupa
+              >
+                Pesquisar
+              </Button>
+              {/* Botão de Limpar Pesquisa */}
+              <Button
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                }}
+                color="secondary"
+                variant="contained"
+                onClick={handleClear}
+                startIcon={<ClearIcon />} // Ícone de borracha
+              >
+                Limpar
+              </Button>
+            </Box>
+          </CardContent>
+        </Card>
+      </Box>
+      <br />
+      {/* Componente de listagem de coroinhas */}
+      <ListagemCoroinhas coroinhas={searchResult} />
     </Box>
-  </Box>
-);
+  );
+};

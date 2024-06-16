@@ -15,9 +15,6 @@ const Page = () => (
     >
       <Container maxWidth={false}>
         <Despensas />
-        <Box sx={{ mt: 3 }}>
-          <ListaDespensas customers={customers} />
-        </Box>
       </Container>
     </Box>
   </>

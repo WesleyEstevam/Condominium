@@ -18,29 +18,33 @@ import {
 import { useRouter } from "next/router";
 import { baseURL } from "../api/api";
 
-export const ListaDespensas = () => {
+export const ListaDespensas = ({ coroinhas }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-  const [coroinhas, setCoroinhas] = useState([]);
+  const [allCoroinhas, setAllCoroinhas] = useState([]);
   const router = useRouter();
 
   // LISTAGEM DE coroinhas
   useEffect(() => {
-    axios
-      .get(baseURL + "coroinhas")
-      .then((response) => {
-        setCoroinhas(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+    if (!coroinhas) {
+      axios
+        .get(baseURL + "coroinhas")
+        .then((response) => {
+          setAllCoroinhas(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      setAllCoroinhas(coroinhas);
+    }
+  }, [coroinhas]);
 
   const dispensarCoroinha = async (id_coroinha) => {
     try {
       await axios.patch(`${baseURL}coroinhas/${id_coroinha}/dispensar`);
-      setCoroinhas((prevCoroinhas) =>
+      setAllCoroinhas((prevCoroinhas) =>
         prevCoroinhas.map((coroinha) =>
           coroinha.id_coroinha === id_coroinha
             ? {
@@ -84,7 +88,7 @@ export const ListaDespensas = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {coroinhas.slice(0, limit).map((coroinha) => (
+              {allCoroinhas.slice(0, limit).map((coroinha) => (
                 <TableRow
                   hover
                   key={coroinha.id_coroinha}
@@ -115,7 +119,7 @@ export const ListaDespensas = () => {
                   >
                     <Button
                       color={
-                        coroinha.status === "dispensado" ? "info" : "success"
+                        coroinha.status === "dispensado" ? "info" : "warning"
                       }
                       variant="contained"
                       onClick={() => dispensarCoroinha(coroinha.id_coroinha)}
@@ -135,7 +139,7 @@ export const ListaDespensas = () => {
       </ImageList>
       <TablePagination
         component="div"
-        count={coroinhas.length}
+        count={allCoroinhas.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}

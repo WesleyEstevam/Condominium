@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { baseURL } from "../api/api";
 import { useRouter } from "next/router";
 
-export const ListagemCoroinhas = () => {
+export const ListagemCoroinhas = ({ coroinhas }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);

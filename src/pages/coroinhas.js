@@ -14,9 +14,6 @@ const Page = () => (
     >
       <Container maxWidth={false}>
         <HeaderCoroinhas />
-        <Box sx={{ mt: 3 }}>
-          <ListagemCoroinhas />
-        </Box>
       </Container>
     </Box>
   </>

@@ -28,9 +28,6 @@ export const HeaderEscalas = (props) => (
         Escalas
       </Typography>
       <Box sx={{ m: 1, display: "flex" }}>
-        <Button startIcon={<DownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
-          Compartilhar
-        </Button>
         <Link href="/cadastros/nova-escala" color="primary">
           <Button color="primary" variant="contained">
             Nova Escala
