@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 import { baseURL } from "../api/api";
 import {
   Box,
@@ -13,7 +12,8 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-
+import axios from "axios";
+import { alertaCadastro } from "../btn_acao/alertas";
 export const NovoCoroinha = () => {
   const [values, setValues] = useState({
     nome_coroinha: "",

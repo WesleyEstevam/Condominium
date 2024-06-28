@@ -62,15 +62,6 @@ export const Despensas = (props) => {
             >
               <TextField
                 fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SvgIcon color="action" fontSize="small">
-                        <SearchIcon />
-                      </SvgIcon>
-                    </InputAdornment>
-                  ),
-                }}
                 placeholder="Nome do coroinha"
                 variant="outlined"
                 value={searchValue}

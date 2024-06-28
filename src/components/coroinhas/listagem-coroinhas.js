@@ -24,6 +24,7 @@ export const ListagemCoroinhas = ({ coroinhas }) => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
   const [coroinha, setCoroinha] = useState([]);
+  const [allCoroinhas, setAllCoroinhas] = useState([]);
   const router = useRouter();
 
   // EXCLUSÃO DE COROINHAS
@@ -68,15 +69,19 @@ export const ListagemCoroinhas = ({ coroinhas }) => {
 
   // LISTAGEM DE COROINHAS
   useEffect(() => {
-    axios
-      .get(baseURL + "coroinhas")
-      .then((response) => {
-        setCoroinha(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+    if (!coroinhas) {
+      axios
+        .get(baseURL + "coroinhas")
+        .then((response) => {
+          setAllCoroinhas(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      setAllCoroinhas(coroinhas);
+    }
+  }, [coroinhas]);
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
@@ -146,7 +151,7 @@ export const ListagemCoroinhas = ({ coroinhas }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {coroinha.slice(0, limit).map((coroinha) => (
+              {allCoroinhas.slice(0, limit).map((coroinha) => (
                 <TableRow
                   hover
                   key={coroinha.id}
@@ -201,7 +206,7 @@ export const ListagemCoroinhas = ({ coroinhas }) => {
       </ImageList>
       <TablePagination
         component="div"
-        count={coroinha.length}
+        count={allCoroinhas.length}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}

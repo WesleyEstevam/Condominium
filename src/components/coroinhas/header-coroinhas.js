@@ -13,7 +13,7 @@ import { Search as SearchIcon, Clear as ClearIcon } from "@mui/icons-material";
 import axios from "axios";
 import { baseURL } from "../api/api";
 import { ListagemCoroinhas } from "./listagem-coroinhas";
-
+import Link from "next/link";
 export const HeaderCoroinhas = (props) => {
   const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState(null);
@@ -54,10 +54,11 @@ export const HeaderCoroinhas = (props) => {
           Coroinhas
         </Typography>
         <Box sx={{ m: 1, display: "flex" }}>
-          {/* Link para página de novo coroinha */}
-          <Button color="primary" variant="contained">
-            Novo Coroinha
-          </Button>
+          <Link href="/cadastros/novo-coroinha" color="primary">
+            <Button color="primary" variant="contained">
+              Nova Coroinha
+            </Button>
+          </Link>
         </Box>
       </Box>
       <Box sx={{ mt: 3 }}>
@@ -69,15 +70,6 @@ export const HeaderCoroinhas = (props) => {
               {/* Campo de pesquisa */}
               <TextField
                 fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SvgIcon color="action" fontSize="small">
-                        <SearchIcon />
-                      </SvgIcon>
-                    </InputAdornment>
-                  ),
-                }}
                 placeholder="Nome do coroinha"
                 variant="outlined"
                 value={searchValue}
